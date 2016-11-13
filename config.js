@@ -67,7 +67,7 @@ var config = {
 		}
 	},
 	"mongo": {
-		"url": "mongodb://localhost:27017/cms",
+		"url": "mongodb://127.0.0.1/cms",
 		"options": {
 			"server": {
 				"auto_reconnect": false,

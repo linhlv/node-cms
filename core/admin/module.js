@@ -5,7 +5,6 @@ module.exports = function(app) {
          console.log('sdfsf');
          res.send('hello admin');
          res.end();
-         next();
      });
 
      return router;

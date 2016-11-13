@@ -14,7 +14,7 @@ var path = require('path'),
     I18n = require('i18n-2'),
     app = express(),    
     session = require('express-session'),
-    //exphbs = require('express-handlebars'),
+    exphbs = require('express-handlebars'),
     mongoclient = require('mongodb').MongoClient,
     redis, redis_client, RedisStore, MongoStore;
 if (config.redis.active) {
@@ -64,7 +64,8 @@ app.set('express', express);
 app.set('logger', logger);
 app.set('views', path.join(__dirname, 'views'));
 app.set('session', session);
-app.set('view engine', '.html');
+app.engine('.hbs', exphbs({defaultLayout: 'layout', extname: '.hbs'}));
+app.set('view engine', '.hbs');
 
 /* Use items */
 app.use(multer({
@@ -177,7 +178,6 @@ app.use(function(req, res, next) {
         next();
     }
 });
-
 
 app.use(function(req, res, next) {
     var err;

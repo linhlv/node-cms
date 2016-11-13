@@ -67,7 +67,7 @@ var config = {
 		}
 	},
 	"mongo": {
-		"url": "mongodb://localhost/taracotjs",
+		"url": "mongodb://localhost:27017/cms",
 		"options": {
 			"server": {
 				"auto_reconnect": false,

@@ -12,8 +12,9 @@ config.cms = version.cms;
 var path = require('path'),
     crypto = require('crypto'),
     I18n = require('i18n-2'),
-    app = express(),
+    app = express(),    
     session = require('express-session'),
+    //exphbs = require('express-handlebars'),
     mongoclient = require('mongodb').MongoClient,
     redis, redis_client, RedisStore, MongoStore;
 if (config.redis.active) {
@@ -159,8 +160,8 @@ app.use(session({
 
 /* Pre-load functions */
 app.use(function(req, res, next) {
-    if (typeof app.get('mongodb') == 'undefined' || !app.get('mongodb')) {
-        mongoclient.connect(config.mongo.url, config.mongo.options, function(err, _db) {
+    if (typeof app.get('mongodb') == 'undefined' || !app.get('mongodb')) {       
+        mongoclient.connect(config.mongo.url, config.mongo.options, function(err, _db) {       
             if (!err) {
                 _db.on('close', function() {
                     app.set('mongodb', false);
@@ -237,7 +238,12 @@ app.use(function(req, res, next) {
     });
 });
 
-
+/* Admin Spaces */
+var _ap = path.join(__dirname, 'core', 'admin', '/');
+var _ar, _ap;
+if(fs.existsSync(_ap + 'routing.js')) _ar = require(_ap + 'routing');
+if(fs.existsSync(_ap + 'module.js')) _am = require(_ap + 'module')(app);
+if(_ar.prefix !== undefined && _am) app.use(_ar.prefix, _am);
 
 /* Load modules */
 for (var mb in modules) {

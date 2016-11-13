@@ -98,6 +98,7 @@ if (!app.get('blocks')) {
 
 
 /* Get modules list and version info */
+console.log(__dirname);
 var modules = fs.readdirSync(path.join(__dirname, 'modules/')),
     version_info = {
         core: config.cms
@@ -129,15 +130,18 @@ I18n.expressBind(app, {
 
 
 /* Connect Redis or fallback to Mongo */
-var _store = new RedisStore({
-    client: redis_client,
-    prefix: config.redis.prefix
-});
-
-if (!redis) _store = new MongoStore({
-    url: config.mongo.url,
-    auto_reconnect: false
-});
+var _store;
+if(config.redis.active && redis){
+    _store = new RedisStore({
+        client: redis_client,
+        prefix: config.redis.prefix
+    });
+}else{
+    _store = new MongoStore({
+        url: config.mongo.url,
+        auto_reconnect: false
+    });
+}
 
 // Fix for old settings (should be 'destroy' instead of 'delete')
 if (config.session.unset == 'delete') config.session.unset = 'destroy';

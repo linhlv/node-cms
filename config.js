@@ -45,7 +45,7 @@ var config = {
 	},
 	"salt": "E3F0UhLyP9IsczRAcVrXICBrFbqbNZP5HH260lNjB7KkEdY8jkDovQTsKw8hydta",
 	"redis": {
-		"active": true,
+		"active": false,
 		"host": "localhost",
 		"port": 6379,
 		"prefix": "taracotjs_",

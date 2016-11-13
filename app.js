@@ -98,7 +98,6 @@ if (!app.get('blocks')) {
 
 
 /* Get modules list and version info */
-console.log(__dirname);
 var modules = fs.readdirSync(path.join(__dirname, 'modules/')),
     version_info = {
         core: config.cms

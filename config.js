@@ -66,8 +66,9 @@ var config = {
 			}
 		}
 	},
-	"mongo": {
-		"url": "mongodb://127.0.0.1/cms",
+	"mongo": {		
+		//"url": "mongodb://twenty:5UpYDwz3neLnv6aAbpB6JfVnVQzps7vPGQL@ds050559.mlab.com:50559/cms",
+		"url": "mongodb://localhost/cms",
 		"options": {
 			"server": {
 				"auto_reconnect": false,

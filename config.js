@@ -94,7 +94,7 @@ var config = {
 		},
 		"file": {
 			"level": "error",
-			"filename": "../logs/taracotjs.log",
+			"filename": "../logs/cms.log",
 			"json": true,
 			"maxsize": 1048576,
 			"maxFiles": 3

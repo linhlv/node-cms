@@ -34,13 +34,12 @@ module.exports = function(app) {
             loadavg: loadavg
         };
 
-         var data = {
-             lang: i18nm,
+         var data = {             
              assets : 'core/cp',
              os: os_data,
          };
 
-         renderer.dir(viewsBasePath).render(req, 'home', undefined, data, res);       
+         app.get('cp').render(req, res, data, i18nm, 'home', req.session.auth);
      });
 
      return router;

@@ -4,7 +4,12 @@ var config = {
 	"uid": "",
 	"protocol": "http",
 	"layouts": {
+		"dir":{		
+			"layouts":"../views/layouts",
+			"partials":"../views/partials"
+		},
 		"default": "layout_default",
+		"admin_default": "layout_default",
 		"avail": [
 			"layout_default"
 		]

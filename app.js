@@ -15,6 +15,10 @@ var path = require('path'),
     app = express(),    
     session = require('express-session'),
     exphbs = require('express-handlebars'),
+    cp = require('./core/cp/cp')(app),
+    winston = require('winston'),
+    multer = require('multer'),
+    bodyParser = require('body-parser'),
     mongoclient = require('mongodb').MongoClient,
     redis, redis_client, RedisStore, MongoStore;
 if (config.redis.active) {
@@ -26,10 +30,6 @@ if (config.redis.active) {
 } else {
     MongoStore = require('connect-mongo')(session);
 }
-
-var winston = require('winston'),
-    multer = require('multer'),
-    bodyParser = require('body-parser');
 
 
 /* Enable trusted proxy */
@@ -62,9 +62,19 @@ app.set('config', config);
 app.set('config_auth', config_auth);
 app.set('express', express);
 app.set('logger', logger);
-app.set('views', path.join(__dirname, 'views'));
 app.set('session', session);
-app.engine('.hbs', exphbs({defaultLayout: '../' + config.layouts.default, extname: '.hbs'}));
+app.set('cp', cp);
+app.set('views', path.join(__dirname, 'views'));
+app.set('_root', path.join(__dirname));
+app.set('renderer', require('./core/renderer')(app));
+
+var hbs = exphbs.create({        
+    layoutsDir: config.layouts.dir.layouts,
+    partialsDir: config.layouts.dir.partials,
+    //defaultLayout: config.layouts.default, 
+    extname: '.hbs'
+});
+app.engine('.hbs', hbs.engine);
 app.set('view engine', '.hbs');
 
 /* Use items */
@@ -88,14 +98,6 @@ app.use(bodyParser.urlencoded({
 
 /* Load static */
 app.use(express.static(path.join(__dirname, 'public')));
-
-/*
-if (!app.get('blocks')) {
-    app.set('blocks', {});
-    app.set('blocks_sync', {});
-}
-*/
-
 
 /* Get modules list and version info */
 var modules = fs.readdirSync(path.join(__dirname, 'modules/')),
@@ -242,7 +244,7 @@ app.use(function(req, res, next) {
 });
 
 /* Admin Spaces */
-var _ap = path.join(__dirname, 'core', 'admin', '/');
+var _ap = path.join(__dirname, 'core', 'cp', '/');
 var _ar, _ap;
 
 app.use(express.static(path.join(_ap, 'public'))); // public
@@ -258,13 +260,7 @@ for (var mb in modules) {
         },
         _mp = path.join(__dirname, 'modules', modules[mb], '/');
     if (fs.existsSync(_mp + 'routing.js')) _r = require(_mp + 'routing');
-    app.set(modules[mb] + '_routing', _r);
-
-    /*
-    if (fs.existsSync(_mp + 'block.js')) _b = require(_mp + 'block')(app);
-    if (_b && _b.data) app.get('blocks')[modules[mb]] = _b.data;
-    if (_b && _b.data_sync) app.get('blocks_sync')[modules[mb]] = _b.data_sync;
-    */
+    app.set(modules[mb] + '_routing', _r);  
 
     if (fs.existsSync(_mp + 'module.js')) _m = require(_mp + 'module')(app);
     if (fs.existsSync(_mp + 'admin.js')) _a = require(_mp + 'admin')(app);

@@ -64,7 +64,7 @@ app.set('express', express);
 app.set('logger', logger);
 app.set('views', path.join(__dirname, 'views'));
 app.set('session', session);
-app.engine('.hbs', exphbs({defaultLayout: 'layout', extname: '.hbs'}));
+app.engine('.hbs', exphbs({defaultLayout: '../' + config.layouts.default, extname: '.hbs'}));
 app.set('view engine', '.hbs');
 
 /* Use items */
@@ -244,6 +244,9 @@ app.use(function(req, res, next) {
 /* Admin Spaces */
 var _ap = path.join(__dirname, 'core', 'admin', '/');
 var _ar, _ap;
+
+app.use(express.static(path.join(_ap, 'public'))); // public
+
 if(fs.existsSync(_ap + 'routing.js')) _ar = require(_ap + 'routing');
 if(fs.existsSync(_ap + 'module.js')) _am = require(_ap + 'module')(app);
 if(_ar.prefix !== undefined && _am) app.use(_ar.prefix, _am);

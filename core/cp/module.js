@@ -4,6 +4,7 @@ module.exports = function(app) {
          path = require('path'),
          config = app.get('config'),
          os = require('os'),
+         fs = require('fs'),
          i18nm = new(require('i18n-2'))({
             locales: app.get('config').locales.avail,
             directory: path.join(__dirname, 'lang'),
@@ -40,6 +41,23 @@ module.exports = function(app) {
          };
 
          app.get('cp').render(req, res, data, i18nm, 'home', req.session.auth);
+     });
+
+     router.get('/spa_metadata.json', function(req, res) {
+        var spa = app.get('spa');
+        if(spa){            
+            app.get('modules').forEach(function(module) {
+                var _mp = path.join(__dirname, '../../modules', module, '/');                                
+                if (fs.existsSync(_mp + 'admin.js')) {
+                    var _a = require(_mp + 'admin')(app);
+                    if(_a.spa){                        
+                        spa[module].displayName  = _a.get_module_name(req);
+                    }                    
+                }                                        
+            });
+
+            res.json(spa);
+        }
      });
 
      return router;

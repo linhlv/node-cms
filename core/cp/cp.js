@@ -25,11 +25,9 @@ module.exports = function(app) {
                 }
             });
 
-            console.log(modules);
-            
             _ro.lang = i18nm;
             _ro.cp_lang = i18ncp;                        
-            _ro.modules = JSON.stringify(modules),
+            _ro.modules = JSON.stringify(modules);         
             _ro.active_module = current;
             
             if(auth){ _ro.username = auth.realname || auth.username; }

@@ -1,5 +1,5 @@
 module.exports = function(app) {
-     var router = app.get('express').Router(),
+    var router = app.get('express').Router(),
         path = require('path'),
         ObjectId = require('mongodb').ObjectID,
         i18nm = new(require('i18n-2'))({
@@ -10,6 +10,8 @@ module.exports = function(app) {
         }),
         parser = app.get('parser'),
         async = require('async');
+    
+    router.spa = true;
 
     router.get_module_name = function(req) {
         i18nm.setLocale(req.session.current_locale);

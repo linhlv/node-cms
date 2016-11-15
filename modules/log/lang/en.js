@@ -11,5 +11,5 @@
 	"view_stack": "View stacktrace",
 	"close": "Close",
 	"total_log_records": "Total log records",
-	"module_name": "module_name"
+	"module_name": "Log"
 }

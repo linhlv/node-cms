@@ -11,6 +11,8 @@ module.exports = function(app) {
         parser = app.get('parser'),
         async = require('async');
 
+    router.spa = true;
+
     router.get_module_name = function(req) {
         i18nm.setLocale(req.session.current_locale);
         return i18nm.__("module_name");

@@ -10,5 +10,6 @@
 	"stack": "Стек",
 	"view_stack": "Просмотр стека",
 	"close": "Закрыть",
-	"total_log_records": "Всего записей в журнале"
+	"total_log_records": "Всего записей в журнале",
+	"module_name": "Журнал"
 }

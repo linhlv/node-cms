@@ -70,8 +70,7 @@ app.set('renderer', require('./core/renderer')(app));
 
 var hbs = exphbs.create({        
     layoutsDir: config.layouts.dir.layouts,
-    partialsDir: config.layouts.dir.partials,
-    //defaultLayout: config.layouts.default, 
+    partialsDir: config.layouts.dir.partials,    
     extname: '.hbs'
 });
 app.engine('.hbs', hbs.engine);
@@ -254,19 +253,37 @@ if(fs.existsSync(_ap + 'module.js')) _am = require(_ap + 'module')(app);
 if(_ar.prefix !== undefined && _am) app.use(_ar.prefix, _am);
 
 /* Load modules */
+var spa = {};
+spa.assets = 'core/cp';
 for (var mb in modules) {
     var _b, _m, _a, _r = {
             prefix: ''
         },
         _mp = path.join(__dirname, 'modules', modules[mb], '/');
     if (fs.existsSync(_mp + 'routing.js')) _r = require(_mp + 'routing');
+
     app.set(modules[mb] + '_routing', _r);  
 
     if (fs.existsSync(_mp + 'module.js')) _m = require(_mp + 'module')(app);
-    if (fs.existsSync(_mp + 'admin.js')) _a = require(_mp + 'admin')(app);
+    if (fs.existsSync(_mp + 'admin.js')) {
+        _a = require(_mp + 'admin')(app);
+        if(_a.spa) {
+            var installer = require(path.join(__dirname, 'modules', modules[mb], 'install'))(undefined, undefined, undefined);
+            var _spam ={
+                name: installer.name,
+                version: installer.version,
+                server: {
+                    routing: _r
+                }
+            };                  
+            spa[installer.name] =_spam;
+        }
+    }
+
     if (_m && _r.prefix !== undefined) app.use(_r.prefix, _m);
-    if (_r.cp_prefix && _a) app.use(_r.cp_prefix, _a);
+    if (_r.cp_prefix && _a) app.use(_r.cp_prefix, _a);    
 }
+app.set('spa', spa);
 
 /* Error 404 (not found) */
 app.use(function(req, res, next) {

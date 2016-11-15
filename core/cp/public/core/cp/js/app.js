@@ -8,9 +8,3 @@ var materialAdmin = angular.module('materialAdmin', [
     'nouislider',
     'ngTable'
 ]);
-
-console.log($);
-var j = JSON.parse(window.configs.ui);
-console.log(j);
-console.log(window.configs.ui);
- 

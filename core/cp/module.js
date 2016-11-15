@@ -45,13 +45,13 @@ module.exports = function(app) {
 
      router.get('/spa_metadata.json', function(req, res) {
         var spa = app.get('spa');
-        if(spa){            
+        if(spa && spa.modules){            
             app.get('modules').forEach(function(module) {
                 var _mp = path.join(__dirname, '../../modules', module, '/');                                
                 if (fs.existsSync(_mp + 'admin.js')) {
                     var _a = require(_mp + 'admin')(app);
                     if(_a.spa){                        
-                        spa[module].displayName  = _a.get_module_name(req);
+                        spa.modules[module].displayName  = _a.get_module_name(req);
                     }                    
                 }                                        
             });

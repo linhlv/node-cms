@@ -255,6 +255,7 @@ if(_ar.prefix !== undefined && _am) app.use(_ar.prefix, _am);
 /* Load modules */
 var spa = {};
 spa.assets = 'core/cp';
+spa.modules = {};
 for (var mb in modules) {
     var _b, _m, _a, _r = {
             prefix: ''
@@ -276,7 +277,7 @@ for (var mb in modules) {
                     routing: _r
                 }
             };                  
-            spa[installer.name] =_spam;
+            spa.modules[installer.name] =_spam;
         }
     }
 

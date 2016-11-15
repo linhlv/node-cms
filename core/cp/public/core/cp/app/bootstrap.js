@@ -1,7 +1,10 @@
 
 define([], function(){ 
     $.get('/cp/spa_metadata.json', function(metadata){
-        console.log(metadata);
-
+        if(metadata && metadata.modules){
+            _.forEach(metadata.modules, function(m){
+                console.log(m);
+            });
+        }
     });
 });

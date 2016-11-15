@@ -45,6 +45,10 @@ module.exports = function(app) {
 
      router.get('/spa_metadata.json', function(req, res) {
         var spa = app.get('spa');
+        spa.lang = i18nm;
+        
+        if(req.session.auth){ _ro.username = req.session.auth.realname || req.session.auth.username; }
+
         if(spa && spa.modules){            
             app.get('modules').forEach(function(module) {
                 var _mp = path.join(__dirname, '../../modules', module, '/');                                

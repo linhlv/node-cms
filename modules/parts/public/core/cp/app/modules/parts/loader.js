@@ -1,12 +1,12 @@
 /// <summary>
-/// Settings bootstrapper which help to config some neccesary starting-up for Settings module
+/// Parts bootstrapper which help to config some neccesary starting-up for Parts module
 /// such as routing resolver, actionagent, localization
 /// </summary>
 define([], function () {
-    // tell Angular create a new settings Module
-    var _m = angular.module('settings', []);
+    // tell Angular create a new parts Module
+    var _m = angular.module('parts', []);
 
-    // router configure for settings module
+    // router configure for parts module
     _m.config(['$routeProvider', 'routeResolverProvider', '$controllerProvider', '$compileProvider', '$filterProvider', '$provide',
 	function ($routeProvider, routeResolverProvider, $controllerProvider, $compileProvider, $filterProvider, $provide) {
 	    // fill-up register information

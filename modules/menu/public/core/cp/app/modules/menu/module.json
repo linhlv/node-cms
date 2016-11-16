@@ -1,4 +1,12 @@
 {
   "name": "menu",
-  "enabled": true
+  "enabled": true,
+  "routing_prefix":"menu",
+  "routing": [
+    {
+      "name":"home",
+      "url":"/",
+      "template":""
+    } 
+  ]
 }

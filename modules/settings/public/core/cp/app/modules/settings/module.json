@@ -1,4 +1,12 @@
 {
   "name": "settings",
-  "enabled": true
+  "enabled": true,
+  "routing_prefix":"settings",
+  "routing": [
+    {
+      "name":"home",
+      "url":"/",
+      "template":""
+    } 
+  ]
 }

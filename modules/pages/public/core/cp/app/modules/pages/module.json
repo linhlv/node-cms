@@ -1,4 +1,12 @@
 {
   "name": "pages",
-  "enabled": true
+  "enabled": true,
+  "routing_prefix":"pages",
+  "routing": [
+    {
+      "name":"home",
+      "url":"/",
+      "template":""
+    } 
+  ]
 }

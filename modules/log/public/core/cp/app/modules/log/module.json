@@ -1,4 +1,12 @@
 {
   "name": "log",
-  "enabled": true
+  "enabled": true,
+  "routing_prefix":"log",
+  "routing": [
+    {
+      "name":"home",
+      "url":"/",
+      "template":""
+    } 
+  ]
 }

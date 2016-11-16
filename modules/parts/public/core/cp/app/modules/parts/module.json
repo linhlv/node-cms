@@ -1,4 +1,12 @@
 {
   "name": "parts",
-  "enabled": true
+  "enabled": true,
+  "routing_prefix":"parts",
+  "routing": [
+    {
+      "name":"home",
+      "url":"/",
+      "template":""
+    } 
+  ]
 }

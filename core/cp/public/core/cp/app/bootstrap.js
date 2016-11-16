@@ -18,10 +18,8 @@ define([], function(){
                 pathModules.push(_mp + '/loader');
             });            
 
-            require(pathModules, function(){                      
-                //var m = 
+            require(pathModules, function(){                   
                 angular.module(window.spa.name, ['shell']);
-                //m.directive
                 angular.element(function() {
                     angular.bootstrap(document, [window.spa.name]);
                 });                

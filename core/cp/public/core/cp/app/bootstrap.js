@@ -18,12 +18,13 @@ define([], function(){
                 pathModules.push(_mp + '/loader');
             });            
 
-            console.log(pathModules);
-
-            require(pathModules, function(){
-                console.log(refModules);
-                angular.module(window.spa.name, refModules);
-                angular.bootstrap(document, [window.spa.name]);
+            require(pathModules, function(){                      
+                //var m = 
+                angular.module(window.spa.name, ['shell']);
+                //m.directive
+                angular.element(function() {
+                    angular.bootstrap(document, [window.spa.name]);
+                });                
             });            
         }
     });

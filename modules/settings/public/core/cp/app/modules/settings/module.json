@@ -2,7 +2,7 @@
   "name": "settings",
   "enabled": true,
   "routing_prefix":"settings",
-  "routing": [
+  "routes": [
     {
       "name":"home",
       "url":"/",

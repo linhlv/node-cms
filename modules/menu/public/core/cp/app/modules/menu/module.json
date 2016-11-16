@@ -2,7 +2,7 @@
   "name": "menu",
   "enabled": true,
   "routing_prefix":"menu",
-  "routing": [
+  "routes": [
     {
       "name":"home",
       "url":"/",

@@ -2,7 +2,7 @@
   "name": "parts",
   "enabled": true,
   "routing_prefix":"parts",
-  "routing": [
+  "routes": [
     {
       "name":"home",
       "url":"/",

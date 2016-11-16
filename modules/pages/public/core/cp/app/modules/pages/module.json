@@ -2,11 +2,12 @@
   "name": "pages",
   "enabled": true,
   "routing_prefix":"pages",
-  "routing": [
+  "routes": [
     {
       "name":"home",
-      "url":"/",
-      "template":""
+      "url":"/home",
+      "template":"",
+      "controller": "pages.ctrl"
     } 
   ]
 }

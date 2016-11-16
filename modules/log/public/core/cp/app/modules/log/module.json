@@ -2,7 +2,7 @@
   "name": "log",
   "enabled": true,
   "routing_prefix":"log",
-  "routing": [
+  "routes": [
     {
       "name":"home",
       "url":"/",

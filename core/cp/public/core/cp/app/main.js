@@ -13,6 +13,7 @@ require.config({
 window.spa = window.spa || {};
 window.spa.name = 'cms';
 window.spa.sysmodules = ['shell'];
+window.spa.builtinmodules = ['ui.router'];
 
 // Start loading the main app file. Put all of
 // your application logic in there.

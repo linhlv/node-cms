@@ -1,5 +1,5 @@
 
-define([], function(){ 
+define(['routing'], function(routing){ 
     $.get('/cp/spa_metadata.json', function(metadata){
         if(metadata && metadata.modules){
             var pathModules = [], moduleRoot = 'modules/', refModules = [], metaModules = [];
@@ -17,70 +17,32 @@ define([], function(){
                 refModules.push(m.name);
                 pathModules.push(_mp + '/loader');
                 metaModules.push(window.configs.baseUrl + 'app/' + _mp + '/module.json');
+            });          
+
+            var metaModuleAjaxes = [];
+            
+            _.forEach(metaModules, function(mm){
+                metaModuleAjaxes.push($.get(mm));
             });            
 
-            require(pathModules, function(){
-                var metaModuleAjaxes = [];
+            $.whenall = function(arr) { return $.when.apply($, arr); };
+
+            $.whenall(metaModuleAjaxes).done(function(){  
+                var _mm = arguments;
                 
-                _.forEach(metaModules, function(mm){
-                    metaModuleAjaxes.push($.get(mm));
-                });
+                refModules = refModules.concat(window.spa.builtinmodules);
 
-                $.whenall = function(arr) { return $.when.apply($, arr); };
-
-                $.whenall(metaModuleAjaxes).done(function(){
-                    var _mm = arguments;
-
-                    var _sm = ['ui.router'];
-
-                    refModules = refModules.concat(_sm);
-
+                require(pathModules, function(){
                     var _m = angular.module(window.spa.name, refModules);
 
-                    _m.config(['$stateProvider', function($stateProvider){
-                        _.forEach(_mm, function(m){
-                            var _md = m[0];
-                            var _mstate = {
-                                name : _md.routing_prefix,
-                                url: '/' + _md.routing_prefix,
-                                template: '<ui-view></ui-view>',
-                                controller: function($state){
-                                    console.log('test', $state.get());
-                                }
-                            };
-
-                            $stateProvider.state(_mstate);
-                               
-                            _.forEach(_md.routes, function(r){                                
-                                var state = {
-                                    name : _md.routing_prefix + '.' + r.name,                                    
-                                    url: r.url,
-                                    template: r.template
-                                };
-
-                                if(r.controller){
-                                    state.controller = r.controller;
-                                    /*
-                                    state.controller = function(){
-                                        console.log('child');
-                                    };
-                                    */
-                                }
-
-                                console.log(state);
-
-                                $stateProvider.state(state);
-                            })
-                        });
-
-                    }]);                    
+                    routing.configure(_m, _mm);                      
 
                     angular.element(function() {
                         angular.bootstrap(document, [window.spa.name]);
-                    }); 
-                    
-                }, function(err){});                              
-            });            
+                    });                                     
+                });                 
+                
+            }, function(err){});   
         }
     });
 });

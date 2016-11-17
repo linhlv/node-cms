@@ -4,9 +4,50 @@
   "routing_prefix":"settings",
   "routes": [
     {
-      "name":"home",
-      "url":"/",
-      "template":""
+      "name":"general",
+      "url":"/general",
+      "template":"<h1>General</h1>"
+    },
+    {
+      "name":"roleandpermission",
+      "url":"/roleandpermission",
+      "template":"<h1>Role & Permission</h1>"
+    },
+    {
+      "name":"roleandpermission.role",
+      "url":"/role",
+      "template":"<h1>Role</h1>"
+    } ,
+    {
+      "name":"roleandpermission.permission",
+      "url":"/permission",
+      "template":"<h1>Permission</h1>"
     } 
+  ],
+  "menu": [
+    {
+      "title":"Settings",
+      "state":"settings",
+      "menu":[
+        {
+          "title":"General",
+          "state":"settings.general"
+        },
+        {
+          "title":"Role & Permission",
+          "state":"settings.roleandpermission",
+          "menu":[
+            {
+              "title":"Role",
+              "state":"settings.roleandpermission.role"
+            },
+            {
+              "title":"Permission",
+              "state":"settings.roleandpermission.permission"
+            }
+          ]
+        } 
+      ]
+    }       
   ]
 }

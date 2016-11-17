@@ -4,9 +4,21 @@
   "routing_prefix":"parts",
   "routes": [
     {
-      "name":"home",
+      "name":"general",
       "url":"/",
-      "template":""
+      "template":"<h1>Parts General</h1>"
+    } 
+  ],
+  "menu":[
+    {
+      "title":"Parts",
+      "state":"parts",
+      "menu":[
+        {
+          "title":"General",
+          "state":"parts.general"
+        } 
+      ]
     } 
   ]
 }

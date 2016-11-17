@@ -5,6 +5,7 @@ define(['routing'], function(routing){
             var pathModules = [], moduleRoot = 'modules/', refModules = [], metaModules = [];
             window.spa = window.spa || {};
             window.spa.modules = {};
+            window.spa.menus = [];
 
             _.forEach(window.spa.sysmodules, function(m){
                 var _mp = moduleRoot + m;
@@ -29,6 +30,15 @@ define(['routing'], function(routing){
 
             $.whenall(metaModuleAjaxes).done(function(){  
                 var _mm = arguments;
+
+                _.forEach(_mm, function(m){
+                    var _md = m[0];
+                    if(_md.menu){
+                        window.spa.menus = window.spa.menus.concat(_md.menu);
+                    }                                        
+                });
+
+                console.log(window.spa.menus);
                 
                 refModules = refModules.concat(window.spa.builtinmodules);
 

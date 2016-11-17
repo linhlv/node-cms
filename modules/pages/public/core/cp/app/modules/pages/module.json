@@ -4,10 +4,22 @@
   "routing_prefix":"pages",
   "routes": [
     {
-      "name":"home",
-      "url":"/home",
+      "name":"general",
+      "url":"/general",
       "template":"",
       "controller": "pages.ctrl"
+    } 
+  ],  
+  "menu":[
+    {
+      "title":"Pages",
+      "state":"pages",
+      "menu":[
+        {
+          "title":"General",
+          "state":"pages.general"
+        } 
+      ]
     } 
   ]
 }

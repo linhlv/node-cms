@@ -11,7 +11,7 @@ define(function () {
             link: function(scope, element, attr) {
                 console.log("treeview directive loaded");
             },
-            template: '<div class="sl-treeview"><ul class="clear"><sidebar-menu-item ng-repeat="item in items" item="item"></sidebar-menu-item></ul></div>',            
+            template: '<ul class="main-menu"><sidebar-menu-item ng-repeat="item in items" item="item"></sidebar-menu-item></ul>',            
             controller:  function ($scope, $rootScope) {
                 $rootScope.depth = 0;
                 $scope.items = [

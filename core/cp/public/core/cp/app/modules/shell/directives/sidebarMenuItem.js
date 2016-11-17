@@ -10,12 +10,21 @@ define(function () {
                 item: "="
             },           
             link: function(scope, element, attr) {
-                scope.$watch('item.childitems', function() {                                      
-                    element.append($compile('<ul><sidebar-menu-item ng-repeat="childitem in item.childitems" item="childitem"></sidebar-menu-item></ul>')(scope));                    
-                });
+                if(angular.isArray(scope.item.childitems)){
+                    element.html('');
+                    element.attr('class', 'sub-menu')           
+                    element.append('<a toggle-submenu>{{item.text}}</a>');
+                    element.append('<ul><sidebar-menu-item ng-repeat="childitem in item.childitems" item="childitem"></sidebar-menu-item></ul>');                    
+                }else{
+                    element.html('');
+                    element.append('<a>{{item.text}}</a>');
+                }
+
+                $compile(element.contents())(scope);
+
                 console.log("treeview item directive loaded");
             },
-            template: '<li><i class="icon-plus-sign"></i><a href="/"><i class="icon-folder-close"></i>{{item.text}}</a></li>'
+            template: '<li data-ui-sref-active="active"><a>{{item.text}}</a></li>'
         };       
     }
 

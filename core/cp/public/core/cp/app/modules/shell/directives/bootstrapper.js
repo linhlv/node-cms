@@ -8,6 +8,6 @@ define([
         directives.directive('toggleSubmenu', toggleSubmenu); 
         directives.directive('toggleSidebar', toggleSidebar);
         directives.directive('sidebarMenuItem', ['$compile', sidebarMenuItem]);
-        directives.directive('sidebarMenu', sidebarMenu);
+        directives.directive('sidebarMenu', ['$compile', sidebarMenu]);
         
 });

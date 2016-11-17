@@ -36,9 +36,7 @@ define(['routing'], function(routing){
                     if(_md.menu){
                         window.spa.menus = window.spa.menus.concat(_md.menu);
                     }                                        
-                });
-
-                console.log(window.spa.menus);
+                });                
                 
                 refModules = refModules.concat(window.spa.builtinmodules);
 

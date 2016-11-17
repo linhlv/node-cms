@@ -36,7 +36,7 @@ module.exports = function(app) {
         };
 
          var data = {             
-             assets : 'core/cp',
+             assets : '/core/cp',
              os: os_data,
          };
 

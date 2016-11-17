@@ -2,24 +2,25 @@
   "name": "settings",
   "enabled": true,
   "routing_prefix":"settings",
+  "templateUrl":"layout.html",
   "routes": [
     {
       "name":"general",
       "url":"/general",
-      "template":"<h1>General</h1>"
+      "templateUrl":"general.html"
     },
     {
-      "name":"roleandpermission",
-      "url":"/roleandpermission",
-      "template":"<h1>Role & Permission</h1>"
+      "name":"security",
+      "url":"/security",
+      "templateUrl":"security.html"
     },
     {
-      "name":"roleandpermission.role",
+      "name":"security.role",
       "url":"/role",
-      "template":"<h1>Role</h1>"
+      "templateUrl":"role.html"
     } ,
     {
-      "name":"roleandpermission.permission",
+      "name":"security.permission",
       "url":"/permission",
       "template":"<h1>Permission</h1>"
     } 
@@ -28,22 +29,27 @@
     {
       "title":"Settings",
       "state":"settings",
+      "iconClass": "zmdi zmdi-settings zmdi-hc-fw",
       "menu":[
         {
           "title":"General",
+          "iconClass": "",
           "state":"settings.general"
         },
         {
-          "title":"Role & Permission",
-          "state":"settings.roleandpermission",
+          "title":"Security",
+          "iconClass": "zmdi zmdi-shield-check zmdi-hc-fw",
+          "state":"settings.security",
           "menu":[
             {
               "title":"Role",
-              "state":"settings.roleandpermission.role"
+              "iconClass": "",
+              "state":"settings.security.role"
             },
             {
               "title":"Permission",
-              "state":"settings.roleandpermission.permission"
+              "iconClass": "",
+              "state":"settings.security.permission"
             }
           ]
         } 

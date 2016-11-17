@@ -2,23 +2,11 @@
   "name": "parts",
   "enabled": true,
   "routing_prefix":"parts",
-  "routes": [
-    {
-      "name":"general",
-      "url":"/",
-      "template":"<h1>Parts General</h1>"
-    } 
-  ],
+  "templateUrl":"parts.html",
   "menu":[
     {
       "title":"Parts",
-      "state":"parts",
-      "menu":[
-        {
-          "title":"General",
-          "state":"parts.general"
-        } 
-      ]
+      "state":"parts"
     } 
   ]
 }

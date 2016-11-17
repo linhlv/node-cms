@@ -2,24 +2,11 @@
   "name": "pages",
   "enabled": true,
   "routing_prefix":"pages",
-  "routes": [
-    {
-      "name":"general",
-      "url":"/general",
-      "template":"",
-      "controller": "pages.ctrl"
-    } 
-  ],  
+  "templateUrl":"pages.html",
   "menu":[
     {
       "title":"Pages",
-      "state":"pages",
-      "menu":[
-        {
-          "title":"General",
-          "state":"pages.general"
-        } 
-      ]
+      "state":"pages"
     } 
   ]
 }

@@ -10,18 +10,30 @@ define(function () {
                 item: "="
             },           
             link: function(scope, element, attr) {
-                element.html('');
-                if(angular.isArray(scope.item.childitems)){                   
-                    element.attr('class', 'sub-menu')           
-                    element.append('<a toggle-submenu><i class="zmdi zmdi-widgets"></i> {{item.text}}</a>');
-                    element.append('<ul><sidebar-menu-item ng-repeat="childitem in item.childitems" item="childitem"></sidebar-menu-item></ul>');                    
-                }else{
-                    element.append('<a><i class="zmdi zmdi-widgets"></i> {{item.text}}</a>');
+                var iconClass = 'zmdi zmdi-folder zmdi-hc-fw';
+                
+                if(scope.item.iconClass){
+                    iconClass = scope.item.iconClass;
                 }
 
-                $compile(element.contents())(scope);
+                element.removeAttr('data-ui-sref-active');
 
-                console.log("treeview item directive loaded");
+                var content = '';    
+
+                if(angular.isArray(scope.item.menu)){
+                    content+='<li data-ui-sref-active="active" class="sub-menu" data-ng-class="{ \'active toggled\': main.$state.includes(\'' + scope.item.state + '\') }">';
+                    content+='  <a toggle-submenu><i class="' + iconClass + '"></i> {{item.title}}</a>';
+                    content+='  <ul><sidebar-menu-item ng-repeat="childitem in item.menu" item="childitem"></sidebar-menu-item></ul>';
+                    content+='</li>';                    
+                }else{
+                    content+='<li data-ui-sref-active="active">';
+                    content+='  <a data-ui-sref="' + scope.item.state + '" ng-click="main.sidebarStat($event)"><i class="' + iconClass + '"></i> {{item.title}}</a>';
+                    content+='</li>';                    
+                }
+
+                var template = $compile(content)(scope); 
+                
+                element.replaceWith(template);              
             },
             template: '<li data-ui-sref-active="active"></li>'
         };       

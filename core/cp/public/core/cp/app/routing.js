@@ -1,7 +1,15 @@
 define([], function(){
     return {
         configure: function(_m, _mm){
-            _m.config(['$stateProvider', function($stateProvider){
+            _m.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
+                var dashboard = {
+                    name: 'dashboard',
+                    url: '/',
+                    templateUrl: '/core/cp/app/modules/shell/views/dashboard.html'
+                };
+
+                $stateProvider.state(dashboard);
+
                 _.forEach(_mm, function(m){
                     var _md = m[0], _mp = 'app/modules/' + m[0].name;
 
@@ -52,6 +60,7 @@ define([], function(){
                     }                    
                 });
 
+                $urlRouterProvider.otherwise('/');
             }]);  
         }
     } 

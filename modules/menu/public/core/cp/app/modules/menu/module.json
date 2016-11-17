@@ -2,11 +2,10 @@
   "name": "menu",
   "enabled": true,
   "routing_prefix":"menu",
-  "routes": [
+  "menu":[
     {
-      "name":"home",
-      "url":"/",
-      "template":""
+      "title":"Menu",
+      "state":"menu"
     } 
   ]
 }

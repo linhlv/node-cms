@@ -9,7 +9,7 @@
         </li>
 
         <li class="logo hidden-xs">
-            <a data-ui-sref="home" data-ng-click="mactrl.sidebarStat($event)">Getz</a>
+            <a data-ui-sref="dashboard" data-ng-click="mactrl.sidebarStat($event)">Getz</a>
         </li>
 
         <li class="pull-right">
@@ -31,7 +31,7 @@
     <aside id="sidebar" data-ng-class="{ 'toggled': mactrl.sidebarToggle.left === true }">
         <div class="sidebar-inner c-overflow">    
             <profile></profile>
-            <sidebar-menu></sidebar-menu>
+            <sidebar-menu data-item-click="mactrl.sidebarStat(arg)"></sidebar-menu>
         </div>
 
     </aside>

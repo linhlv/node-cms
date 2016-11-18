@@ -8,32 +8,38 @@ define(function () {
             replace: true,
             scope: {
                 item: "="
-            },           
-            link: function(scope, element, attr) {
-                var iconClass = 'zmdi zmdi-folder zmdi-hc-fw';
-                
-                if(scope.item.iconClass){
-                    iconClass = scope.item.iconClass;
-                }
+            },        
+            require: '^sidebarMenu',            
+            compile: function(tElement, tAttr) {
+                var iconClass = 'zmdi zmdi-folder zmdi-hc-fw';    
+                return function(scope, iElement, iAttr, sidebarMenu){                    
+                    if(scope.item.iconClass){
+                        iconClass = scope.item.iconClass;
+                    }
 
-                element.removeAttr('data-ui-sref-active');
+                    iElement.removeAttr('data-ui-sref-active');
 
-                var content = '';    
+                    var template = '';    
 
-                if(angular.isArray(scope.item.menu)){
-                    content+='<li data-ui-sref-active="active" class="sub-menu" data-ng-class="{ \'active toggled\': main.$state.includes(\'' + scope.item.state + '\') }">';
-                    content+='  <a toggle-submenu><i class="' + iconClass + '"></i> {{item.title}}</a>';
-                    content+='  <ul><sidebar-menu-item ng-repeat="childitem in item.menu" item="childitem"></sidebar-menu-item></ul>';
-                    content+='</li>';                    
-                }else{
-                    content+='<li data-ui-sref-active="active">';
-                    content+='  <a data-ui-sref="' + scope.item.state + '" ng-click="main.sidebarStat($event)"><i class="' + iconClass + '"></i> {{item.title}}</a>';
-                    content+='</li>';                    
-                }
+                    if(angular.isArray(scope.item.menu)){
+                        template+='<li data-ui-sref-active="active" class="sub-menu" data-ng-class="{ \'active toggled\': main.$state.includes(\'' + scope.item.state + '\') }">';
+                        template+='  <a toggle-submenu><i class="' + iconClass + '"></i> {{item.title}}</a>';
+                        template+='  <ul><sidebar-menu-item ng-repeat="childitem in item.menu" item="childitem"></sidebar-menu-item></ul>';
+                        template+='</li>';                    
+                    }else{
+                        template+='<li data-ui-sref-active="active">';
+                        template+='  <a data-ui-sref="' + scope.item.state + '" data-ng-click="sidebarStat($event)"><i class="' + iconClass + '"></i> {{item.title}}</a>';
+                        template+='</li>';                    
+                    }
 
-                var template = $compile(content)(scope); 
-                
-                element.replaceWith(template);              
+                    var newElement = angular.element(template);
+                    
+                    scope.sidebarStat = sidebarMenu.sidebarStat;
+
+                    $compile(newElement)(scope); 
+                    
+                    iElement.replaceWith(newElement);
+                };         
             },
             template: '<li data-ui-sref-active="active"></li>'
         };       

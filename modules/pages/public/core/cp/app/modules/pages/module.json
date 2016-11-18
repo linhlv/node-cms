@@ -6,7 +6,8 @@
   "menu":[
     {
       "title":"Pages",
-      "state":"pages"
+      "state":"pages",
+      "iconClass": "zmdi zmdi-globe zmdi-hc-fw"
     } 
   ]
 }

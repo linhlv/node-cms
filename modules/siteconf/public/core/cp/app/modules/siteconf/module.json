@@ -1,0 +1,13 @@
+{
+  "name": "siteconf",
+  "enabled": true,
+  "routing_prefix":"siteconf",
+  "template":"<h1>Site configuration</h1>",
+  "menu": [
+    {
+      "title":"Site configuration",
+      "state":"siteconf",
+      "iconClass": "zmdi zmdi-code-setting zmdi-hc-fw"
+    }       
+  ]
+}

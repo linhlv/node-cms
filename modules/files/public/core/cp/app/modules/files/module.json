@@ -1,0 +1,13 @@
+{
+  "name": "files",
+  "enabled": true,
+  "routing_prefix":"files",
+  "template":"<h1>Files</h1>",
+  "menu": [
+    {
+      "title":"Files",
+      "state":"files",
+      "iconClass": "zmdi zmdi-file zmdi-hc-fw"
+    }       
+  ]
+}

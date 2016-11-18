@@ -1,0 +1,13 @@
+{
+  "name": "users",
+  "enabled": true,
+  "routing_prefix":"users",
+  "template":"<h1>Users</h1>",
+  "menu": [
+    {
+      "title":"Users",
+      "state":"users",
+      "iconClass": "zmdi zmdi-account zmdi-hc-fw"
+    }       
+  ]
+}

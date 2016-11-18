@@ -5,7 +5,8 @@
   "menu":[
     {
       "title":"Menu",
-      "state":"menu"
+      "state":"menu",
+      "iconClass": "zmdi zmdi-menu zmdi-hc-fw"
     } 
   ]
 }

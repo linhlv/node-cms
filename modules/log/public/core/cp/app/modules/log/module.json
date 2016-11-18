@@ -2,11 +2,12 @@
   "name": "log",
   "enabled": true,
   "routing_prefix":"log",
-  "routes": [
+  "template":"<h1>Log</h1>",
+  "menu": [
     {
-      "name":"home",
-      "url":"/",
-      "template":""
-    } 
+      "title":"Log",
+      "state":"log",
+      "iconClass": "zmdi zmdi-receipt zmdi-hc-fw"
+    }       
   ]
 }

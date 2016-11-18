@@ -6,7 +6,8 @@
   "menu":[
     {
       "title":"Parts",
-      "state":"parts"
+      "state":"parts",
+      "iconClass": "zmdi zmdi-layers zmdi-hc-fw"
     } 
   ]
 }

@@ -1,5 +1,5 @@
 
-define(['routing'], function(routing){ 
+define(['routing', 'templates'], function(routing, templates){ 
     $.get('/cp/spa_metadata.json', function(metadata){
         if(metadata && metadata.modules){
             var pathModules = [], moduleRoot = 'modules/', refModules = [], metaModules = [];
@@ -42,6 +42,10 @@ define(['routing'], function(routing){
 
                 require(pathModules, function(){
                     var _m = angular.module(window.spa.name, refModules);
+
+                    _m.run(['$templateCache', function($templateCache){
+                        templates($templateCache);
+                    }])
 
                     routing.configure(_m, _mm);                      
 

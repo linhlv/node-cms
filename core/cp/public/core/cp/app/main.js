@@ -13,7 +13,7 @@ require.config({
 window.spa = window.spa || {};
 window.spa.name = 'cms';
 window.spa.sysmodules = ['shell'];
-window.spa.builtinmodules = ['ui.router'];
+window.spa.builtinmodules = ['ngAnimate', 'ngResource', 'ui.router', 'ui.bootstrap', 'angular-loading-bar', 'oc.lazyLoad', 'nouislider', 'ngTable'];
 
 // Start loading the main app file. Put all of
 // your application logic in there.

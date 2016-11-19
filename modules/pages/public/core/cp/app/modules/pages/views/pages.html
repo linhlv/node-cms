@@ -35,7 +35,7 @@
 <div class="card">
     <div class="listview lv-bordered lv-lg">
         <div class="lv-header-alt clearfix">
-            <h2 class="lvh-label hidden-xs">Some text here</h2>
+            <h2 class="lvh-label hidden-xs"></h2>
 
             <div class="lvh-search" data-ng-if="mactrl.listviewSearchStat" data-ng-click="mactrl.listviewSearchStat">
                 <input type="text" placeholder="Start typing..." class="lvhs-input">
@@ -449,8 +449,8 @@
         </div>
     </div>
     
-    <div class="lv-pagination" data-ng-controller="PaginationDemoCtrl">
-        <uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"></uib-pagination>
+    <div class="lv-pagination">
+        <uib-pagination template-url="template/pagination/pagination.html" total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"></uib-pagination>
     </div>
 </div>
 

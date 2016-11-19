@@ -9,19 +9,16 @@ define(function () {
             scope: {
                 itemClick : '&'
             },    
-            link: function(scope, element, attr) {               
+            link: function(scope, element, attr) {     
+
             },
             template: '<div><ul class="main-menu"><sidebar-menu-item ng-repeat="item in menus" item="item"></sidebar-menu-item></ul><div>',            
-            controller:  function ($scope, $rootScope) {
+            controller:  function ($scope, $rootScope, $parse) {
                 if(window.spa && window.spa.menus){
                     $rootScope.depth = 0;
                     $scope.menus = window.spa.menus;
-
-                    console.log($scope.itemClick);
-
                     this.sidebarStat = function(event){
-                        $scope.itemClick(event);
-                        console.log(event);
+                        $scope.itemClick({arg: event});
                     }    
                 }
             }

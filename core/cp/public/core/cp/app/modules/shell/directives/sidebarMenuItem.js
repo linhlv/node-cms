@@ -22,7 +22,7 @@ define(function () {
                     var template = '';    
 
                     if(angular.isArray(scope.item.menu)){
-                        template+='<li data-ui-sref-active="active" class="sub-menu" data-ng-class="{ \'active toggled\': main.$state.includes(\'' + scope.item.state + '\') }">';
+                        template+='<li data-ui-sref-active="active" class="sub-menu" data-ng-class="{ \'active toggled\': includes(\'' + scope.item.state + '\') }">';
                         template+='  <a toggle-submenu><i class="' + iconClass + '"></i> {{item.title}}</a>';
                         template+='  <ul><sidebar-menu-item ng-repeat="childitem in item.menu" item="childitem"></sidebar-menu-item></ul>';
                         template+='</li>';                    
@@ -34,6 +34,7 @@ define(function () {
 
                     var newElement = angular.element(template);
                     
+                    scope.includes = sidebarMenu.includes;
                     scope.sidebarStat = sidebarMenu.sidebarStat;
 
                     $compile(newElement)(scope); 

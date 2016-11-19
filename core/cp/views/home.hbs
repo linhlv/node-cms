@@ -31,7 +31,7 @@
     <aside id="sidebar" data-ng-class="{ 'toggled': mactrl.sidebarToggle.left === true }">
         <div class="sidebar-inner c-overflow">    
             <profile></profile>
-            <sidebar-menu data-item-click="mactrl.sidebarStat(arg)"></sidebar-menu>
+            <sidebar-menu data-item-click="mactrl.sidebarStat(arg)" data-includes="mactrl.$state.includes(state)"></sidebar-menu>
         </div>
 
     </aside>

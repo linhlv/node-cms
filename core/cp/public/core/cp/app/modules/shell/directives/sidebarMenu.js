@@ -7,7 +7,8 @@ define(function () {
             restrict: 'E', 
             replace: true,  
             scope: {
-                itemClick : '&'
+                itemClick : '&',
+                includes : '&'
             },    
             link: function(scope, element, attr) {     
 
@@ -17,8 +18,13 @@ define(function () {
                 if(window.spa && window.spa.menus){
                     $rootScope.depth = 0;
                     $scope.menus = window.spa.menus;
+
                     this.sidebarStat = function(event){
                         $scope.itemClick({arg: event});
+                    }
+
+                    this.includes = function(state){
+                        return $scope.includes({state: state});
                     }    
                 }
             }

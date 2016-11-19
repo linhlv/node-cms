@@ -1,0 +1,59 @@
+{
+  "name": "settings",
+  "enabled": true,
+  "routing_prefix":"settings",
+  "templateUrl":"layout.html",
+  "routes": [
+    {
+      "name":"general",
+      "url":"/general",
+      "templateUrl":"general.html"
+    },
+    {
+      "name":"security",
+      "url":"/security",
+      "templateUrl":"security.html"
+    },
+    {
+      "name":"security.role",
+      "url":"/role",
+      "templateUrl":"role.html"
+    } ,
+    {
+      "name":"security.permission",
+      "url":"/permission",
+      "template":"<h1>Permission</h1>"
+    } 
+  ],
+  "menu": [
+    {
+      "title":"Settings",
+      "state":"settings",
+      "iconClass": "zmdi zmdi-settings zmdi-hc-fw",
+      "menu":[
+        {
+          "title":"General",
+          "iconClass": "",
+          "state":"settings.general"
+        },
+        {
+          "title":"Security",
+          "iconClass": "zmdi zmdi-shield-check zmdi-hc-fw",
+          "state":"settings.security",
+          "menu":[
+            {
+              "title":"Role",
+              "iconClass": "",
+              "state":"settings.security.role"
+            },
+            {
+              "title":"Permission",
+              "iconClass": "",
+              "state":"settings.security.permission"
+            }
+          ]
+        } 
+      ]
+    }       
+  ]
+}

@@ -2,7 +2,7 @@
   "name": "log",
   "enabled": true,
   "routing_prefix":"log",
-  "template":"<h1>Log</h1>",
+  "templateUrl":"log.html",
   "menu": [
     {
       "title":"Log",

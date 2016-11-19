@@ -2,6 +2,7 @@
   "name": "menu",
   "enabled": true,
   "routing_prefix":"menu",
+  "templateUrl":"menu.html",
   "menu":[
     {
       "title":"Menu",

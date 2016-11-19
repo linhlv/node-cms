@@ -2,7 +2,7 @@
   "name": "files",
   "enabled": true,
   "routing_prefix":"files",
-  "template":"<h1>Files</h1>",
+  "templateUrl":"files.html",
   "menu": [
     {
       "title":"Files",

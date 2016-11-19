@@ -29,31 +29,7 @@
     {
       "title":"Settings",
       "state":"settings",
-      "iconClass": "zmdi zmdi-settings zmdi-hc-fw",
-      "menu":[
-        {
-          "title":"General",
-          "iconClass": "",
-          "state":"settings.general"
-        },
-        {
-          "title":"Security",
-          "iconClass": "zmdi zmdi-shield-check zmdi-hc-fw",
-          "state":"settings.security",
-          "menu":[
-            {
-              "title":"Role",
-              "iconClass": "",
-              "state":"settings.security.role"
-            },
-            {
-              "title":"Permission",
-              "iconClass": "",
-              "state":"settings.security.permission"
-            }
-          ]
-        } 
-      ]
+      "iconClass": "zmdi zmdi-settings zmdi-hc-fw"
     }       
   ]
 }

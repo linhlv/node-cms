@@ -14,6 +14,12 @@ module.exports = function(app) {
          viewsBasePath = 'core/cp/views';
           
      router.get('/', function(req, res) {
+        if (typeof req.session.auth == 'undefined' || req.session.auth === false || req.session.auth.status < 2) {
+            req.session.auth_redirect_host = req.get('host');
+            req.session.auth_redirect = '/cp';
+            res.redirect(303, "/auth/cp?rnd=" + Math.random().toString().replace('.', ''));
+            return;
+        }
         i18nm.setLocale(req.session.current_locale);
 
         var loadavg = os.loadavg();

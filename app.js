@@ -16,6 +16,7 @@ var path = require('path'),
     session = require('express-session'),
     exphbs = require('express-handlebars'),
     cp = require('./core/cp/cp')(app),
+    auth = require('./core/auth')(app),
     winston = require('winston'),
     multer = require('multer'),
     bodyParser = require('body-parser'),
@@ -64,6 +65,7 @@ app.set('express', express);
 app.set('logger', logger);
 app.set('session', session);
 app.set('cp', cp);
+app.set('auth-core', auth);
 app.set('views', path.join(__dirname, 'views'));
 app.set('_root', path.join(__dirname));
 app.set('renderer', require('./core/renderer')(app));
@@ -242,6 +244,48 @@ app.use(function(req, res, next) {
     });
 });
 
+
+/* Load authorization data */
+app.use(function(req, res, next) {
+    app.get('auth-core').check(req, function(auth) {
+        req.session.auth = auth;
+        var __local = false;
+        if (app.get('settings') && app.get('settings').site_auth && app.get('settings').site_auth == 'mnd') {
+            if (req.method == 'GET' && (!auth || (auth.status && auth.status < 1))) {
+                if (req.url.match(/^\/auth/)) __local = true;
+                for (var r = 0; r < public_folder_dirs.length; r++) {
+                    var _rx = new RegExp('^' + public_folder_dirs[r].replace(/\/$/, ''));
+                    if (req.url.match(_rx)) __local = true;
+                }
+                if (!__local) return res.redirect(303, "/auth?rnd=" + Math.random().toString().replace('.', ''));
+            }
+        }
+        __local = false;
+        if (app.get('settings') && app.get('settings').site_mode && app.get('settings').site_mode == 'maintenance') {
+            if (req.method == 'GET' && (!auth || (auth.status && auth.status < 2))) {
+                if (req.url.match(/^\/auth\/cp/)) __local = true;
+                if (req.url.match(/^\/maintenance/)) __local = true;
+                for (var j = 0; j < public_folder_dirs.length; j++) {
+                    var _rx2 = new RegExp('^' + public_folder_dirs[j].replace(/\/$/, ''));
+                    if (req.url.match(_rx2)) __local = true;
+                }
+                if (!__local) return res.redirect(303, "/maintenance");
+            }
+        }
+        return next();
+    });
+});
+
+/* Load avatar */
+app.use(function(req, res, next) {
+    if (req.session && req.session.auth) {
+        req.session.auth.avatar = '/images/avatars/default.png';
+        var afn = crypto.createHash('md5').update(config.salt + '.' + req.session.auth._id).digest('hex');
+        if (fs.existsSync(path.join(__dirname, 'public', 'images', 'avatars', afn + '.jpg'))) req.session.auth.avatar = '/images/avatars/' + afn + '.jpg';
+    }
+    next();
+});
+
 /* Admin Spaces */
 var _ap = path.join(__dirname, 'core', 'cp', '/');
 var _ar, _ap;
@@ -264,6 +308,8 @@ for (var mb in modules) {
     if (fs.existsSync(_mp + 'routing.js')) _r = require(_mp + 'routing');
 
     app.set(modules[mb] + '_routing', _r);  
+
+    console.log(_mp);
 
     if (fs.existsSync(_mp + 'module.js')) _m = require(_mp + 'module')(app);
     if (fs.existsSync(_mp + 'admin.js')) {

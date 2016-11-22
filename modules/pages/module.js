@@ -81,16 +81,26 @@ module.exports = function(app) {
                         bread_html_bootstrap: bread_html_bootstrap,
                         current_lang: lng
                     };
-                    var html_render = '';
+                    var html_render = 'test';
                     page_data.blocks_sync = {};
                     try {
+                        /*
                         Object.keys(app.get('blocks_sync')).forEach(function(key) {
                             var fn = app.get('blocks_sync')[key];
                             if (fn) page_data.blocks_sync[key] = fn;
                         });
-                        var renderer = gaikan.compileFromString(entities.decode(items[0].pdata[lng].pcontent));
-                        html_render = renderer(gaikan, page_data, undefined);
-                    } catch (ex) {}
+                        */
+
+                        html_render =items[0].pdata[lng].pcontent; 
+                        
+
+                        // var renderer = gaikan.compileFromString(entities.decode(items[0].pdata[lng].pcontent));
+                        // html_render = renderer(gaikan, page_data, undefined);
+
+
+                    } catch (ex) {
+                        console.log(ex);
+                    }
                     var full_title = items[0].pdata[lng].ptitle;
                     if (title_arr.length) {
                         full_title += ' | ' + title_arr.join(' | ');
@@ -99,7 +109,7 @@ module.exports = function(app) {
                         title: full_title,
                         current_lang: lng,
                         page_title: items[0].pdata[lng].ptitle,
-                        content: html_render,
+                        body: html_render,
                         keywords: items[0].pdata[lng].pkeywords,
                         description: items[0].pdata[lng].pdesc,
                         bread: bread,
@@ -115,6 +125,33 @@ module.exports = function(app) {
             });
         });     
     });
+
+    var folders_make_hash = function(fldrs) {
+        var fh = {};
+        for (var i = 0; i < fldrs.length; i++) {
+            fh[fldrs[i].id] = fldrs[i];
+            delete fh[fldrs[i].id].id;
+        }
+        return fh;
+    };
+
+    var folders_find_path = function(fldrs_hash, id, _path) {
+        var path = _path || [];
+        if (fldrs_hash && id && fldrs_hash[id] && fldrs_hash[id].parent && fldrs_hash[id].parent != '#') {
+            var pi = {
+                name: fldrs_hash[id].text
+            };
+            var locales = app.get('config').locales.avail;
+            if (fldrs_hash[id].data && fldrs_hash[id].data.lang) {
+                for (var i = 0; i < locales.length; i++) {
+                    pi[locales[i]] = fldrs_hash[id].data.lang[locales[i]];
+                }
+            }
+            path.push(pi);
+            folders_find_path(fldrs_hash, fldrs_hash[id].parent, path);
+        }
+        return path;
+    };
 
     return router;
 };

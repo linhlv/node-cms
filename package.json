@@ -30,6 +30,7 @@
     "express-session": "^1.0.4",
     "fs-extra": "^0.9.1",
     "i18n-2": "^0.4.6",
+    "lodash": "^4.17.2",
     "moment": "^2.8.3",
     "mongodb": "^1.4.5",
     "multer": "^0.1.0",

@@ -81,8 +81,7 @@ module.exports = function(app) {
         }
         if (!req.session.auth_redirect)
             req.session.auth_redirect = '/auth/profile?rnd=' + Math.random().toString().replace('.', '');
-        var render = renderer.render_file(path.join(__dirname, 'views'), 'login_user', {
-            lang: i18nm,
+        var render = renderer.render_file(path.join(__dirname, 'views'), 'login_user', {            
             captcha: _cap,
             captcha_req: captcha_req,
             data: data,
@@ -109,13 +108,21 @@ module.exports = function(app) {
         if (req.session.captcha_req) captcha_req = true;
         var redirect_host = '';
         if (req.session.auth_redirect_host) redirect_host = config.protocol + '://' + req.session.auth_redirect_host;
-        var render = renderer.render_file(path.join(__dirname, 'views'), 'login_cp', {
+
+         var data = {
             lang: i18nm,
-            captcha: _cap,
+            m : 'auth', 
+            keywords: '',
+            description: '',
+            extra_css: '<link rel="stylesheet" href="/modules/auth/css/user_auth.css" type="text/css">',
+            captcha: _cap,            
             captcha_req: captcha_req,
             redirect_host: redirect_host,
             redirect: req.session.auth_redirect
-        }, req);
+        };
+
+        var render = renderer.render_file(path.join(__dirname, 'views'), 'login_cp', data, req);
+
         res.send(render);
     });
     router.get('/register', function(req, res) {
@@ -176,7 +183,6 @@ module.exports = function(app) {
                     lang: i18nm,
                     captcha: _cap,
                     captcha_req: true,
-                    data: data,
                     invcode: invcode,
                     redirect_host: redirect_host,
                     redirect: req.session.auth_redirect

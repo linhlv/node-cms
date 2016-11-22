@@ -1,0 +1,41 @@
+(function(){
+    var shared = angular.module('shared', [
+        'ngAnimate',
+        'ngResource',
+        'ui.router',
+        'ui.bootstrap',
+        'angular-loading-bar',
+        'oc.lazyLoad',
+        'nouislider',
+        'ngTable'
+    ]);
+
+    shared.directive('fgLine', function(){
+        return {
+            restrict: 'C',
+            link: function(scope, element) {
+                if($('.fg-line')[0]) {
+                    $('body').on('focus', '.form-control', function(){
+                        $(this).closest('.fg-line').addClass('fg-toggled');
+                    })
+
+                    $('body').on('blur', '.form-control', function(){
+                        var p = $(this).closest('.form-group');
+                        var i = p.find('.form-control').val();
+
+                        if (p.hasClass('fg-float')) {
+                            if (i.length == 0) {
+                                $(this).closest('.fg-line').removeClass('fg-toggled');
+                            }
+                        }
+                        else {
+                            $(this).closest('.fg-line').removeClass('fg-toggled');
+                        }
+                    });
+                }
+    
+            }
+        }
+        
+    });
+})();

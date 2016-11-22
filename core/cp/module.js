@@ -41,9 +41,8 @@ module.exports = function(app) {
             loadavg: loadavg
         };
 
-         var data = {             
-             assets : '/core/cp',
-             os: os_data,
+         var data = {
+             os: os_data
          };
 
          app.get('cp').render(req, res, data, i18nm, 'home', req.session.auth);

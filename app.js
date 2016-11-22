@@ -15,7 +15,6 @@ var path = require('path'),
     app = express(),    
     session = require('express-session'),
     exphbs = require('express-handlebars'),
-    handlebars = require('handlebars'),
     cp = require('./core/cp/cp')(app),
     auth = require('./core/auth')(app),
     winston = require('winston'),
@@ -79,7 +78,6 @@ var hbs = exphbs.create({
 app.engine('.hbs', hbs.engine);
 app.set('view engine', '.hbs');
 app.set('hbs', hbs);
-app.set('handlebars', handlebars);
 
 /* Use items */
 app.use(multer({

@@ -7,7 +7,8 @@ var config = require('../config'),
         email: '',
         status: 0,
         realname: ''
-    };
+    },
+    assets = '/core/cp';
 
 module.exports = function(app) {
     var i18nm = new(require('i18n-2'))({
@@ -34,6 +35,7 @@ module.exports = function(app) {
             _ro.auth = _default_auth_data;            
             _ro._lang = i18nm;                        
             _ro.layout = path.join(_root, _base , '/layouts/', _layout);
+            _ro.assets = assets;
             if (req && req.session && req.session.auth) _ro.auth = req.session.auth;
             
             res.render(_vp, _ro);
@@ -45,6 +47,7 @@ module.exports = function(app) {
 
             data.title = 'CP';
             data.auth = _default_auth_data;
+            data.assets = assets;
 
             if (req && req.session && req.session.auth) data.auth = req.session.auth;
 

@@ -41,6 +41,18 @@ module.exports = function(app) {
          render_file: function(dir, filename, data, req) {
             var _ro = data || {};
 
+            var _layout = dir + '/' + filename + '.hbs';     
+
+            data.title = 'CP';
+            data.auth = _default_auth_data;
+
+            if (req && req.session && req.session.auth) data.auth = req.session.auth;
+
+            var source = fs.readFileSync(_layout, 'utf-8');      
+            var template = app.get('hbs').handlebars.compile(source);
+            var html = template(data);
+
+            return html;
          }         
      };
 

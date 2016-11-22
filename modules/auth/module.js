@@ -35,7 +35,7 @@ module.exports = function(app) {
         } else {
             next();
         }
-    });
+    });    
     router.post('/captcha', function(req, res) {
         var c = parseInt(Math.random() * 9000 + 1000);
         req.session.captcha = c;
@@ -48,9 +48,7 @@ module.exports = function(app) {
             next();
         }
     });
-    router.get('/', function(req, res) {
-        console.log('auth');
-        
+    router.get('/', function(req, res) {        
         i18nm.setLocale(req.session.current_locale);
         if (typeof req.session != 'undefined' && typeof req.session.auth != 'undefined' && req.session.auth !== false) {
             res.redirect(303, "/?rnd=" + Math.random().toString().replace('.', ''));
@@ -95,6 +93,7 @@ module.exports = function(app) {
         data.content = render;
         app.get('renderer').render(res, undefined, data, req);
     });
+
     router.get('/cp', function(req, res) {
         i18nm.setLocale(req.session.current_locale);
         if (typeof req.session != 'undefined' && typeof req.session.auth != 'undefined' && req.session.auth !== false) {

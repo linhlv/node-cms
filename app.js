@@ -15,6 +15,7 @@ var path = require('path'),
     app = express(),    
     session = require('express-session'),
     exphbs = require('express-handlebars'),
+    handlebars = require('handlebars'),
     cp = require('./core/cp/cp')(app),
     auth = require('./core/auth')(app),
     winston = require('winston'),
@@ -77,6 +78,8 @@ var hbs = exphbs.create({
 });
 app.engine('.hbs', hbs.engine);
 app.set('view engine', '.hbs');
+app.set('hbs', hbs);
+app.set('handlebars', handlebars);
 
 /* Use items */
 app.use(multer({
@@ -305,12 +308,8 @@ for (var mb in modules) {
             prefix: ''
         },
         _mp = path.join(__dirname, 'modules', modules[mb], '/');
+
     if (fs.existsSync(_mp + 'routing.js')) _r = require(_mp + 'routing');
-
-    app.set(modules[mb] + '_routing', _r);  
-
-    console.log(_mp);
-
     if (fs.existsSync(_mp + 'module.js')) _m = require(_mp + 'module')(app);
     if (fs.existsSync(_mp + 'admin.js')) {
         _a = require(_mp + 'admin')(app);

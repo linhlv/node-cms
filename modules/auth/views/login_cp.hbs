@@ -120,6 +120,15 @@
         <![endif]-->
                 
         <!-- App level -->
+         <script type="text/javascript">
+            var _lang_vars = {
+                    ajax_failed: "{{lang 'ajax_failed'}}",
+                    invalid_username_syntax: "{{lang 'invalid_username_syntax'}}",
+                    invalid_password_syntax: "{{lang 'invalid_password_syntax'}}"
+                },
+                redirect_url = "{{redirect}}" || "/",
+                redirect_host = "{{redirect_host}}" || location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '');
+        </script>        
         <script src="/shared/js/shared.js"></script>
         <script src="{{mp}}/js/app.js"></script>
         <script src="{{mp}}/js/services/auth.svc.js"></script>

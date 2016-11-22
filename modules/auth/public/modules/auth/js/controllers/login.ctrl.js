@@ -26,7 +26,7 @@
             }
 
             authSvc.process(vm.username, vm.password).then(function(res){
-                if(res.result!=1){
+                if(res.data && res.data.result!=1){
                     //failed
                 }else{
                     location.href = redirect_url + "?rnd=" + Math.random().toString().replace('.', '');

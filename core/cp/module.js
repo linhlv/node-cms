@@ -41,18 +41,22 @@ module.exports = function(app) {
             loadavg: loadavg
         };
 
-         var data = {
-             os: os_data
-         };
+        var body = app.get('renderer').render_file(path.join(__dirname, 'views'), 'spa', {
+            lang: i18nm,
+            os: os_data,
+            config: app.get('config')
+        }, req);
 
-         app.get('cp').render(req, res, data, i18nm, 'home', req.session.auth);
+         app.get('cp').render(req, res, {
+             body: body
+         }, i18nm, 'spa', req.session.auth);
      });
 
      router.get('/spa_metadata.json', function(req, res) {
         var spa = app.get('spa');
         spa.lang = i18nm;
         
-        if(req.session.auth){ _ro.username = req.session.auth.realname || req.session.auth.username; }
+        if(req.session.auth){ req.session.auth.username = req.session.auth.realname || req.session.auth.username; }
 
         if(spa && spa.modules){            
             app.get('modules').forEach(function(module) {

@@ -93,7 +93,7 @@ module.exports = function(app) {
         app.get('renderer').render(res, undefined, data, req);
     });
 
-    router.get('/cp', function(req, res) {
+    router.get('/cp', function(req, res) {        
         i18nm.setLocale(req.session.current_locale);
         if (typeof req.session != 'undefined' && typeof req.session.auth != 'undefined' && req.session.auth !== false) {
             res.redirect(303, "/?rnd=" + Math.random().toString().replace('.', ''));
@@ -734,7 +734,7 @@ module.exports = function(app) {
                 });
         });
     });
-    router.get('/logout', function(req, res) {
+    router.get('/logout', function(req, res) {        
         i18nm.setLocale(req.session.current_locale);
         if (!req.session.auth || req.session.auth.status < 1) {
             req.session.auth_redirect_host = req.get('host');
@@ -742,7 +742,9 @@ module.exports = function(app) {
             res.redirect(303, "/auth?rnd=" + Math.random().toString().replace('.', ''));
             return;
         }
+
         delete req.session.auth;
+
         var data = {
             title: i18nm.__('logout'),
             page_title: i18nm.__('logout'),
@@ -750,46 +752,23 @@ module.exports = function(app) {
             description: '',
             extra_css: ''
         };
+
         var render = renderer.render_file(path.join(__dirname, 'views'), 'logout', {
             lang: i18nm,
             data: data
         }, req);
-        data.content = render;
-        app.get('renderer').render(res, undefined, data, req);
+
+        data.body = render;
+
+        app.get('renderer').render(req, undefined, data, res);
     });
+    
     router.post('/process', function(req, res) {
         res.setHeader('Content-Type', 'application/json');
         i18nm.setLocale(req.session.current_locale);
         var username = req.body.username;
         var password = req.body.password;
-        var captcha = req.body.captcha;
-        if (req.session.captcha_req) {
-            if (!captcha.match(/^[0-9]{4}$/)) {
-                res.send(JSON.stringify({
-                    result: 0,
-                    field: "auth_captcha",
-                    error: i18nm.__("invalid_captcha")
-                }));
-                return;
-            }
-            if (captcha != req.session.captcha) {
-                req.session.captcha = 0;
-                res.send(JSON.stringify({
-                    result: 0,
-                    field: "auth_captcha",
-                    error: i18nm.__("invalid_captcha")
-                }));
-                return;
-            }
-        }
-        req.session.captcha = 0;
-        if (typeof username == 'undefined' || typeof password == 'undefined') {
-            res.send(JSON.stringify({
-                result: 0,
-                error: i18nm.__("username_password_missing")
-            }));
-            return;
-        }
+       
         if (!username.match(/^[A-Za-z0-9_\-]{3,20}$/)) {
             res.send(JSON.stringify({
                 result: 0,
@@ -835,6 +814,7 @@ module.exports = function(app) {
             }));
         });
     });
+
     router.get('/profile', function(req, res) {
         i18nm.setLocale(req.session.current_locale);
         if (!req.session.auth || req.session.auth.status < 1) {

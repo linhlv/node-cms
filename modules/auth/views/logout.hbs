@@ -1,5 +1,5 @@
-<h1>!{root.data.title}</h1>
-<p>!{root.lang.__('logged_out')}</p>
+<h1>{{data.title}}</h1>
+<p>{{lang 'logged_out'}}</p>
 <script>
 setTimeout( function() {
 	location.href = "/?rnd=" + Math.random().toString().replace('.', '');

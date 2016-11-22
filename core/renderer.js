@@ -27,24 +27,17 @@ module.exports = function(app) {
     };
 
     var renderer = {
-         dir: function(base){
-             _base = base;
-             return {render: this.render};
-         },         
-         render: function(req, view, layout, data, res) {             
+         render: function(req, layout, data, res) {             
             var _ro = data || {};
-            var _layout = (layout || config.layouts.default) + '_' + req.session.current_locale;
-            var _vp = path.join(_root, _base, view);            
+            var _layout = (layout || config.layouts.default) + '_' + req.session.current_locale;         
             
             i18nm.setLocale(req.session.current_locale);            
             
             _wrap(_ro);
-
-            _ro.layout = path.join(_root, _base , '/layouts/', _layout);
             
             if (req && req.session && req.session.auth) _ro.auth = req.session.auth;
             
-            res.render(_vp, _ro);
+            res.render(_layout, _ro);
          },
          render_file: function(dir, filename, data, req) {
             var _ro = data || {};

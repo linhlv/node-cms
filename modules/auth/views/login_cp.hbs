@@ -16,21 +16,21 @@
         <link href="{{assets}}/css/app.min.2.css" rel="stylesheet">
     </head>
 
-    <body class="login-content" data-ng-controller="loginCtrl as lctrl">
+    <body class="login-content" data-ng-controller="loginCtrl as vm">
 
         <!-- Login -->
         <div class="lc-block toggled" id="l-login" >
             <div class="input-group m-b-20">
                 <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
                 <div class="fg-line">
-                    <input type="text" class="form-control" placeholder="{{lang 'username'}}">
+                    <input type="text" id="auth_username" class="form-control" placeholder="{{lang 'username'}}" data-ng-model="vm.username">
                 </div>
             </div>
 
             <div class="input-group m-b-20">
                 <span class="input-group-addon"><i class="zmdi zmdi-male"></i></span>
                 <div class="fg-line">
-                    <input type="password" class="form-control" placeholder="{{lang 'password'}}">
+                    <input type="password" id="auth_password" class="form-control" placeholder="{{lang 'password'}}"  data-ng-model="vm.password">
                 </div>
             </div>
 
@@ -43,7 +43,7 @@
                     Keep me signed in
                 </label>
             </div>
-            <a href="" class="btn btn-login btn-danger btn-float"><i class="zmdi zmdi-arrow-forward"></i></a>         
+            <a href="" class="btn btn-login btn-danger btn-float" data-ng-click="vm.login()"><i class="zmdi zmdi-arrow-forward"></i></a>         
         </div>
         <!-- Older IE warning message -->
         <!--[if lt IE 9]>
@@ -122,6 +122,7 @@
         <!-- App level -->
         <script src="/shared/js/shared.js"></script>
         <script src="{{mp}}/js/app.js"></script>
+        <script src="{{mp}}/js/services/auth.svc.js"></script>
         <script src="{{mp}}/js/controllers/login.ctrl.js"></script>
         
     </body>

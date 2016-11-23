@@ -2,6 +2,7 @@ var config = require('../config'),
     fs = require('fs'),    
     async = require('async'),
     path = require('path'),
+    _ = require('lodash'),
     _default_auth_data = {
         username: '',
         email: '',
@@ -16,7 +17,8 @@ module.exports = function(app) {
             extension: '.js',
             devMode: config.locales.dev_mode
         }),
-        templates = {}, 
+        templates = {},
+        hbs = app.get('hbs'),  
         _base = '',_root = app.get('_root');
 
     var _wrap = function(ro){
@@ -36,6 +38,18 @@ module.exports = function(app) {
             _wrap(_ro);
             
             if (req && req.session && req.session.auth) _ro.auth = req.session.auth;
+
+            var helpers = app.get('helpers');
+            if(helpers){                
+                _.forEach(helpers, function(mh, key){
+                    var m_helpers = app.get('helpers')[key];
+                    
+                    _.forEach(m_helpers, function(h, i){
+                        hbs.handlebars.registerHelper(key + '_' + i, h);
+                    });
+                        
+                });
+            }         
             
             res.render(_layout, _ro);
          },
@@ -50,10 +64,11 @@ module.exports = function(app) {
             if (req && req.session && req.session.auth) _ro.auth = req.session.auth;
 
             var source = fs.readFileSync(_layout, 'utf-8');      
-            var hbs = app.get('hbs');
+                        
             hbs.handlebars.registerHelper('lang', function(key){                
                 return data.lang.__(key); 
-            });            
+            });
+
             var template = hbs.handlebars.compile(source);
             var html = template(_ro);
 

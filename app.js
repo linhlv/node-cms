@@ -68,7 +68,6 @@ app.set('cp', cp);
 app.set('auth-core', auth);
 app.set('views', path.join(__dirname, 'views'));
 app.set('_root', path.join(__dirname));
-app.set('renderer', require('./core/renderer')(app));
 
 var hbs = exphbs.create({        
     layoutsDir: config.layouts.dir.layouts,
@@ -78,6 +77,7 @@ var hbs = exphbs.create({
 app.engine('.hbs', hbs.engine);
 app.set('view engine', '.hbs');
 app.set('hbs', hbs);
+app.set('renderer', require('./core/renderer')(app));
 
 /* Use items */
 app.use(multer({
@@ -100,6 +100,10 @@ app.use(bodyParser.urlencoded({
 
 /* Load static */
 app.use(express.static(path.join(__dirname, 'public')));
+
+if (!app.get('helpers')) {
+    app.set('helpers', {}); 
+}
 
 /* Get modules list and version info */
 var modules = fs.readdirSync(path.join(__dirname, 'modules/')),
@@ -302,14 +306,17 @@ var spa = {};
 spa.assets = 'core/cp';
 spa.modules = {};
 for (var mb in modules) {
-    var _b, _m, _a, _r = {
+    var _h = null, _m, _a, _r = {
             prefix: ''
         },
         _mp = path.join(__dirname, 'modules', modules[mb], '/');
 
     if (fs.existsSync(_mp + 'routing.js')) _r = require(_mp + 'routing');
 
-    app.set(modules[mb] + '_routing', _r);
+    app.set(modules[mb] + '_routing', _r);   
+
+    if (fs.existsSync(_mp + 'helper.js')) _h = require(_mp + 'helper')(app);
+    if (_h) app.get('helpers')[modules[mb]] = _h;
 
     if (fs.existsSync(_mp + 'module.js')) _m = require(_mp + 'module')(app);
     if (fs.existsSync(_mp + 'admin.js')) {

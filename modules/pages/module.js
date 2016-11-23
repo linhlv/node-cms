@@ -1,8 +1,7 @@
 module.exports = function(app) {
     var router = app.get('express').Router(),
         path = require('path'),
-        exphbs = app.get('exphbs'),
-        renderer = app.get('renderer'),        
+        exphbs = app.get('exphbs'),     
         config = app.get('config'),
         i18nm = new(require('i18n-2'))({
             locales: app.get('config').locales.avail,

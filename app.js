@@ -315,7 +315,7 @@ for (var mb in modules) {
 
     app.set(modules[mb] + '_routing', _r);   
 
-    if (fs.existsSync(_mp + 'helper.js')) _h = require(_mp + 'helper')(app);
+    if (fs.existsSync(_mp + 'helper.js')) _h = require(_mp + 'helper');
     if (_h) app.get('helpers')[modules[mb]] = _h;
 
     if (fs.existsSync(_mp + 'module.js')) _m = require(_mp + 'module')(app);

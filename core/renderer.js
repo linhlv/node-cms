@@ -40,14 +40,15 @@ module.exports = function(app) {
             if (req && req.session && req.session.auth) _ro.auth = req.session.auth;
 
             var helpers = app.get('helpers');
+
             if(helpers){                
                 _.forEach(helpers, function(mh, key){
-                    var m_helpers = app.get('helpers')[key];
-                    
+                    var m_helpers = app.get('helpers')[key](app, req);                    
                     _.forEach(m_helpers, function(h, i){
-                        hbs.handlebars.registerHelper(key + '_' + i, h);
-                    });
-                        
+                        h(function(html){
+                            hbs.handlebars.registerHelper(key + '_' + i, html);
+                        });                        
+                    });                        
                 });
             }         
             

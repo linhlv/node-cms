@@ -9,8 +9,7 @@ module.exports = function(app) {
             directory: path.join(__dirname, 'lang'),
             extension: '.js',
             devMode: app.get('config').locales.dev_mode
-        });
-          
+        });          
     
     router.get(/(.*)/, function(req, res, next) {
           var lng = req.session.current_locale;
@@ -50,9 +49,10 @@ module.exports = function(app) {
             } else {
                 folders = JSON.parse(items[0].ovalue);
             }
+
             app.get('mongodb').collection('pages').find(find_query, {
                 limit: 1
-            }).toArray(function(err, items) {
+            }).toArray(function(err, items) {   
                 if (!err && typeof items != 'undefined' && items && items.length && !err) {
                     if (!items[0].pdata) items[0].pdata = {};
                     if (!items[0].pdata[lng]) items[0].pdata[lng] = {};
@@ -69,35 +69,24 @@ module.exports = function(app) {
                     }
                     title_arr = title_arr.reverse();
                     bread_html += '<li>' + items[0].pdata[lng].ptitle + '</li>';
-                    bread_html_uikit = '<ul class="uk-breadcrumb">' + bread_html + '</ul>';
                     bread_html_bootstrap = '<ol class="breadcrumb">' + bread_html + '</ol>';
+
                     var page_data = {
                         title: items[0].pdata[lng].ptitle,
                         keywords: items[0].pdata[lng].keywords,
                         description: items[0].pdata[lng].desc,
                         bread: bread,
                         bread_html: bread_html,
-                        bread_html_uikit: bread_html_uikit,
                         bread_html_bootstrap: bread_html_bootstrap,
                         current_lang: lng
                     };
-                    var html_render = 'test';
-                    page_data.blocks_sync = {};
-                    try {
-                        /*
-                        Object.keys(app.get('blocks_sync')).forEach(function(key) {
-                            var fn = app.get('blocks_sync')[key];
-                            if (fn) page_data.blocks_sync[key] = fn;
-                        });
-                        */
 
-                        html_render =items[0].pdata[lng].pcontent; 
-                        
-
-                        // var renderer = gaikan.compileFromString(entities.decode(items[0].pdata[lng].pcontent));
-                        // html_render = renderer(gaikan, page_data, undefined);
-
-
+                    var html_render = '';
+                    
+                    try {              
+                        var hbs = app.get('hbs');      
+                        var template = hbs.handlebars.compile(items[0].pdata[lng].pcontent);
+                        var html_render = template(page_data);   
                     } catch (ex) {
                         console.log(ex);
                     }
@@ -114,10 +103,11 @@ module.exports = function(app) {
                         description: items[0].pdata[lng].pdesc,
                         bread: bread,
                         bread_html: bread_html,
-                        bread_html_uikit: bread_html_uikit,
                         bread_html_bootstrap: bread_html_bootstrap
                     };
+
                     var layout = items[0].pdata[lng].playout || undefined;
+
                     return app.get('renderer').render(req, layout, data, res);
                 } else {
                     return next();

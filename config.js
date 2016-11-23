@@ -71,8 +71,7 @@ var config = {
 			}
 		}
 	},
-	"mongo": {		
-		//"url": "mongodb://twenty:5UpYDwz3neLnv6aAbpB6JfVnVQzps7vPGQL@ds050559.mlab.com:50559/cms",
+	"mongo": {
 		"url": "mongodb://localhost/cms",
 		"options": {
 			"server": {

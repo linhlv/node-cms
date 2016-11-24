@@ -10,6 +10,8 @@ define([], function(){
 
                 $stateProvider.state(dashboard);
 
+                
+
                 _.forEach(_mm, function(m){
                     var _md = m[0], _mp = 'app/modules/' + m[0].name;
 

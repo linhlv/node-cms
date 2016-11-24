@@ -1,0 +1,25 @@
+{
+  "name": "types",
+  "enabled": true,
+  "routing_prefix":"types",
+  "templateUrl":"types.html",
+  "routes":[
+    {
+      "name":"list",
+      "url":"/list",
+      "templateUrl":"types-list.html"
+    },
+    {
+      "name":"add",
+      "url":"/add",
+      "templateUrl":"types-add.html"
+    }
+  ],
+  "menu":[
+    {
+      "title":"Types",
+      "state":"types.list",
+      "iconClass": "zmdi zmdi-file zmdi-hc-fw"
+    } 
+  ]
+}

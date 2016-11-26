@@ -72,6 +72,7 @@ var config = {
 		}
 	},
 	"mongo": {
+		// "url":"mongodb://forty:572Nhu9yd5gXkVyqkg6y8eDHJNhwu6BCBUe@ds050559.mlab.com:50559/cms?auto_reconnect=true,w=1",
 		"url": "mongodb://localhost/cms",
 		"options": {
 			"server": {

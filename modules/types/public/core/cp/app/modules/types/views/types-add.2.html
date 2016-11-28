@@ -1,198 +1,58 @@
 <div class="card">
      <div class="card-header ch-alt">
-        <h2>New page type <small>Please enter the page type display name (visible name shown to users) and code name (unique identifier).</small></h2>
-        <ul class="actions">
-            <li>
-                <a href="" data-ng-click="mactrl.listviewSearchStat = true">
-                    <i class="zmdi zmdi-search"></i>
-                </a>
-            </li>
-            <li>
-                <a href="">
-                    <i class="zmdi zmdi-plus"></i>
-                </a>
-            </li>   
-            <li class="dropdown" uib-dropdown>
-                <a href="" uib-dropdown-toggle aria-expanded="true">
-                    <i class="zmdi zmdi-sort"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-right">
-                    <li>
-                        <a href="">Last Modified</a>
-                    </li>
-                    <li>
-                        <a href="">Last Edited</a>
-                    </li>
-                    <li>
-                        <a href="">Name</a>
-                    </li>
-                    <li>
-                        <a href="">Date</a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
+        <h2>New page type <code>(2/3)</code>
+            <small>
+                Please choose which kind of page type you wish to create. If you select a page type with custom fields, you also need to supply names for the new database table and its primary key.
+            </small>
+        </h2>        
     </div>
-    <div class="card-body">     
-        <div class="table-responsive">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>Actions</th>
-                        <th>Display name</th>
-                        <th>Code name</th>
-                        <th>Data type</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>  
-                            <button class="btn btn-default btn-sm"><i class="zmdi zmdi-edit"></i></button>
-                            <button class="btn btn-default btn-sm"><i class="zmdi zmdi-delete"></i></button>
-                            <div class="btn-group" uib-dropdown>
-                                <button type="button" class="btn btn-default btn-sm dropdown-toggle" uib-dropdown-toggle><i class="zmdi zmdi-more-vert"></i></button>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#">Dropdown link</a></li>
-                                    <li><a href="#">Dropdown link</a></li>
-                                </ul>
-                            </div>
-                        </td>
-                        <td>Alexandra</td>
-                        <td>Christopher</td>
-                        <td>Pages</td>
-                    </tr>
-                    <tr>
-                        <td>  
-                            <button class="btn btn-default btn-sm"><i class="zmdi zmdi-edit"></i></button>
-                            <button class="btn btn-default btn-sm"><i class="zmdi zmdi-delete"></i></button>
-                            <div class="btn-group" uib-dropdown>
-                                <button type="button" class="btn btn-default btn-sm dropdown-toggle" uib-dropdown-toggle><i class="zmdi zmdi-more-vert"></i></button>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#">Dropdown link</a></li>
-                                    <li><a href="#">Dropdown link</a></li>
-                                </ul>
-                            </div>
-                        </td>
-                        <td>Madeleine</td>
-                        <td>Hollaway</td>
-                        <td>
-                            Container
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>  
-                            <button class="btn btn-default btn-sm"><i class="zmdi zmdi-edit"></i></button>
-                            <button class="btn btn-default btn-sm"><i class="zmdi zmdi-delete"></i></button>
-                            <div class="btn-group" uib-dropdown>
-                                <button type="button" class="btn btn-default btn-sm dropdown-toggle" uib-dropdown-toggle><i class="zmdi zmdi-more-vert"></i></button>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#">Dropdown link</a></li>
-                                    <li><a href="#">Dropdown link</a></li>
-                                </ul>
-                            </div>
-                        </td>
-                        <td>Sebastian</td>
-                        <td>Johnston</td>
-                        <td>
-                           Pages
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>  
-                            <button class="btn btn-default btn-sm"><i class="zmdi zmdi-edit"></i></button>
-                            <button class="btn btn-default btn-sm"><i class="zmdi zmdi-delete"></i></button>
-                            <div class="btn-group" uib-dropdown>
-                                <button type="button" class="btn btn-default btn-sm dropdown-toggle" uib-dropdown-toggle><i class="zmdi zmdi-more-vert"></i></button>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#">Dropdown link</a></li>
-                                    <li><a href="#">Dropdown link</a></li>
-                                </ul>
-                            </div>
-                        </td>
-                        <td>Mitchell</td>
-                        <td>Christin</td>
-                        <td>
-                           Pages
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>  
-                            <button class="btn btn-default btn-sm"><i class="zmdi zmdi-edit"></i></button>
-                            <button class="btn btn-default btn-sm"><i class="zmdi zmdi-delete"></i></button>
-                            <div class="btn-group" uib-dropdown>
-                                <button type="button" class="btn btn-default btn-sm dropdown-toggle" uib-dropdown-toggle><i class="zmdi zmdi-more-vert"></i></button>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#">Dropdown link</a></li>
-                                    <li><a href="#">Dropdown link</a></li>
-                                </ul>
-                            </div>
-                        </td>
-                        <td>Elizabeth</td>
-                        <td>Belkitt</td>
-                        <td>
-                           Container
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>  
-                            <button class="btn btn-default btn-sm"><i class="zmdi zmdi-edit"></i></button>
-                            <button class="btn btn-default btn-sm"><i class="zmdi zmdi-delete"></i></button>
-                            <div class="btn-group" uib-dropdown>
-                                <button type="button" class="btn btn-default btn-sm dropdown-toggle" uib-dropdown-toggle><i class="zmdi zmdi-more-vert"></i></button>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#">Dropdown link</a></li>
-                                    <li><a href="#">Dropdown link</a></li>
-                                </ul>
-                            </div>
-                        </td>
-                        <td>Benjamin</td>
-                        <td>Parnell</td>
-                        <td>
-                            Pages
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>  
-                            <button class="btn btn-default btn-sm"><i class="zmdi zmdi-edit"></i></button>
-                            <button class="btn btn-default btn-sm"><i class="zmdi zmdi-delete"></i></button>
-                            <div class="btn-group" uib-dropdown>
-                                <button type="button" class="btn btn-default btn-sm dropdown-toggle" uib-dropdown-toggle><i class="zmdi zmdi-more-vert"></i></button>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#">Dropdown link</a></li>
-                                    <li><a href="#">Dropdown link</a></li>
-                                </ul>
-                            </div>
-                        </td>
-                        <td>Katherine</td>
-                        <td>Buckland</td>
-                        <td>
-                            Container
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>  
-                            <button class="btn btn-default btn-sm"><i class="zmdi zmdi-edit"></i></button>
-                            <button class="btn btn-default btn-sm"><i class="zmdi zmdi-delete"></i></button>
-                            <div class="btn-group" uib-dropdown>
-                                <button type="button" class="btn btn-default btn-sm dropdown-toggle" uib-dropdown-toggle><i class="zmdi zmdi-more-vert"></i></button>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#">Dropdown link</a></li>
-                                    <li><a href="#">Dropdown link</a></li>
-                                </ul>
-                            </div>
-                        </td>
-                        <td>Nicholas</td>
-                        <td>Walmart</td>
-                        <td>
-                           Container
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+    <div class="card-body card-padding">
+        <form role="form">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group fg-line">
+                        <label for="typeDisplayName">Page type has custom fields</label>
+                    </div>
+                </div>
+            </div>          
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group fg-line">
+                        <div class="toggle-switch">
+                            <input id="tw-switch" type="checkbox" hidden="hidden" data-ng-model="vm.types">
+                            <label for="tw-switch" class="ts-helper"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div data-ng-hide="vm.types">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <blockquote class="m-b-25">
+                            <p>The page type is only a container without custom fields.</p>
+                        </blockquote>
+                    </div>                
+                </div>
+            </div>
+            <div data-ng-show="vm.types">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <blockquote class="m-b-25">
+                            <p>The page type has custom fields.</p>
+                        </blockquote>
+                    </div>                
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group fg-line">
+                            <label for="typeName">Type name</label>
+                            <input type="text" class="form-control input-sm" id="typeName" placeholder="Page type name">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="btn bgm-green" data-ui-sref="types.add.2">Next <i class="zmdi zmdi-arrow-forward"></i></button>
+        </form>     
     </div>    
-    <div class="lv-pagination">
-        <uib-pagination template-url="template/pagination/pagination.html" total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"></uib-pagination>
-    </div>
 </div>
 

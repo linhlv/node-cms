@@ -22,7 +22,14 @@
     {
       "name":"add.2",
       "url":"/2",
-      "templateUrl":"types-add.2.html"
+      "templateUrl":"types-add.2.html",
+      "controller":"types-add.2.ctrl as vm"
+    },
+    {
+      "name":"add.3",
+      "url":"/3",
+      "templateUrl":"types-add.3.html",
+      "controller":"types-add.3.ctrl as vm"
     }
   ],
   "menu":[

@@ -13,6 +13,16 @@
       "name":"add",
       "url":"/add",
       "templateUrl":"types-add.html"
+    },
+    {
+      "name":"add.1",
+      "url":"/1",
+      "templateUrl":"types-add.1.html"
+    },
+    {
+      "name":"add.2",
+      "url":"/2",
+      "templateUrl":"types-add.2.html"
     }
   ],
   "menu":[

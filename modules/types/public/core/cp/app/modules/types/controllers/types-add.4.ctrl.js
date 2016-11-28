@@ -4,11 +4,12 @@
 define(function () {
     function c($scope){
         var vm = this;
+
         vm.types = true;
       
 
 
-        console.log('types-add.2');
+        console.log('types-add.4');
     }
 
     return c;

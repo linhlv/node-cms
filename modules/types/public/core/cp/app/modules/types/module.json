@@ -30,6 +30,12 @@
       "url":"/3",
       "templateUrl":"types-add.3.html",
       "controller":"types-add.3.ctrl as vm"
+    },
+    {
+      "name":"add.4",
+      "url":"/4",
+      "templateUrl":"types-add.4.html",
+      "controller":"types-add.4.ctrl as vm"
     }
   ],
   "menu":[

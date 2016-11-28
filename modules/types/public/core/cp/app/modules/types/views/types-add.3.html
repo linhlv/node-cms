@@ -5,130 +5,18 @@
     <div class="ms-menu" data-ng-class="{ 'toggled': mactrl.lvMenuStat }">
         <div class="ms-block text-center">
              <div class="btn-group"> 
-                <button type="button" class="btn btn-primary waves-effect"><i class="zmdi zmdi-plus"></i></button>
+                <button type="button" class="btn btn-primary waves-effect" data-ng-click="vm.add()"><i class="zmdi zmdi-plus"></i></button>
                 <button type="button" class="btn btn-primary waves-effect"><i class="zmdi zmdi-chevron-up"></i></button>
                 <button type="button" class="btn btn-primary waves-effect"><i class="zmdi zmdi-chevron-down"></i></button>
             </div>
         </div>
 
         <div class="listview lv-user m-t-20 lv-listview">            
-            <div class="lv-field-item media active">
-                <div class="lv-avatar pull-left">
-                    <img src="core/cp/img/profile-pics/1.jpg" alt="">
-                </div>
+            <div class="lv-field-item media" data-ng-repeat="item in vm.data.fields" data-ng-click="vm.selectField(item)" data-ng-class="{'active': (vm.selectedField!==undefined && vm.selectedField.id===item.id)}">
+                <div class="lv-avatar bgm-red pull-left" data-ng-bind="vm.getIcon(item)"></div>
                 <div class="media-body">
-                    <div class="lv-title">Davil Parnell Davil Parnell Davil Parnell</div>
-                    <div class="lv-small">Fierent fastidii recteque ad pro</div>
-                </div>
-            </div>
-
-            <div class="lv-field-item media">
-                <div class="lv-avatar bgm-red pull-left">a</div>
-                <div class="media-body">
-                    <div class="lv-title">Ann Watkinson</div>
-                    <div class="lv-small">Cum sociis natoque penatibus </div>
-                </div>
-            </div>
-
-            <div class="lv-field-item media">
-                <div class="lv-avatar bgm-orange pull-left">m</div>
-                <div class="media-body">
-                    <div class="lv-title">Marse Walter</div>
-                    <div class="lv-small">Suspendisse sapien ligula</div>
-                </div>
-            </div>
-
-            <div class="lv-field-item media">
-                <div class="lv-avatar pull-left">
-                    <img src="core/cp/img/profile-pics/2.jpg" alt="">
-                </div>
-                <div class="media-body">
-                    <div class="lv-title">Jeremy Robbins</div>
-                    <div class="lv-small">Phasellus porttitor tellus nec</div>
-                </div>
-            </div>
-
-            <div class="lv-field-item media">
-                <div class="lv-avatar pull-left">
-                    <img src="core/cp/img/profile-pics/3.jpg" alt="">
-                </div>
-                <div class="media-body">
-                    <div class="lv-title">Reginald Horace</div>
-                    <div class="lv-small">Quisque consequat arcu eget</div>
-                </div>
-            </div>
-
-            <div class="lv-field-item media">
-                <div class="lv-avatar bgm-cyan pull-left">s</div>
-                <div class="media-body">
-                    <div class="lv-title">Shark Henry</div>
-                    <div class="lv-small">Nam lobortis odio et leo maximu</div>
-                </div>
-            </div>
-
-            <div class="lv-field-item media">
-                <div class="lv-avatar bgm-purple pull-left">p</div>
-                <div class="media-body">
-                    <div class="lv-title">Paul Van Dack</div>
-                    <div class="lv-small">Nam posuere purus sed velit auctor sodales</div>
-                </div>
-            </div>
-
-            <div class="lv-field-item media">
-                <div class="lv-avatar pull-left">
-                    <img src="core/cp/img/profile-pics/4.jpg" alt="">
-                </div>
-                <div class="media-body">
-                    <div class="lv-title">James Anderson</div>
-                    <div class="lv-small">Vivamus imperdiet sagittis quam</div>
-                </div>
-            </div>
-
-            <div class="lv-field-item media">
-                <div class="lv-avatar pull-left">
-                    <img src="core/cp/img/profile-pics/6.jpg" alt="">
-                </div>
-                <div class="media-body">
-                    <div class="lv-title">Kane Williams</div>
-                    <div class="lv-small">Suspendisse justo nulla luctus nec</div>
-                </div>
-            </div>
-            <div class="lv-field-item media">
-                <div class="lv-avatar pull-left">
-                    <img src="core/cp/img/profile-pics/4.jpg" alt="">
-                </div>
-                <div class="media-body">
-                    <div class="lv-title">James Anderson</div>
-                    <div class="lv-small">Vivamus imperdiet sagittis quam</div>
-                </div>
-            </div>
-
-            <div class="lv-field-item media">
-                <div class="lv-avatar pull-left">
-                    <img src="core/cp/img/profile-pics/6.jpg" alt="">
-                </div>
-                <div class="media-body">
-                    <div class="lv-title">Kane Williams</div>
-                    <div class="lv-small">Suspendisse justo nulla luctus nec</div>
-                </div>
-            </div>
-            <div class="lv-field-item media">
-                <div class="lv-avatar pull-left">
-                    <img src="core/cp/img/profile-pics/4.jpg" alt="">
-                </div>
-                <div class="media-body">
-                    <div class="lv-title">James Anderson</div>
-                    <div class="lv-small">Vivamus imperdiet sagittis quam</div>
-                </div>
-            </div>
-
-            <div class="lv-field-item media">
-                <div class="lv-avatar pull-left">
-                    <img src="core/cp/img/profile-pics/6.jpg" alt="">
-                </div>
-                <div class="media-body">
-                    <div class="lv-title">Kane Williams</div>
-                    <div class="lv-small">Suspendisse justo nulla luctus nec</div>
+                    <div class="lv-title" data-ng-bind="item.name"></div>
+                    <div class="lv-small" data-ng-bind="item.description"></div>
                 </div>
             </div>
         </div>
@@ -232,6 +120,14 @@
                     <div class="lv-field-item media">
                         <div class="col-sm-4">
                             <div class="form-group fg-line">
+                                <label for="typeName">Description</label>
+                                <textarea class="form-control" data-auto-size placeholder="Field type description..."></textarea>
+                            </div>  
+                        </div>
+                    </div>   
+                    <div class="lv-field-item media">
+                        <div class="col-sm-4">
+                            <div class="form-group fg-line">
                                 <label for="typeName">Default value</label>
                                 <input type="text" class="form-control input-sm" id="typeName" placeholder="Default value">
                             </div>  
@@ -305,7 +201,7 @@
                 <div class="clearfix"></div>
 
                 <div class="lv-footer-nav">
-                    <button class="btn bgm-green" data-ui-sref="types.add.4">Next <i class="zmdi zmdi-arrow-forward"></i></button>                
+                    <button class="btn bgm-green" data-ng-click="vm.next()">Next <i class="zmdi zmdi-arrow-forward"></i></button>                
                 </div>
             </div>
         </form>

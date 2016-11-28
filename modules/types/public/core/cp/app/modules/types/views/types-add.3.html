@@ -11,10 +11,7 @@
             </div>
         </div>
 
-        <div class="listview lv-user m-t-20 lv-listview">
-            <div class="lv-field-item media">
-                &nbsp;
-            </div>
+        <div class="listview lv-user m-t-20 lv-listview">            
             <div class="lv-field-item media active">
                 <div class="lv-avatar pull-left">
                     <img src="core/cp/img/profile-pics/1.jpg" alt="">
@@ -135,8 +132,6 @@
                 </div>
             </div>
         </div>
-
-
     </div>
 
     <div class="ms-body">
@@ -170,55 +165,141 @@
                 </div>
 
                 <div class="lv-body">
+                     <div class="lv-field-item media">
+                        <div class="col-sm-4">
+                            &nbsp;
+                        </div>
+                    </div> 
+                    <div class="lv-field-item media">
+                        <div class="col-sm-4">
+                            <blockquote class="m-b-25">
+                                <p class="text-uppercase">General</p>
+                            </blockquote>
+                        </div>
+                    </div>                     
                     <div class="lv-field-item media">
                         <div class="col-sm-4">
                             <div class="form-group fg-line">
-                                <label for="typeName">Type name</label>
-                                <input type="text" class="form-control input-sm" id="typeName" placeholder="Page type name">
+                                <label for="typeName">Field name</label>
+                                <input type="text" class="form-control input-sm" id="typeName" placeholder="Field name">
                             </div>  
                         </div>
                     </div> 
                     <div class="lv-field-item media">
                         <div class="col-sm-4">
                             <div class="form-group fg-line">
-                                <label for="typeName">Type name</label>
-                                <input type="text" class="form-control input-sm" id="typeName" placeholder="Page type name">
+                                <label for="typeName">Data type</label>
+                                <select chosen data-placeholder="Select a country..." class="w-100">
+                                    <option selected="selected" value="docattachments">Attachments</option>
+                                    <option value="boolean">Boolean (Yes/No)</option>
+                                    <option value="date">Date</option>
+                                    <option value="datetime">Date and time</option>
+                                    <option value="decimal">Decimal number</option>
+                                    <option value="file">File</option>
+                                    <option value="double">Floating-point number (Double precision)</option>
+                                    <option value="integer">Integer number</option>
+                                    <option value="longinteger">Long integer number</option>
+                                    <option value="longtext">Long text</option>
+                                    <option value="docrelationships">Pages</option>
+                                    <option value="text">Text</option>
+                                    <option value="timespan">Time interval</option>
+                                    <option value="guid">Unique identifier (GUID)</option>
+                                </select>
+                            </div>  
+                        </div>
+                    </div> 
+                    <div class="lv-field-item media">
+                        <div class="col-sm-4">
+                            <div class="form-group fg-line">
+                                <label for="typeName">Size</label>
+                                <input type="text" class="form-control input-sm" id="typeName" placeholder="Size">
                             </div>  
                         </div>
                     </div>  
                      <div class="lv-field-item media">
                         <div class="col-sm-4">
                             <div class="form-group fg-line">
-                                <label for="typeName">Type name</label>
-                                <input type="text" class="form-control input-sm" id="typeName" placeholder="Page type name">
+                                <label for="typeName">Required</label>
+                                <div class="checkbox m-b-15">
+                                    <label>
+                                        <input type="checkbox" value="">
+                                        <i class="input-helper"></i>
+                                    </label>
+                                </div>
                             </div>  
                         </div>
                     </div> 
                     <div class="lv-field-item media">
                         <div class="col-sm-4">
                             <div class="form-group fg-line">
-                                <label for="typeName">Type name</label>
-                                <input type="text" class="form-control input-sm" id="typeName" placeholder="Page type name">
+                                <label for="typeName">Default value</label>
+                                <input type="text" class="form-control input-sm" id="typeName" placeholder="Default value">
                             </div>  
                         </div>
-                    </div>  
-                     <div class="lv-field-item media">
+                    </div>                     
+                    <div class="lv-field-item media">
+                        <div class="col-sm-4">
+                            <blockquote class="m-b-25">
+                                <p class="text-uppercase">Field appearance</p>
+                            </blockquote>
+                        </div>
+                    </div>   
+                    <div class="lv-field-item media">
                         <div class="col-sm-4">
                             <div class="form-group fg-line">
-                                <label for="typeName">Type name</label>
-                                <input type="text" class="form-control input-sm" id="typeName" placeholder="Page type name">
+                                <label for="typeName">Caption</label>
+                                <input type="text" class="form-control input-sm" id="typeName" placeholder="Caption">
                             </div>  
                         </div>
                     </div> 
                     <div class="lv-field-item media">
                         <div class="col-sm-4">
                             <div class="form-group fg-line">
-                                <label for="typeName">Type name</label>
-                                <input type="text" class="form-control input-sm" id="typeName" placeholder="Page type name">
+                                <label for="typeName">Description</label>
+                                <input type="text" class="form-control input-sm" id="typeName" placeholder="Description">
                             </div>  
                         </div>
                     </div>  
-
+                    <div class="lv-field-item media">
+                        <div class="col-sm-4">
+                            <div class="form-group fg-line">
+                                <label for="typeName">Explaination</label>
+                                <input type="text" class="form-control input-sm" id="typeName" placeholder="Explaination">
+                            </div>  
+                        </div>
+                    </div> 
+                    <div class="lv-field-item media">
+                        <div class="col-sm-4">
+                            <div class="form-group fg-line">
+                                <label for="typeName">Form control</label>
+                                <select chosen data-placeholder="Select a country..." class="w-100">
+                                    <option selected="selected" value="docattachments">Label</option>
+                                    <option value="boolean">Check box</option>
+                                    <option value="date">Text box</option>
+                                    <option value="date">Text box</option>
+                                    <option value="datetime">Date and time picker</option>
+                                    <option value="decimal">Dropdown list</option>
+                                    <option value="file">File</option>
+                                    <option value="double">Floating-point number (Double precision)</option>
+                                    <option value="integer">Integer number</option>
+                                    <option value="longinteger">Long integer number</option>
+                                    <option value="longtext">Long text</option>
+                                    <option value="docrelationships">Pages</option>
+                                    <option value="text">Text</option>
+                                    <option value="timespan">Time interval</option>
+                                    <option value="guid">Unique identifier (GUID)</option>
+                                </select>
+                            </div>  
+                        </div>
+                    </div> 
+                    <div class="lv-field-item media">
+                        <div class="col-sm-4">
+                            <div class="form-group fg-line">
+                                <label for="typeName">Watermark</label>
+                                <input type="text" class="form-control input-sm" id="typeName" placeholder="Watermark">
+                            </div>  
+                        </div>
+                    </div> 
                 </div>
                 
                 <div class="clearfix"></div>

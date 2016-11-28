@@ -2,7 +2,7 @@
 // monitor common task change
 /// </summary>
 define(function () {
-    function c($scope){
+    function c($scope, $state, $sessionStorage){
         var vm = this;
 
         vm.types = true;

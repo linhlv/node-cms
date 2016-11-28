@@ -19,13 +19,13 @@
                 <div class="col-sm-4">
                     <div class="form-group fg-line">
                         <div class="toggle-switch">
-                            <input id="tw-switch" type="checkbox" hidden="hidden" data-ng-model="vm.types">
+                            <input id="tw-switch" type="checkbox" hidden="hidden" data-ng-model="vm.data.types">
                             <label for="tw-switch" class="ts-helper"></label>
                         </div>
                     </div>
                 </div>
             </div>
-            <div data-ng-hide="vm.types">
+            <div data-ng-hide="vm.data.types">
                 <div class="row">
                     <div class="col-sm-12">
                         <blockquote class="m-b-25">
@@ -34,7 +34,7 @@
                     </div>                
                 </div>
             </div>
-            <div data-ng-show="vm.types">
+            <div data-ng-show="vm.data.types">
                 <div class="row">
                     <div class="col-sm-12">
                         <blockquote class="m-b-25">
@@ -46,12 +46,12 @@
                     <div class="col-sm-4">
                         <div class="form-group fg-line">
                             <label for="typeName">Type name</label>
-                            <input type="text" class="form-control input-sm" id="typeName" placeholder="Page type name">
+                            <input type="text" class="form-control input-sm" id="typeName" data-ng-model="vm.data.typeName" placeholder="Page type name">
                         </div>
                     </div>
                 </div>
             </div>
-            <button class="btn bgm-green" data-ui-sref="types.add.2">Next <i class="zmdi zmdi-arrow-forward"></i></button>
+            <button class="btn bgm-green" data-ng-click="vm.next()">Next <i class="zmdi zmdi-arrow-forward"></i></button>
         </form>     
     </div>    
 </div>

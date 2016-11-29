@@ -2,7 +2,7 @@
     <h2>New page type <code>(3/4)</code> <small>Please define custom fields of the page type and their appearance in the editing form. You can define fields, such as SKU, product weight, press release text, etc.</small></h2>  
 </div>
 <div class="card m-b-0 atopline" id="messages-main">
-    <div class="ms-menu" data-ng-class="{ 'toggled': mactrl.lvMenuStat }">
+    <div class="ms-menu min-height-form" data-ng-class="{ 'toggled': mactrl.lvMenuStat }">
         <div class="ms-block text-center">
              <div class="btn-group"> 
                 <button type="button" class="btn btn-primary waves-effect" data-ng-click="vm.add()"><i class="zmdi zmdi-plus"></i></button>
@@ -22,7 +22,7 @@
         </div>
     </div>
 
-    <div class="ms-body">
+    <div class="ms-body min-height-form">
         <form>
             <div class="listview lv-message">
                 <div class="lv-header-alt clearfix">
@@ -34,11 +34,9 @@
                         </div>
                     </div>
 
-                    <div class="lvh-label hidden-xs">
-                       Davil Parnell
-                    </div>
+                    <div class="lvh-label hidden-xs" data-ng-bind="vm.selectedField.name"></div>
 
-                    <ul class="lv-actions actions">
+                    <ul class="lv-actions actions" data-ng-show="vm.selectedField">
                         <li>
                             <a href="">
                                 <i class="zmdi zmdi-delete"></i>
@@ -52,7 +50,10 @@
                     </ul>
                 </div>
 
-                <div class="lv-body">
+                <div class="lv-body lv-padding" data-ng-hide="vm.selectedField">
+                    <p>Please select or add a new field for editing...</p>
+                </div>
+                <div class="lv-body" data-ng-show="vm.selectedField">
                      <div class="lv-field-item media">
                         <div class="col-sm-4">
                             &nbsp;
@@ -69,7 +70,7 @@
                         <div class="col-sm-4">
                             <div class="form-group fg-line">
                                 <label for="typeName">Field name</label>
-                                <input type="text" class="form-control input-sm" id="typeName" placeholder="Field name">
+                                <input type="text" class="form-control input-sm" id="typeName" placeholder="Field name" data-ng-model="vm.selectedField.name">
                             </div>  
                         </div>
                     </div> 
@@ -77,7 +78,7 @@
                         <div class="col-sm-4">
                             <div class="form-group fg-line">
                                 <label for="typeName">Data type</label>
-                                <select chosen data-placeholder="Select a country..." class="w-100">
+                                <select chosen data-placeholder="Select a country..." class="w-100" data-ng-model="vm.selectedField.dataType">
                                     <option selected="selected" value="docattachments">Attachments</option>
                                     <option value="boolean">Boolean (Yes/No)</option>
                                     <option value="date">Date</option>
@@ -100,7 +101,7 @@
                         <div class="col-sm-4">
                             <div class="form-group fg-line">
                                 <label for="typeName">Size</label>
-                                <input type="text" class="form-control input-sm" id="typeName" placeholder="Size">
+                                <input type="text" class="form-control input-sm" id="typeName" placeholder="Size" data-ng-model="vm.selectedField.size">
                             </div>  
                         </div>
                     </div>  
@@ -110,7 +111,7 @@
                                 <label for="typeName">Required</label>
                                 <div class="checkbox m-b-15">
                                     <label>
-                                        <input type="checkbox" value="">
+                                        <input type="checkbox" value=""  data-ng-model="vm.selectedField.required">
                                         <i class="input-helper"></i>
                                     </label>
                                 </div>
@@ -121,7 +122,7 @@
                         <div class="col-sm-4">
                             <div class="form-group fg-line">
                                 <label for="typeName">Description</label>
-                                <textarea class="form-control" data-auto-size placeholder="Field type description..."></textarea>
+                                <textarea class="form-control" data-auto-size placeholder="Field type description..." data-ng-model="vm.selectedField.description"></textarea>
                             </div>  
                         </div>
                     </div>   
@@ -129,7 +130,7 @@
                         <div class="col-sm-4">
                             <div class="form-group fg-line">
                                 <label for="typeName">Default value</label>
-                                <input type="text" class="form-control input-sm" id="typeName" placeholder="Default value">
+                                <input type="text" class="form-control input-sm" id="typeName" placeholder="Default value" data-ng-model="vm.selectedField.defaultValue">
                             </div>  
                         </div>
                     </div>                     
@@ -144,7 +145,7 @@
                         <div class="col-sm-4">
                             <div class="form-group fg-line">
                                 <label for="typeName">Caption</label>
-                                <input type="text" class="form-control input-sm" id="typeName" placeholder="Caption">
+                                <input type="text" class="form-control input-sm" id="typeName" placeholder="Caption" data-ng-model="vm.selectedField.caption">
                             </div>  
                         </div>
                     </div> 
@@ -152,7 +153,7 @@
                         <div class="col-sm-4">
                             <div class="form-group fg-line">
                                 <label for="typeName">Description</label>
-                                <input type="text" class="form-control input-sm" id="typeName" placeholder="Description">
+                                <input type="text" class="form-control input-sm" id="typeName" placeholder="Description" data-ng-model="vm.selectedField.displayDescription">
                             </div>  
                         </div>
                     </div>  
@@ -160,7 +161,7 @@
                         <div class="col-sm-4">
                             <div class="form-group fg-line">
                                 <label for="typeName">Explaination</label>
-                                <input type="text" class="form-control input-sm" id="typeName" placeholder="Explaination">
+                                <input type="text" class="form-control input-sm" id="typeName" placeholder="Explaination" data-ng-model="vm.selectedField.explaination">
                             </div>  
                         </div>
                     </div> 
@@ -168,7 +169,7 @@
                         <div class="col-sm-4">
                             <div class="form-group fg-line">
                                 <label for="typeName">Form control</label>
-                                <select chosen data-placeholder="Select a country..." class="w-100">
+                                <select chosen data-placeholder="Select a country..." class="w-100"  data-ng-model="vm.selectedField.formControl">
                                     <option selected="selected" value="docattachments">Label</option>
                                     <option value="boolean">Check box</option>
                                     <option value="date">Text box</option>
@@ -192,7 +193,7 @@
                         <div class="col-sm-4">
                             <div class="form-group fg-line">
                                 <label for="typeName">Watermark</label>
-                                <input type="text" class="form-control input-sm" id="typeName" placeholder="Watermark">
+                                <input type="text" class="form-control input-sm" id="typeName" placeholder="Watermark"  data-ng-model="vm.selectedField.watermark">
                             </div>  
                         </div>
                     </div> 

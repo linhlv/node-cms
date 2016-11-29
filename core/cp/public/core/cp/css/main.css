@@ -48,7 +48,14 @@
     width: 100%;
 }
 
+.lv-padding {
+    padding: 23px 25px;
+    padding-bottom: 0px;
+}
 
+.min-height-form{
+    min-height: 400px;
+}
 
 .central-e {
     margin-left: auto;

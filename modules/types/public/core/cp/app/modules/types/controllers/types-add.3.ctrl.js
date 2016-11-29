@@ -20,6 +20,10 @@ define(['modules/types/configs/mock'], function (mock) {
         vm.data = $sessionStorage.pageType.step3;
         vm.data.fields = vm.data.fields || mock;  
 
+        if(vm.data.fields.length){            
+            vm.selectedField = vm.data.fields[0];
+        }
+
         if(!$sessionStorage.pageType.step2 || !$sessionStorage.pageType.step2.types){
             // did not go to type selection step or selected container type
             swal({
@@ -40,7 +44,9 @@ define(['modules/types/configs/mock'], function (mock) {
                 id: guid(),
                 name: 'New field',
                 description: 'New field...'
-            })
+            });
+
+            vm.selectedField = vm.data.fields[0];
         };
 
         vm.selectField = function(item){

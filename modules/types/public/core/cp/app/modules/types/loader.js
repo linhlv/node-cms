@@ -4,7 +4,7 @@
 /// </summary>
 define(['modules/types/configs/dependencies'], function () {
     // tell Angular create a new menu Module
-    var _m = angular.module('types', ['types.controllers']);
+    var _m = angular.module('types', ['types.services','types.controllers']);
 
     
     return _m;

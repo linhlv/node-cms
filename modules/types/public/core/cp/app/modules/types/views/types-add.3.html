@@ -6,8 +6,8 @@
         <div class="ms-block text-center">
              <div class="btn-group"> 
                 <button type="button" class="btn btn-primary waves-effect" data-ng-click="vm.add()"><i class="zmdi zmdi-plus"></i></button>
-                <button type="button" class="btn btn-primary waves-effect"><i class="zmdi zmdi-chevron-up"></i></button>
-                <button type="button" class="btn btn-primary waves-effect"><i class="zmdi zmdi-chevron-down"></i></button>
+                <button type="button" class="btn btn-primary waves-effect"><i class="zmdi zmdi-chevron-up" data-ng-click="vm.moveUp();"></i></button>
+                <button type="button" class="btn btn-primary waves-effect"><i class="zmdi zmdi-chevron-down" data-ng-click="vm.moveDown();"></i></button>                
             </div>
         </div>
 
@@ -38,15 +38,10 @@
 
                     <ul class="lv-actions actions" data-ng-show="vm.selectedField">
                         <li>
-                            <a href="">
+                            <a href="" data-ng-click="vm.delete()">
                                 <i class="zmdi zmdi-delete"></i>
                             </a>
-                        </li>
-                        <li>
-                            <a href="">
-                                <i class="zmdi zmdi-check"></i>
-                            </a>
-                        </li>                        
+                        </li>             
                     </ul>
                 </div>
 
@@ -78,7 +73,7 @@
                         <div class="col-sm-4">
                             <div class="form-group fg-line">
                                 <label for="typeName">Data type</label>
-                                <select chosen data-placeholder="Select a country..." class="w-100" data-ng-model="vm.selectedField.dataType">
+                                <select chosen data-placeholder="Select a type..." class="w-100" data-ng-model="vm.selectedField.dataType">
                                     <option selected="selected" value="docattachments">Attachments</option>
                                     <option value="boolean">Boolean (Yes/No)</option>
                                     <option value="date">Date</option>
@@ -111,7 +106,7 @@
                                 <label for="typeName">Required</label>
                                 <div class="checkbox m-b-15">
                                     <label>
-                                        <input type="checkbox" value=""  data-ng-model="vm.selectedField.required">
+                                        <input type="checkbox" value="" data-ng-model="vm.selectedField.required">
                                         <i class="input-helper"></i>
                                     </label>
                                 </div>
@@ -169,22 +164,12 @@
                         <div class="col-sm-4">
                             <div class="form-group fg-line">
                                 <label for="typeName">Form control</label>
-                                <select chosen data-placeholder="Select a country..." class="w-100"  data-ng-model="vm.selectedField.formControl">
+                                <select chosen data-placeholder="Select control..." class="w-100"  data-ng-model="vm.selectedField.formControl">
                                     <option selected="selected" value="docattachments">Label</option>
                                     <option value="boolean">Check box</option>
                                     <option value="date">Text box</option>
-                                    <option value="date">Text box</option>
                                     <option value="datetime">Date and time picker</option>
-                                    <option value="decimal">Dropdown list</option>
-                                    <option value="file">File</option>
-                                    <option value="double">Floating-point number (Double precision)</option>
-                                    <option value="integer">Integer number</option>
-                                    <option value="longinteger">Long integer number</option>
-                                    <option value="longtext">Long text</option>
-                                    <option value="docrelationships">Pages</option>
-                                    <option value="text">Text</option>
-                                    <option value="timespan">Time interval</option>
-                                    <option value="guid">Unique identifier (GUID)</option>
+                                    <option value="decimal">Dropdown list</option>                                   
                                 </select>
                             </div>  
                         </div>

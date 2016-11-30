@@ -7,7 +7,8 @@
     {
       "name":"list",
       "url":"/list",
-      "templateUrl":"types-list.html"
+      "templateUrl":"types-list.html",
+      "controller":"types-list.ctrl as vm"
     },
     {
       "name":"add",

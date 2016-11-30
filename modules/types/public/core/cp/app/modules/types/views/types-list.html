@@ -50,7 +50,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                     <tr data-ng-repeat="item in vm.items">
                         <td>  
                             <button class="btn btn-default btn-sm"><i class="zmdi zmdi-edit"></i></button>
                             <button class="btn btn-default btn-sm"><i class="zmdi zmdi-delete"></i></button>
@@ -62,135 +62,9 @@
                                 </ul>
                             </div>
                         </td>
-                        <td>Alexandra</td>
-                        <td>Christopher</td>
-                        <td>Pages</td>
-                    </tr>
-                    <tr>
-                        <td>  
-                            <button class="btn btn-default btn-sm"><i class="zmdi zmdi-edit"></i></button>
-                            <button class="btn btn-default btn-sm"><i class="zmdi zmdi-delete"></i></button>
-                            <div class="btn-group" uib-dropdown>
-                                <button type="button" class="btn btn-default btn-sm dropdown-toggle" uib-dropdown-toggle><i class="zmdi zmdi-more-vert"></i></button>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#">Dropdown link</a></li>
-                                    <li><a href="#">Dropdown link</a></li>
-                                </ul>
-                            </div>
-                        </td>
-                        <td>Madeleine</td>
-                        <td>Hollaway</td>
-                        <td>
-                            Container
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>  
-                            <button class="btn btn-default btn-sm"><i class="zmdi zmdi-edit"></i></button>
-                            <button class="btn btn-default btn-sm"><i class="zmdi zmdi-delete"></i></button>
-                            <div class="btn-group" uib-dropdown>
-                                <button type="button" class="btn btn-default btn-sm dropdown-toggle" uib-dropdown-toggle><i class="zmdi zmdi-more-vert"></i></button>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#">Dropdown link</a></li>
-                                    <li><a href="#">Dropdown link</a></li>
-                                </ul>
-                            </div>
-                        </td>
-                        <td>Sebastian</td>
-                        <td>Johnston</td>
-                        <td>
-                           Pages
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>  
-                            <button class="btn btn-default btn-sm"><i class="zmdi zmdi-edit"></i></button>
-                            <button class="btn btn-default btn-sm"><i class="zmdi zmdi-delete"></i></button>
-                            <div class="btn-group" uib-dropdown>
-                                <button type="button" class="btn btn-default btn-sm dropdown-toggle" uib-dropdown-toggle><i class="zmdi zmdi-more-vert"></i></button>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#">Dropdown link</a></li>
-                                    <li><a href="#">Dropdown link</a></li>
-                                </ul>
-                            </div>
-                        </td>
-                        <td>Mitchell</td>
-                        <td>Christin</td>
-                        <td>
-                           Pages
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>  
-                            <button class="btn btn-default btn-sm"><i class="zmdi zmdi-edit"></i></button>
-                            <button class="btn btn-default btn-sm"><i class="zmdi zmdi-delete"></i></button>
-                            <div class="btn-group" uib-dropdown>
-                                <button type="button" class="btn btn-default btn-sm dropdown-toggle" uib-dropdown-toggle><i class="zmdi zmdi-more-vert"></i></button>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#">Dropdown link</a></li>
-                                    <li><a href="#">Dropdown link</a></li>
-                                </ul>
-                            </div>
-                        </td>
-                        <td>Elizabeth</td>
-                        <td>Belkitt</td>
-                        <td>
-                           Container
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>  
-                            <button class="btn btn-default btn-sm"><i class="zmdi zmdi-edit"></i></button>
-                            <button class="btn btn-default btn-sm"><i class="zmdi zmdi-delete"></i></button>
-                            <div class="btn-group" uib-dropdown>
-                                <button type="button" class="btn btn-default btn-sm dropdown-toggle" uib-dropdown-toggle><i class="zmdi zmdi-more-vert"></i></button>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#">Dropdown link</a></li>
-                                    <li><a href="#">Dropdown link</a></li>
-                                </ul>
-                            </div>
-                        </td>
-                        <td>Benjamin</td>
-                        <td>Parnell</td>
-                        <td>
-                            Pages
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>  
-                            <button class="btn btn-default btn-sm"><i class="zmdi zmdi-edit"></i></button>
-                            <button class="btn btn-default btn-sm"><i class="zmdi zmdi-delete"></i></button>
-                            <div class="btn-group" uib-dropdown>
-                                <button type="button" class="btn btn-default btn-sm dropdown-toggle" uib-dropdown-toggle><i class="zmdi zmdi-more-vert"></i></button>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#">Dropdown link</a></li>
-                                    <li><a href="#">Dropdown link</a></li>
-                                </ul>
-                            </div>
-                        </td>
-                        <td>Katherine</td>
-                        <td>Buckland</td>
-                        <td>
-                            Container
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>  
-                            <button class="btn btn-default btn-sm"><i class="zmdi zmdi-edit"></i></button>
-                            <button class="btn btn-default btn-sm"><i class="zmdi zmdi-delete"></i></button>
-                            <div class="btn-group" uib-dropdown>
-                                <button type="button" class="btn btn-default btn-sm dropdown-toggle" uib-dropdown-toggle><i class="zmdi zmdi-more-vert"></i></button>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#">Dropdown link</a></li>
-                                    <li><a href="#">Dropdown link</a></li>
-                                </ul>
-                            </div>
-                        </td>
-                        <td>Nicholas</td>
-                        <td>Walmart</td>
-                        <td>
-                           Container
-                        </td>
+                        <td data-ng-bind="item.displayName"></td>
+                        <td data-ng-bind="item.types ? item.namespace + '.' + item.name +' (' + item.typeName + ')' : item.namespace + '.' + item.name"></td>
+                        <td data-ng-bind="item.types ? 'Page':'Container'"></td>
                     </tr>
                 </tbody>
             </table>

@@ -10,6 +10,13 @@ define([], function () {
         /// <summary>
         /// save type
         /// </summary>
+        this.getAll = function () {
+            return $http.get('/cp/types/data/load').then(httpHandler.handleSuccess, httpHandler.handleError);
+        };
+
+        /// <summary>
+        /// save type
+        /// </summary>
         this.save = function (type) {
             return $http.post('/cp/types/data/save', type).then(httpHandler.handleSuccess, httpHandler.handleError);
         };

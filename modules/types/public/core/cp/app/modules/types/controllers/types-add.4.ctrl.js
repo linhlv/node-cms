@@ -16,7 +16,7 @@ define(function () {
         }else{            
             $sessionStorage.pageType = $sessionStorage.pageType || {};                
             vm.data = $sessionStorage.pageType;
-            if(!$sessionStorage.pageType.step2 || !$sessionStorage.pageType.step2.types){
+            if(!$sessionStorage.pageType.step2){
                 // did not go to step 2
                 swal({
                     title: "Oops!",   
@@ -31,13 +31,21 @@ define(function () {
         }        
 
         vm.finish = function(){
+            
             var d = {
-                fields : vm.data.step3.fields,
-                types: vm.data.step2.types,
-                typeName: vm.data.step2.typeName,
-                displayName: vm.data.step1.displayName, 
-                name: vm.data.step1.name
+                displayName: vm.data.step1.displayName,
+                name: vm.data.step1.name,
+                namespace: vm.data.step1.namespace,                   
+                types: vm.data.step2.types===undefined ? false : true               
             };
+
+            if(vm.data.step2.types){ //in case page type 
+                d.fields = vm.data.step3.fields,
+                d.typeName = vm.data.step2.typeName
+            }
+
+            console.log(d)
+
             typesSvc.save(d).then(function(res){
                 if(res){
                     delete $sessionStorage.pageType;

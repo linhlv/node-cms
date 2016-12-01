@@ -48,12 +48,14 @@
     {
       "name":"edit.general",
       "url":"/general",
-      "templateUrl":"types-edit-general.html"
+      "templateUrl":"types-edit-general.html",
+      "controller":"types-edit-general.ctrl as vm"
     },
     {
       "name":"edit.fields",
       "url":"/fields",
-      "templateUrl":"types-edit-fields.html"
+      "templateUrl":"types-edit-fields.html",
+      "controller":"types-edit-fields.ctrl as vm"
     }
   ],
   "menu":[

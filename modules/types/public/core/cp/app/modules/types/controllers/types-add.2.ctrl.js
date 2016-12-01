@@ -7,6 +7,7 @@ define(function () {
         $sessionStorage.pageType = $sessionStorage.pageType || {};
         $sessionStorage.pageType.step2 = $sessionStorage.pageType.step2 || {};        
         vm.data = $sessionStorage.pageType.step2;
+        vm.back = function(){ $state.go('types.add.1');};
         vm.next = function(){
             $sessionStorage.pageType.step2 = vm.data;
             var _s = vm.data.types ? 'types.add.3':'types.add.4';

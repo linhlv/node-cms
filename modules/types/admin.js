@@ -18,8 +18,40 @@ module.exports = function(app) {
         return i18nm.__("module_name");
     };
 
+    router.get('/data/get',function(req, res){         
+        var query_string = req.query; 
+        var sort = {};
+        var rep = {};
+
+        if (!query_string) {
+            rep.status = 0;
+            rep.error = i18nm.__("invalid_query");
+            return res.send(JSON.stringify(rep));
+        }
+
+        if (!query_string.id) {
+            rep.status = 0;
+            rep.error = i18nm.__("invalid_query");
+            return res.send(JSON.stringify(rep));
+        }
+
+        var find_query = {
+            _id : new ObjectId(req.query.id)
+        };       
+
+        app.get('mongodb').collection('types').find(find_query)        
+            .sort(sort).toArray(function(err, items) {
+                if(items && items.length && items.length==1){
+                    // Return results
+                    rep.status = 1;
+                    rep.data = items[0];                    
+                    return res.send(JSON.stringify(rep));
+                }
+            });   
+    });
+
     router.get('/data/load',function(req, res){
-        var find_query = {};
+        var find_query = {};        
         var sort = {};
         var rep = {};
         rep.items = [];
@@ -53,8 +85,6 @@ module.exports = function(app) {
 
         // Fields validation
         var types_data = req.body;
-
-        console.log(types_data);
         
         if (!types_data) {
             rep.status = 0;

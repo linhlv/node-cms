@@ -1,8 +1,17 @@
 <div class="card-header ch-alt">
-    <h2>New page type <code data-ng-bind="vm.data.types ? '(4/4)':'(3/3)'"></code> <small>Please enter the page type display name (visible name shown to users) and code name (unique identifier).</small></h2>  
+    <h2>New page type <code data-ng-bind="vm.data.types ? '(4/4)':'(3/3)'"></code> <small>Please enter the page type display name (visible name shown to users) and code name (unique identifier).</small></h2>
+    <ul class="actions">          
+        <li>
+            <a href="" data-ng-click="vm.back()">
+                <i class="zmdi zmdi-arrow-back"></i>
+            </a>
+            <a href="" data-ng-click="vm.finish()">
+                <i class="zmdi zmdi-check"></i>
+            </a>
+        </li>
+    </ul>    
 </div>
 <div class="card-body card-padding">     
    <h5>Finish</h5>
    <p>Quisque nec turpis at urna dictum luctus. Suspendisse convallis dignissim eros at volutpat. In egestas mattis dui. Aliquam mattis dictum aliquet. Nulla sapien mauris, eleifend et sem ac, commodo dapibus odio. Vivamus pretium nec odio cursus elementum. Suspendisse molestie ullamcorper ornare.</p>
-    <button class="btn bgm-green" data-ng-click="vm.finish()">Finish <i class="zmdi zmdi-check"></i></button>    
 </div>    

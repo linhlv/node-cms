@@ -30,6 +30,14 @@ define(function () {
             }            
         }        
 
+        vm.back = function(){
+            if(!vm.data.step2.types){
+                $state.go('types.add.2');
+            } else{
+                $state.go('types.add.3');
+            }                
+        };
+
         vm.finish = function(){
             
             var d = {
@@ -42,9 +50,7 @@ define(function () {
             if(vm.data.step2.types){ //in case page type 
                 d.fields = vm.data.step3.fields,
                 d.typeName = vm.data.step2.typeName
-            }
-
-            console.log(d)
+            }            
 
             typesSvc.save(d).then(function(res){
                 if(res){

@@ -3,14 +3,13 @@
 /// </summary>
 define(function () {
     function c($scope, $state, $sessionStorage, $stateParams, typesSvc){
-        var vm = this;
+        var vm = this, id = $stateParams.id;
         vm.includes = function(s){ return $state.includes(s); };
-        vm.tabSelect = function(s){ $state.go('types.edit.' + s, $stateParams.id); };
+        vm.tabSelect = function(s){ $state.go('types.edit.' + s, id); };
         
-        typesSvc.getAll().then(function(res){
-            if(res && res.items){
-                vm.items = res.items;                    
-                console.log('type edit', vm.items);
+        typesSvc.get(id).then(function(res){
+            if(res && res.data){
+                vm.data = res.data;
             }            
         });
     }

@@ -5,6 +5,18 @@
                 Please choose which kind of page type you wish to create. If you select a page type with custom fields, you also need to supply names for the new database table and its primary key.
             </small>
         </h2>        
+        <ul class="actions">
+            <li>
+                <a href="" data-ng-click="vm.back()">
+                    <i class="zmdi zmdi-arrow-back"></i>
+                </a>
+            </li>
+            <li>
+                <a href="" data-ng-click="vm.next()">
+                    <i class="zmdi zmdi-arrow-forward"></i>
+                </a>
+            </li>
+        </ul>  
     </div>
     <div class="card-body card-padding">
         <form role="form">
@@ -51,7 +63,6 @@
                     </div>
                 </div>
             </div>
-            <button class="btn bgm-green" data-ng-click="vm.next()">Next <i class="zmdi zmdi-arrow-forward"></i></button>
         </form>     
     </div>    
 </div>

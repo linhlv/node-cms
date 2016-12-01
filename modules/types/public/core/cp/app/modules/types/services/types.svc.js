@@ -7,6 +7,15 @@ define([], function () {
     
     //Events Publish/Subscribe
     function s($http, httpHandler){
+
+        /// <summary>
+        /// save type
+        /// </summary>
+        this.get = function (id) {
+            return $http.get('/cp/types/data/get', { params: { id: id }}).then(httpHandler.handleSuccess, httpHandler.handleError);
+        };
+
+
         /// <summary>
         /// save type
         /// </summary>

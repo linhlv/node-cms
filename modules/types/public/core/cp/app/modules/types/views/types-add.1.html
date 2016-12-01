@@ -1,32 +1,13 @@
 <div class="card-header ch-alt">
-    <h2>New page type <small>Please enter the page type display name (visible name shown to users) and code name (unique identifier).</small></h2>  
+    <h2>New page type <small>Please enter the page type display name (visible name shown to users) and code name (unique identifier).</small></h2>
+    <ul class="actions">        
+        <li>
+            <a href="" data-ng-click="vm.next()">
+                <i class="zmdi zmdi-arrow-forward"></i>
+            </a>
+        </li>
+    </ul>    
 </div>
 <div class="card-body card-padding">     
-    <form role="form">
-        <div class="row">
-           <div class="col-sm-4">
-                <div class="form-group fg-line">
-                    <label for="typeDisplayName">Display name</label>
-                    <input type="text" class="form-control input-sm" id="typeDisplayName" data-ng-model="vm.data.displayName" placeholder="Page type display name">
-                </div>
-            </div>
-        </div>
-        <div class="row">
-           <div class="col-sm-4">
-                <div class="form-group fg-line">
-                    <label for="namespace">Namespace</label>
-                    <input type="text" class="form-control input-sm" id="namespace" data-ng-model="vm.data.namespace" placeholder="Page type namespace">
-                </div>
-            </div>
-        </div>
-        <div class="row">
-           <div class="col-sm-4">
-                <div class="form-group fg-line">
-                    <label for="name">Name</label>
-                    <input type="text" class="form-control input-sm" id="name" data-ng-model="vm.data.name" placeholder="Name">
-                </div>
-            </div>
-        </div>
-        <button class="btn bgm-green" data-ng-click="vm.next()">Next <i class="zmdi zmdi-arrow-forward"></i></button>
-    </form>
+   <basic-type-info data-info="vm.data"></basic-type-info>
 </div>    

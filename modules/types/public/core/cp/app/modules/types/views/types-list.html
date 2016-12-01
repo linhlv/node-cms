@@ -52,7 +52,7 @@
                 <tbody>
                      <tr data-ng-repeat="item in vm.items">
                         <td>  
-                            <button class="btn btn-default btn-sm"><i class="zmdi zmdi-edit"></i></button>
+                            <button class="btn btn-default btn-sm" data-ng-click="vm.edit(item)"><i class="zmdi zmdi-edit"></i></button>
                             <button class="btn btn-default btn-sm"><i class="zmdi zmdi-delete"></i></button>
                             <div class="btn-group" uib-dropdown>
                                 <button type="button" class="btn btn-default btn-sm dropdown-toggle" uib-dropdown-toggle><i class="zmdi zmdi-more-vert"></i></button>

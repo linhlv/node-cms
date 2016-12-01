@@ -1,0 +1,21 @@
+<div class="card">
+    <div class="card-header ch-alt">
+        <h2>New page type <small>Please enter the page type display name (visible name shown to users) and code name (unique identifier).</small></h2>  
+    </div>
+    <div class="card-body card-padding">    
+            <div>
+                <ul class="tab-nav">
+                    <li  data-ng-class="{active: vm.includes('*.*.general')}">
+                        <a href="" data-ng-click="vm.tabSelect('general')">General</a>
+                    </li>
+                    <li data-ng-class="{active: vm.includes('*.*.fields')}">                        
+                        <a href="" data-ng-click="vm.tabSelect('fields')">Fields</a>
+                    </li>
+                </ul>
+            </div>
+
+
+        <ui-view></ui-view>
+    </div>
+
+</div>

@@ -3,7 +3,7 @@
   "enabled": true,
   "routing_prefix":"types",
   "templateUrl":"types.html",
-  "routes":[
+  "routes":[    
     {
       "name":"list",
       "url":"/list",
@@ -38,6 +38,22 @@
       "url":"/4",
       "templateUrl":"types-add.4.html",
       "controller":"types-add.4.ctrl as vm"
+    },
+    {
+      "name":"edit",
+      "url":"/e/:id",
+      "templateUrl":"types-edit.html",
+      "controller":"types-edit.ctrl as vm"
+    },
+    {
+      "name":"edit.general",
+      "url":"/general",
+      "templateUrl":"types-edit-general.html"
+    },
+    {
+      "name":"edit.fields",
+      "url":"/fields",
+      "templateUrl":"types-edit-fields.html"
     }
   ],
   "menu":[

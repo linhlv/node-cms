@@ -50,7 +50,7 @@ define(function () {
 
                 vm.add = function(){
                     vm.data.fields.unshift({
-                        id: guid(),
+                        id: $.utils.newGuid(),
                         order: 0,
                         name: 'New field',
                         description: 'New field...'

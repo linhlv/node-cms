@@ -3,7 +3,7 @@
 /// </summary>
 define(function () {
     function c($scope, $state, $sessionStorage, $stateParams, typesSvc){
-        var vm = this, id = $stateParams.id;        
+        var vm = this, id = $stateParams.id;           
 
         typesSvc.get(id).then(function(res){
             if(!res || !res.data || !res.data.types){
@@ -17,8 +17,7 @@ define(function () {
                 });      
             }
 
-            if(res && res.data){
-                
+            if(res && res.data){                
                 vm.data = res.data;
                 $scope.data = res.data;
             }            
@@ -34,8 +33,7 @@ define(function () {
                     }, function(){});         
                 }
             });   
-        }
-        
+        };
     }
 
     return c;

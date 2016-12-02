@@ -2,17 +2,6 @@
 // monitor common task change
 /// </summary>
 define(['modules/types/configs/mock'], function (mock) {
-    function guid() {
-        return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-        s4() + '-' + s4() + s4() + s4();
-    }
-
-    function s4() {
-        return Math.floor((1 + Math.random()) * 0x10000)
-            .toString(16)
-            .substring(1);
-    }
-
     function c($scope, $state, $sessionStorage){
         var vm = this;
         $sessionStorage.pageType = $sessionStorage.pageType || {};

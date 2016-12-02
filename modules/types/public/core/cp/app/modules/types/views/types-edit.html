@@ -8,7 +8,7 @@
                 <li  data-ng-class="{active: vm.includes('*.*.general')}">
                     <a href="" data-ng-click="vm.tabSelect('general')">General</a>
                 </li>
-                <li data-ng-class="{active: vm.includes('*.*.fields')}">                        
+                <li data-ng-class="{active: vm.includes('*.*.fields')}" data-ng-show="vm.data && vm.data.types">                        
                     <a href="" data-ng-click="vm.tabSelect('fields')">Fields</a>
                 </li>
             </ul>

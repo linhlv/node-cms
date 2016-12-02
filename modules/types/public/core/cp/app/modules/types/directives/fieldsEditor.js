@@ -13,12 +13,15 @@ define(function () {
             controller : function($scope){
                 var vm = this;
                 vm.data = {};
-                vm.data.fields = $scope.fields;
                 
-                if(vm.data.fields && vm.data.fields.length){            
-                    vm.selectedField = vm.data.fields[0];
-                }
+                $scope.$watch('fields', function(newValue, oldValue){
+                    vm.data.fields = newValue;
 
+                    if(vm.data.fields && vm.data.fields.length){            
+                        vm.selectedField = vm.data.fields[0];
+                    }
+                });
+                
                 var move = function(array, element, delta) {
                     var index = array.indexOf(element);
                     var newIndex = index + delta;

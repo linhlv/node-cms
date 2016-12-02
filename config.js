@@ -8,7 +8,7 @@ var config = {
 			"layouts":"../views/layouts",
 			"partials":"../views/partials"
 		},
-		"default": "layout_default",
+		"default": "layout_landing",
 		"admin_default": "layout_default",
 		"avail": [
 			"layout_default"

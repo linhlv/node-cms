@@ -1,0 +1,14 @@
+{
+  "name": "pages",
+  "enabled": false,
+  "routing_prefix":"pages",
+  "templateUrl":"pages.html",
+  "controller":"pages.ctrl",
+  "menu":[
+    {
+      "title":"Pages",
+      "state":"pages",
+      "iconClass": "zmdi zmdi-globe zmdi-hc-fw"
+    } 
+  ]
+}

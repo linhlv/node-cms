@@ -11,7 +11,8 @@ module.exports = function(app) {
         parser = app.get('parser'),
         async = require('async');
 
-    router.spa = true;
+    // false to hide on menu
+    router.spa = false;
 
     router.get_module_name = function(req) {
         i18nm.setLocale(req.session.current_locale);

@@ -11,6 +11,7 @@ module.exports = function(app) {
         parser = app.get('parser'),
         async = require('async');
     
+    
     router.spa = true;
 
     router.get_module_name = function(req) {

@@ -8,10 +8,8 @@
 
 html,
 body {
+    font-family: Montserrat, arial, serif;
     height: 100%;
-}
-
-body {
     padding-top: 50px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
 }
 
@@ -19,8 +17,53 @@ body {
     float: left;
     height: 59px;
     padding: 5px 5px;
-    font-size: 18px;
+    
     line-height: 20px;
+}
+.mk-nav{
+    background: rgba(255,255,255,0.95);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.11);
+    text-transform: uppercase;
+    font-size: 13px;
+    -webkit-transition: all .4s ease-out;
+    -moz-transition: all .4s ease-out;
+    -ms-transition: all .4s ease-out;
+    -o-transition: all .4s ease-out;        
+}
+
+.mk-nav .nav-margin {
+    margin-top: 5px;
+}
+
+.mk-nav .navbar-brand img.logo{
+    height: 50px;
+}
+
+.mk-nav .navbar-toggle .icon-bar {
+    background-color: #888;
+}
+
+.mk-nav .navbar-toggle{
+      background-color: #ddd;
+}
+
+.mk-nav ul li a{
+    color:  #323334;
+}
+
+.mk-nav ul li a:hover{
+    color:  #fbaf5d;
+    background: none;
+}
+
+.mk-nav ul .open>a, .mk-nav ul .open>a:focus, .mk-nav ul .open>a:hover{
+    color:  #fbaf5d;
+    background: none;
+}
+
+.mk-nav .dropdown-menu-large{
+    text-transform: capitalize;
+    font-family: Raleway, Arial, Helvetica, sans-serif;
 }
 
 .img-portfolio {
@@ -122,8 +165,9 @@ footer {
   clear: both;
   font-weight: normal;
   line-height: 1.428571429;
-  color: #333333;
+  color: #a9a9a9;
   white-space: normal;
+  font-size: 12px;
 }
 .dropdown-menu-large > li ul > li > a:hover,
 .dropdown-menu-large > li ul > li > a:focus {
@@ -134,7 +178,7 @@ footer {
 .dropdown-menu-large .disabled > a,
 .dropdown-menu-large .disabled > a:hover,
 .dropdown-menu-large .disabled > a:focus {
-  color: #999999;
+  color: #999999;  
 }
 .dropdown-menu-large .disabled > a:hover,
 .dropdown-menu-large .disabled > a:focus {
@@ -145,8 +189,9 @@ footer {
   cursor: not-allowed;
 }
 .dropdown-menu-large .dropdown-header {
-  color: #428bca;
-  font-size: 18px;
+  color: #3c3c3c;
+  font-size: 12px;
+  font-weight: 600;
 }
 @media (max-width: 768px) {
   .dropdown-menu-large {

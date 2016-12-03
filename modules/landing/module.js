@@ -9,11 +9,11 @@ module.exports = function(app) {
             directory: path.join(__dirname, 'lang'),
             extension: '.js',
             devMode: app.get('config').locales.dev_mode
-        });          
+        }), baseTitle = 'MK Handicrafts';          
     
     router.get('/', function(req, res, next) {
         var data = {
-                title: 'module_name',
+                title: baseTitle + ' - Home',
                 page_title:'module_name',
                 keywords: '',
                 description: '',
@@ -41,7 +41,7 @@ module.exports = function(app) {
 
     router.get('/about', function(req, res, next) {        
         var data = {
-                title: 'module_name',
+                title: baseTitle + ' - About',
                 page_title:'module_name',
                 keywords: '',
                 description: '',
@@ -61,7 +61,7 @@ module.exports = function(app) {
 
     router.get('/products', function(req, res, next) {        
         var data = {
-                title: 'module_name',
+                title: baseTitle + ' - Products',
                 page_title:'module_name',
                 keywords: '',
                 description: '',
@@ -81,7 +81,7 @@ module.exports = function(app) {
 
     router.get('/collection', function(req, res, next) {        
         var data = {
-                title: 'module_name',
+                title: baseTitle + ' - Collection',
                 page_title:'module_name',
                 keywords: '',
                 description: '',
@@ -101,7 +101,7 @@ module.exports = function(app) {
 
     router.get('/faq', function(req, res, next) {        
         var data = {
-                title: 'module_name',
+                title: baseTitle + ' - FAQs',
                 page_title:'module_name',
                 keywords: '',
                 description: '',
@@ -121,7 +121,7 @@ module.exports = function(app) {
 
     router.get('/contact', function(req, res, next) {        
         var data = {
-                title: 'module_name',
+                title: baseTitle + ' - Contact Us',
                 page_title:'module_name',
                 keywords: '',
                 description: '',
@@ -142,7 +142,7 @@ module.exports = function(app) {
 
     router.get('/login', function(req, res, next) {        
         var data = {
-                title: 'module_name',
+                title: baseTitle + ' - Login',
                 page_title:'module_name',
                 keywords: '',
                 description: '',
@@ -162,7 +162,7 @@ module.exports = function(app) {
     
     router.get('/request', function(req, res, next) {        
         var data = {
-                title: 'module_name',
+                title: baseTitle + ' - Request Full Catalogue',
                 page_title:'module_name',
                 keywords: '',
                 description: '',

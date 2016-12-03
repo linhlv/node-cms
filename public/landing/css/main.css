@@ -8,9 +8,28 @@
 
 html,
 body {
-    font-family: Montserrat, arial, serif;
+    font-family: 'Lato', sans-serif;    
     height: 100%;
     padding-top: 45px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+}
+
+p{
+    line-height: 24px;
+    font-weight: 400;
+    font-style: normal;
+    color: #838383;
+    font-size: 14px;
+}
+
+h2{
+    font-size: 16px;
+}
+.page-header{
+    text-transform: uppercase;
+    font-family: Raleway, Arial, Helvetica, sans-serif;
+    font-weight: 600;
+    line-height: 1.35;
+    letter-spacing: 1.5px;
 }
 
 .navbar-brand {
@@ -21,9 +40,11 @@ body {
     line-height: 20px;
 }
 .mk-nav{    
+    font-family: Montserrat, arial, serif;
     text-transform: uppercase;
     font-size: 13px;     
     margin-bottom: 0px;
+    background: #fff;
 }
 
 .ontop {
@@ -52,13 +73,17 @@ body {
 }
 
 .mk-nav ul.nav > li > a{
-    font-weight: bold;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1.12px;
     color: #323334;
     line-height: 50px;
 }
 
 .ontop ul.nav > li > a{
-    font-weight: bold;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1.12px;
     color: #323334;
     line-height: 30px;
 }
@@ -82,6 +107,47 @@ body {
 .mk-nav ul.dropdown-menu-large li a:hover, .mk-nav ul.dropdown-menu-large li.active a {
     color:  #fbaf5d;
 } 
+
+.mk input[type="text"], .mk input[type="tel"], .mk input[type="email"],.mk  textarea{
+    background: #f2f2f2;
+    border: 1px solid #e3e3e3;
+    border-radius: 0;
+    height: 46px;
+    padding-left: 15px;
+    width: 100%;
+}
+
+.mk  textarea{
+    height: 100px;
+    background: none;
+}
+
+.mk .well{
+    border-radius: 0;
+    border: none;
+    margin: 0 0 40px;
+    padding: 20px;
+    background: #f7f7f7;
+}
+
+.mk .btn{
+    border-radius: 0;
+    border:transparent;
+    background:#333;
+    padding: 10px 15px;
+    font-weight: 100;
+    text-transform: uppercase;
+    color: #fff !important;
+    display: inline-block;
+    vertical-align: middle;
+    transition: all 0.4s ease;
+}
+
+.mk .btn:hover{
+    background: #fbaf5d;
+}
+
+
 
 .img-portfolio {
     margin-bottom: 30px;

@@ -108,7 +108,7 @@ h2{
     color:  #fbaf5d;
 } 
 
-.mk input[type="text"], .mk input[type="tel"], .mk input[type="email"],.mk  textarea{
+.mk input[type="text"], .mk input[type="tel"], .mk input[type="email"],.mk input[type="password"], .mk  textarea{
     background: #f2f2f2;
     border: 1px solid #e3e3e3;
     border-radius: 0;
@@ -145,6 +145,14 @@ h2{
 
 .mk .btn:hover{
     background: #fbaf5d;
+}
+
+.mk .panel {
+    border: none;
+}
+
+.mk .breadcrumb{
+    text-transform: uppercase;
 }
 
 

@@ -3,6 +3,7 @@ module.exports = function(app) {
         path = require('path'),
         exphbs = app.get('exphbs'),  
         renderer = app.get('renderer'),
+        ObjectId = require('mongodb').ObjectID,
         config = app.get('config'),
         i18nm = new(require('i18n-2'))({
             locales: app.get('config').locales.avail,
@@ -198,6 +199,92 @@ module.exports = function(app) {
         data.body = body;
         
         return app.get('renderer').render(req, undefined, data, res);
+    });
+
+    router.post('/request', function(req, res, next) {   
+        // Fields validation
+        var posting_data = req.body,
+        rep = {
+
+        };
+        
+        if (!posting_data) {
+            rep.status = 0;
+            rep.error = 'Data not found!';
+            return res.send(JSON.stringify(rep));
+        }
+
+        if (!posting_data.name
+            || !posting_data.name
+            || !posting_data.company
+            || !posting_data.phone
+            || !posting_data.email
+            || !posting_data.message) {
+            rep.status = 0;
+            rep.error = 'Data fields are missing!';
+            return res.send(JSON.stringify(rep));
+        }
+
+        var query = {
+            email : req.body.email
+        };
+
+        app.get('mongodb').collection('requests').find(query).count(function(request_err, request_items_count) {
+            if(request_err){
+                rep.status = 0;
+                rep.reason = {
+                    systemError: true
+                };
+                rep.error = 'There was an error while processing, please try again!';
+                return res.send(JSON.stringify(rep));
+            }
+
+            if (request_items_count == 1) {
+                rep.status = 0;
+                rep.reason = {
+                    requestExisting: true
+                };
+                rep.error = 'Your email is used to request full catalogue we will feedback you soon or please contact our agent for support!';
+                return res.send(JSON.stringify(rep));                           
+            }else{            
+                //find on user 
+                app.get('mongodb').collection('users').find(query).count(function(user_err, user_items_count) {
+                    if(user_err){
+                        rep.status = 0;
+                        rep.reason = {
+                            systemError: true
+                        };
+                        rep.error = 'There was an error while processing, please try again!';
+                        return res.send(JSON.stringify(rep));
+                    }
+                    
+                    if(user_items_count == 1){
+                        //user existing
+                        rep.status = 0;
+                        rep.reason = {
+                            userExisting: true
+                        };
+                        rep.error = 'Your were already provided access information to view full catalogue or you my forgot your password, use forgot password feature!';
+                        return res.send(JSON.stringify(rep));
+                    }else{
+                        posting_data._id = new ObjectId()                                
+                        app.get('mongodb').collection('requests').insert(posting_data, function(create_requests_err){
+                            if (create_requests_err) {
+                                rep.status = 0;
+                                rep.reason = {
+                                    systemError: true
+                                };
+                                rep.error = 'There was an error while processing, please try again!';             
+                                return res.send(JSON.stringify(rep));
+                            }else{
+                                rep.status = 1;
+                                return res.send(JSON.stringify(rep));
+                            }
+                        }); 
+                    }
+                });                               
+             }
+        });        
     });
 
   

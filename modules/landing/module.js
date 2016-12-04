@@ -67,7 +67,27 @@ module.exports = function(app) {
                 description: '',
                 extra_css: '<link rel="stylesheet" href="/modules/support/css/frontend.css" type="text/css">'
             },            
-            body = renderer.render_file(path.join(__dirname, 'views'), 'about', {
+            body = renderer.render_file(path.join(__dirname, 'views'), 'products', {
+                lang: i18nm,
+                data: data,
+                status_list: JSON.stringify(i18nm.__('status_list')),
+                prio_list: JSON.stringify(i18nm.__('prio_list')),
+                current_locale: req.session.current_locale
+            }, req);        
+        data.body = body;
+        
+        return app.get('renderer').render(req, undefined, data, res);
+    });
+
+    router.get('/product-item', function(req, res, next) {        
+        var data = {
+                title: baseTitle + ' - Product Details',
+                page_title:'module_name',
+                keywords: '',
+                description: '',
+                extra_css: '<link rel="stylesheet" href="/modules/support/css/frontend.css" type="text/css">'
+            },            
+            body = renderer.render_file(path.join(__dirname, 'views'), 'product-item', {
                 lang: i18nm,
                 data: data,
                 status_list: JSON.stringify(i18nm.__('status_list')),

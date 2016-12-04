@@ -159,6 +159,12 @@ h2{
     text-transform: uppercase;
 }
 
+.mk .validation-error{
+    color:red;
+    font-size: 13px;
+    line-height: 180%;
+}
+
 
 
 .img-portfolio {

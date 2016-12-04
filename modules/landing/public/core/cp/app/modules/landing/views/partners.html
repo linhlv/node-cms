@@ -22,20 +22,20 @@
             </ul>
         </div>
 
-        <div class="lv-body">
-            <div class="lv-item media">                
+        <div class="lv-body mk-custom">
+            <div class="lv-item media" data-ng-repeat="item in vm.items">                
                 <div class="media-body">
-                    <div class="lv-title">Per an error perpetua, fierent fastidii recteque ad pro. Mei id brute intellegam</div>
+                    <div class="lv-title">{{item.name + ' from ' + item.company}}</div>
                     <ul class="lv-attrs">
-                        <li>Date Created: 11/06/1988</li>
-                        <li>Phone: Yes</li>
-                        <li>Email: 212</li>                        
+                        <li>Date Created: {{item.createdOn | date: 'dd-MM-yyyy HH:mm:ss'}}</li>                        
+                        <li>Phone:&nbsp;<a class="listview-a" data-ng-href="tel:{{item.phone}}" data-ng-bind="item.phone"></a></li>
+                        <li>Email:&nbsp;<a class="listview-a" data-ng-href="mailto:{{item.email}}" data-ng-bind="item.email"></a></li>                        
                     </ul>
                     <div class="lv-actions actions">
-                        <a href="">
+                        <a href="" data-ng-click="vm.approve(item)">
                             <i class="zmdi zmdi-check"></i>
                         </a>     
-                        <a href="">
+                        <a href="" data-ng-click="vm.show(item)">
                             <i class="zmdi zmdi-info"></i>
                         </a>                  
                     </div>                    

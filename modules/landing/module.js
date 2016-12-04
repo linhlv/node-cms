@@ -199,7 +199,7 @@ module.exports = function(app) {
         data.body = body;
         
         return app.get('renderer').render(req, undefined, data, res);
-    });
+    });  
 
     router.post('/request', function(req, res, next) {   
         // Fields validation
@@ -267,7 +267,8 @@ module.exports = function(app) {
                         rep.error = 'Your were already provided access information to view full catalogue or you my forgot your password, use forgot password feature!';
                         return res.send(JSON.stringify(rep));
                     }else{
-                        posting_data._id = new ObjectId()                                
+                        posting_data._id = new ObjectId();
+                        posting_data.createdOn = new Date();                                
                         app.get('mongodb').collection('requests').insert(posting_data, function(create_requests_err){
                             if (create_requests_err) {
                                 rep.status = 0;
@@ -285,9 +286,7 @@ module.exports = function(app) {
                 });                               
              }
         });        
-    });
-
-  
+    }); 
 
     return router;
 };

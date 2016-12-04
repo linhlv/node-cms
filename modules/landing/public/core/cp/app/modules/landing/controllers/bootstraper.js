@@ -5,6 +5,6 @@ define([
     function (landing, requests, contacts) {
         angular.module('landing.controllers', [])
             .controller('landing.ctrl', ['$scope', landing])
-            .controller('partners.ctrl', ['$scope', requests])
+            .controller('partners.ctrl', ['$scope', '$http', requests])
             .controller('contacts.ctrl', ['$scope', contacts]);
 });

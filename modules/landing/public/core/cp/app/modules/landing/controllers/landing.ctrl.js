@@ -13,9 +13,6 @@ define(function () {
         $scope.bigTotalItems = 175;
         $scope.bigCurrentPage = 1;
         // End Paging
-
-
-        console.log('requests');
     }
 
     return c;

@@ -10,8 +10,7 @@
         vm.send = function(){
             vm.submitting = true;
             
-            var options = { method: 'POST', url: '/request', data: vm.data, headers: { 'Content-Type': 'application/json' } };
-            console.log($scope.f);
+            var options = { method: 'POST', url: '/request', data: vm.data, headers: { 'Content-Type': 'application/json' } };            
             
             if($scope.f.$valid){  
                 $http(options).then(function (data, status, headers, cfg) {

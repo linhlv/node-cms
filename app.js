@@ -319,9 +319,9 @@ for (var mb in modules) {
     if (_h) app.get('helpers')[modules[mb]] = _h;
 
     if (fs.existsSync(_mp + 'module.js')) _m = require(_mp + 'module')(app);
-    if (fs.existsSync(_mp + 'admin.js')) {
-        _a = require(_mp + 'admin')(app);
-        if(_a.spa) {
+    if (fs.existsSync(_mp + 'admin.js')) {        
+        _a = require(_mp + 'admin')(app);            
+        if(_a.spa) {            
             var installer = require(path.join(__dirname, 'modules', modules[mb], 'install'))(undefined, undefined, undefined);
             var _spam ={
                 name: installer.name,

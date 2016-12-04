@@ -63,7 +63,8 @@ module.exports = function(app) {
                 var _mp = path.join(__dirname, '../../modules', module, '/');                                
                 if (fs.existsSync(_mp + 'admin.js')) {
                     var _a = require(_mp + 'admin')(app);
-                    if(_a.spa){                      
+                    if(_a.spa){         
+                        console.log('d' + module);             
                         if(spa.modules[module]){
                             spa.modules[module].displayName  = _a.get_module_name(req);
                         }                          

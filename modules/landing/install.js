@@ -1,6 +1,6 @@
 module.exports = function(db, ensure_indexes, config) {
     var is = {
-            name: 'pages',
+            name: 'landing',
             version: '0.5.152',
             collections: function(_callback) {
                 // Create collections

@@ -1,14 +1,40 @@
 {
-  "name": "pages",
+  "name": "landing",
   "enabled": false,
-  "routing_prefix":"pages",
-  "templateUrl":"pages.html",
-  "controller":"pages.ctrl",
+  "routing_prefix":"landing",
+  "templateUrl":"landing.html",
+  "controller":"landing.ctrl",
+  "routes":[    
+      {
+        "name":"partners",
+        "url":"/partners",
+        "templateUrl":"partners.html",
+        "controller":"partners.ctrl as vm"
+      },
+      {
+        "name":"contacts",
+        "url":"/contacts",
+        "templateUrl":"contacts.html",
+        "controller":"contacts.ctrl as vm"
+      }
+  ],
   "menu":[
     {
-      "title":"Pages",
-      "state":"pages",
-      "iconClass": "zmdi zmdi-globe zmdi-hc-fw"
+      "title":"Landing",
+      "state":"landing",
+      "iconClass": "zmdi zmdi-menu zmdi-hc-fw zmdi",
+      "menu":[
+        {
+          "title":"Partners",
+          "state":"landing.partners",
+          "iconClass": "zmdi zmdi-accounts-list zmdi-hc-fw"
+        },
+        {
+          "title":"Contacts",
+          "state":"landing.contacts",
+          "iconClass": "zmdi zmdi-inbox zmdi-hc-fw"
+        } 
+      ]
     } 
   ]
 }

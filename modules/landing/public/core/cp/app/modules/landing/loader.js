@@ -4,7 +4,7 @@
 /// </summary>
 define(['modules/landing/configs/dependencies'], function () {
     // tell Angular create a new pages Module
-    var _m = angular.module('pages', ['pages.controllers']);   
+    var _m = angular.module('landing', ['landing.controllers']);   
 
     return _m;
 });

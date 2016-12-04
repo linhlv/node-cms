@@ -1,3 +1,3 @@
 define([   
-    'modules/pages/controllers/bootstraper'
+    'modules/landing/controllers/bootstraper'
 ]);

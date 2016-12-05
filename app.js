@@ -5,6 +5,7 @@ var express = require('express'),
     config = require('./config'),
     fs = require('fs'),
     config_auth = require('./config_auth'),
+    utils = require('./utils');
     version = require('./version');
 
 config.cms = version.cms;
@@ -68,6 +69,7 @@ app.set('cp', cp);
 app.set('auth-core', auth);
 app.set('views', path.join(__dirname, 'views'));
 app.set('_root', path.join(__dirname));
+app.set('utils', utils);
 
 var hbs = exphbs.create({        
     layoutsDir: config.layouts.dir.layouts,

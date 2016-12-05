@@ -10,7 +10,7 @@ module.exports = function(app) {
         }),
         crypto = require('crypto'),
         config = require('../../config'),
-        parser = app.get('parser'),
+        parser = app.get('parser'),        
         async = require('async');
         
     router.spa = true;
@@ -57,27 +57,26 @@ module.exports = function(app) {
                 if (items.length > 0) {
                     var update = items[0];
 
-                    update.approved = true;                    
+                    update.approved = true;  
+                    update.password = app.get('utils').generatePassword(6);                                     
 
                     app.get('mongodb').collection('requests').update({
                         _id: new ObjectId(posting_data._id)
                     }, update, function() {
-                         var password_md5 = crypto.createHash('md5').update(config.salt + '.admin').digest('hex');
+                         var password_md5 = crypto.createHash('md5').update(config.salt + '.' + update.password).digest('hex');
                          app.get('mongodb').collection('users').insert({
                             username: update.email,
-                            username_auth: 'admin',
+                            username_auth: update.email,
                             email: update.email,
                             realname: update.name,
                             status: 2,
                             regdate: Date.now(),
                             password: password_md5
                         }, function(_err) {
-                            if(_err){
-                                console.log('Error:', _err);
-                                return;
-                            }      
+                            if(_err){ return; }     
 
                             rep.status = 1;
+                            rep.updated = update;
                             return res.send(JSON.stringify(rep));                      
                         });
                     });

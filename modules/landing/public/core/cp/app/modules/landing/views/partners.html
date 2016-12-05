@@ -29,10 +29,11 @@
                     <ul class="lv-attrs">
                         <li>Date Created: {{item.createdOn | date: 'dd-MM-yyyy HH:mm:ss'}}</li>                        
                         <li>Phone:&nbsp;<a class="listview-a" data-ng-href="tel:{{item.phone}}" data-ng-bind="item.phone"></a></li>
-                        <li>Email:&nbsp;<a class="listview-a" data-ng-href="mailto:{{item.email}}" data-ng-bind="item.email"></a></li>                        
+                        <li>Email:&nbsp;<a class="listview-a" data-ng-href="mailto:{{item.email}}" data-ng-bind="item.email"></a></li>
+                        <li data-ng-if="item.approved">Password: <span data-ng-bind="item.password"></span></li>                        
                     </ul>
                     <div class="lv-actions actions">
-                        <a href="" data-ng-click="vm.approve(item)">
+                        <a href="" data-ng-click="vm.approve(item)" data-ng-if="!item.approved">
                             <i class="zmdi zmdi-check"></i>
                         </a>     
                         <a href="" data-ng-click="vm.show(item)">

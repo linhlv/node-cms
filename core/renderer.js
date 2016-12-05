@@ -50,8 +50,8 @@ module.exports = function(app) {
                         });                        
                     });                        
                 });
-            }         
-            
+            }
+                        
             res.render(_layout, _ro);
          },
          render_file: function(dir, filename, data, req) {

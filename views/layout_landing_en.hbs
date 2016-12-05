@@ -14,17 +14,17 @@
     <title>{{title}}</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="landing/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/landing/css/bootstrap.min.css" rel="stylesheet">
 
     
     <!-- Custom CSS -->
-    <link href="landing/css/main.css" rel="stylesheet">
+    <link href="/landing/css/main.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="landing/font-montserrat/fonts.css" rel="stylesheet" type="text/css">    
-    <link href="landing/font-raleway/fonts.css" rel="stylesheet" type="text/css">    
+    <link href="/landing/font-montserrat/fonts.css" rel="stylesheet" type="text/css">    
+    <link href="/landing/font-raleway/fonts.css" rel="stylesheet" type="text/css">    
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-    <link href="landing/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="/landing/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -35,7 +35,7 @@
 
 </head>
 
-<body class="mk" data-ng-app="landing">    
+<body class="mk" data-ng-app="root">    
     <!-- Navigation -->
     <nav class="navbar navbar-fixed-top mk-nav" role="navigation">
         <div class="container">
@@ -47,8 +47,8 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">
-                    <img class="logo" src="landing/images/logo.png" alt="">
+                <a class="navbar-brand" href="/">
+                    <!--img class="logo" src="/landing/images/logo.png" alt=""-->
                 </a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -129,7 +129,7 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right nav-margin">                                     
                     <li>
-                        <a href="/login">Login</a>
+                        <a href="/auth/">Login</a>
                     </li>
                     <li>
                         <a href="/request">Request Full Catalogue</a>
@@ -161,17 +161,17 @@
     <!-- /.container -->
 
     <!-- jQuery -->
-    <script src="landing/js/jquery.js"></script>
+    <script src="/landing/js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="landing/js/bootstrap.min.js"></script>
+    <script src="/landing/js/bootstrap.min.js"></script>
 
-    <script src="landing/js/theme.js"></script>
+    <script src="/landing/js/theme.js"></script>
 
     <!-- Angular JavaScript -->
-    <script src="landing/js/angular.min.js"></script>
+    <script src="/landing/js/angular.min.js"></script>
 
-    <script src="app/main.js"></script>
+    <script src="/app/main.js"></script>
 
     <!-- Script to Activate the Carousel -->
     <script>
@@ -179,7 +179,7 @@
         interval: 5000 //changes the speed
     })
     </script>
-
+    {{{scripts}}}
 </body>
 
 </html>

@@ -1,4 +1,3 @@
 (function(){
-    window.modules = window.modules || {}; 
-    window.modules.auth = angular.module('auth', ['shared']);    
+    window.rootModule = window.rootModule || angular.module('root', []);
 })();

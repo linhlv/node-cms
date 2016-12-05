@@ -81,7 +81,8 @@ module.exports = function(app) {
         }
         if (!req.session.auth_redirect)
             req.session.auth_redirect = '/auth/profile?rnd=' + Math.random().toString().replace('.', '');
-        var render = renderer.render_file(path.join(__dirname, 'views'), 'login_user', {            
+        
+        var body = renderer.render_file(path.join(__dirname, 'views'), 'login_user', {            
             captcha: _cap,
             captcha_req: captcha_req,
             data: data,
@@ -89,8 +90,13 @@ module.exports = function(app) {
             redirect_host: redirect_host,
             config_auth: JSON.stringify(_config_auth)
         }, req);
-        data.content = render;
-        app.get('renderer').render(res, undefined, data, req);
+
+        var scripts = renderer.render_file(path.join(__dirname, 'views'), 'login_user_scripts', {}, req);
+        
+        data.body = body;
+        data.scripts = scripts;
+
+        app.get('renderer').render(req, undefined, data, res);
     });
 
     router.get('/cp', function(req, res) {        
@@ -125,6 +131,8 @@ module.exports = function(app) {
 
         res.send(render);
     });
+
+
     router.get('/register', function(req, res) {
         i18nm.setLocale(req.session.current_locale);
         if (typeof req.session != 'undefined' && typeof req.session.auth != 'undefined' && req.session.auth !== false) {
@@ -766,10 +774,15 @@ module.exports = function(app) {
     router.post('/process', function(req, res) {
         res.setHeader('Content-Type', 'application/json');
         i18nm.setLocale(req.session.current_locale);
+
+        console.log(req.body);
+
         var username = req.body.username;
         var password = req.body.password;
-       
-        if (!username.match(/^[A-Za-z0-9_\-]{3,20}$/)) {
+        
+        var email_pattern = /[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}/igm;
+        console.log(username);
+        if (!email_pattern.test(username)) {
             res.send(JSON.stringify({
                 result: 0,
                 field: "auth_username",

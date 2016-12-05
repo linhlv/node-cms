@@ -1,7 +1,7 @@
 (function(){
-    var landing = angular.module('landing', []);
+    window.rootModule = window.rootModule || angular.module('root', []);
 
-    landing.controller('request.ctrl', ['$scope', '$http', function($scope, $http){
+    window.rootModule.controller('request.ctrl', ['$scope', '$http', function($scope, $http){
         var vm = this;
         vm.data = {}, vm.submitting = false, vm.alert = {show: false, message: ''};
 
@@ -57,7 +57,7 @@
         };
     }]);
 
-    landing.controller('contact.ctrl', ['$scope', function($scope){
+    window.rootModule.controller('contact.ctrl', ['$scope', function($scope){
         var vm = this;
         vm.data = {}, vm.submitting = false;
 
@@ -67,7 +67,7 @@
         };
     }]);
 
-    landing.controller('login.ctrl', ['$scope', function($scope){
+    window.rootModule.controller('login.ctrl', ['$scope', function($scope){
         var vm = this;
         vm.data = {}, vm.submitting = false;
 

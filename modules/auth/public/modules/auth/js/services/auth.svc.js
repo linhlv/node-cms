@@ -1,5 +1,5 @@
 (function(){
-    window.modules.auth.service('authSvc', ['$http', '$q', function($http, $q){
+    window.rootModule.service('authSvc', ['$http', '$q', function($http, $q){
         var process = function(username, password){
             var deferred = $q.defer();
             var req = {

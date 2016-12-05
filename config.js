@@ -59,15 +59,18 @@ var config = {
 	"mailer": {
 		"sender": "TaracotJS <noreply@taracot.org>",
 		"feedback": "TaracotJS <info@taracot.org>",
-		"transport": "sendmail",
+		"transport": "smtp",
 		"sendmail": {
 			"path": "/usr/sbin/sendmail"
 		},
 		"smtp": {
-			"service": "smtp.gmail.com",
+			"pool": true,
+			"host": "smtp.gmail.com",
+			"port": 465,
+			"secure": true,
 			"auth": {
-				"user": "linh.le@smoovapp.com",
-				"pass": "ThanhNha9888"
+				"user": "dev.linhlv@gmail.com",
+				"pass": "ThanhNha"
 			}
 		}
 	},

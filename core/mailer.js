@@ -14,20 +14,18 @@ module.exports = function(app) {
         simpleSend: function(){
             var mailOptions = {
                 from: config.mailer.sender,
-                to: to,
-                subject: subject,
-                text: data_txt,
-                html: entities.encodeNonASCII(mail_template)
+                to: 'dev.linhlv@gmail.com',
+                subject: 'subject',
+                text: 'simple mail',
+                html: '<html><body><h1>Hello</h1></body></html>'
             };
+            //console.log(transporter);
             if (transporter) {
+
                 transporter.sendMail(mailOptions, function(error, info) {
-                    if (callback) {
-                        if (error) {
-                            callback(error);
-                        } else {
-                            callback();
-                        }
-                    }
+                    console.log(error);
+                    if(!error)
+                        console.log('sent');
                 });
             }
         },

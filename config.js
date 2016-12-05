@@ -64,10 +64,10 @@ var config = {
 			"path": "/usr/sbin/sendmail"
 		},
 		"smtp": {
-			"service": "Gmail",
+			"service": "smtp.gmail.com",
 			"auth": {
-				"user": "gmail.user@gmail.com",
-				"pass": "password"
+				"user": "linh.le@smoovapp.com",
+				"pass": "ThanhNha9888"
 			}
 		}
 	},

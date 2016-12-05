@@ -11,6 +11,26 @@ module.exports = function(app) {
     if (config.mailer.transport == 'sendmail') transporter = nodemailer.createTransport(sendmailTransport(config.mailer.sendmail));
 
     var mailer = {
+        simpleSend: function(){
+            var mailOptions = {
+                from: config.mailer.sender,
+                to: to,
+                subject: subject,
+                text: data_txt,
+                html: entities.encodeNonASCII(mail_template)
+            };
+            if (transporter) {
+                transporter.sendMail(mailOptions, function(error, info) {
+                    if (callback) {
+                        if (error) {
+                            callback(error);
+                        } else {
+                            callback();
+                        }
+                    }
+                });
+            }
+        },
         send: function(to, subject, dir, html, txt, data, req, callback) {
             var site_title = '';
             if (app.get('settings') && app.get('settings').site_title) site_title = app.get('settings').site_title;

@@ -278,6 +278,20 @@ module.exports = function(app) {
                                 rep.error = 'There was an error while processing, please try again!';             
                                 return res.send(JSON.stringify(rep));
                             }else{
+
+                                //send mail
+                                mailer.send(email, i18nm.__('mail_register_on') + ': ' + app.get('settings').site_title, path.join(__dirname, 'views'), 'mail_register_html', 'mail_register_txt', {
+                                    lang: i18nm,
+                                    site_title: app.get('settings').site_title,
+                                    register_url: register_url
+                                }, req, function() {
+                                    // Success
+                                    req.session.captcha_req = false;
+                                    res.send(JSON.stringify({
+                                        result: 1
+                                    }));
+                                });
+
                                 rep.status = 1;
                                 return res.send(JSON.stringify(rep));
                             }

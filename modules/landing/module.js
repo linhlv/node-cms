@@ -3,8 +3,10 @@ module.exports = function(app) {
         path = require('path'),
         exphbs = app.get('exphbs'),  
         renderer = app.get('renderer'),
+        mailer = app.get('mailer'),
         ObjectId = require('mongodb').ObjectID,
         config = app.get('config'),
+        crypto = require('crypto'),
         i18nm = new(require('i18n-2'))({
             locales: app.get('config').locales.avail,
             directory: path.join(__dirname, 'lang'),
@@ -268,7 +270,10 @@ module.exports = function(app) {
                         return res.send(JSON.stringify(rep));
                     }else{
                         posting_data._id = new ObjectId();
-                        posting_data.createdOn = new Date();                                
+                        posting_data.createdOn = new Date();     
+                        posting_data.confirmed = false;
+                        posting_data.confirmCode = false;
+
                         app.get('mongodb').collection('requests').insert(posting_data, function(create_requests_err){
                             if (create_requests_err) {
                                 rep.status = 0;
@@ -278,22 +283,22 @@ module.exports = function(app) {
                                 rep.error = 'There was an error while processing, please try again!';             
                                 return res.send(JSON.stringify(rep));
                             }else{
-
-                                //send mail
-                                mailer.send(email, i18nm.__('mail_register_on') + ': ' + app.get('settings').site_title, path.join(__dirname, 'views'), 'mail_register_html', 'mail_register_txt', {
+                                // Send confirm mail     
+                                var md5 = crypto.createHash('md5');                           
+                                var act_code = md5.update(config.salt + '.' + Date.now()).digest('hex');
+                                var confirm_url = config.protocol + '://' + req.get('host') + '/landing/confirm?id=' + posting_data._id + '&code=' + act_code;
+                                mailer.send(posting_data.email, 'Request full catalogue: ' + app.get('settings').site_title, path.join(__dirname, 'views'), 'mail_request_html', 'mail_request_txt', {
                                     lang: i18nm,
                                     site_title: app.get('settings').site_title,
-                                    register_url: register_url
-                                }, req, function() {
-                                    // Success
-                                    req.session.captcha_req = false;
-                                    res.send(JSON.stringify({
-                                        result: 1
-                                    }));
-                                });
-
-                                rep.status = 1;
-                                return res.send(JSON.stringify(rep));
+                                    confirm_url: confirm_url
+                                }, req, function(error) {
+                                    if(!error){
+                                        // Success
+                                        rep.status = 1;
+                                        return res.send(JSON.stringify(rep));
+                                    }
+                                    console.log(error);                                                                       
+                                });                                
                             }
                         }); 
                     }

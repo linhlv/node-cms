@@ -13,9 +13,9 @@ config.cms = version.cms;
 var path = require('path'),
     crypto = require('crypto'),
     I18n = require('i18n-2'),
-    app = express(),    
+    app = express(),
     session = require('express-session'),
-    exphbs = require('express-handlebars'),
+    exphbs = require('express-handlebars'),    
     cp = require('./core/cp/cp')(app),
     auth = require('./core/auth')(app),
     winston = require('winston'),
@@ -71,6 +71,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('_root', path.join(__dirname));
 app.set('utils', utils);
 
+
 var hbs = exphbs.create({        
     layoutsDir: config.layouts.dir.layouts,
     partialsDir: config.layouts.dir.partials,    
@@ -80,6 +81,7 @@ app.engine('.hbs', hbs.engine);
 app.set('view engine', '.hbs');
 app.set('hbs', hbs);
 app.set('renderer', require('./core/renderer')(app));
+app.set('mailer', require('./core/mailer')(app));
 
 /* Use items */
 app.use(multer({

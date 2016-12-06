@@ -14,7 +14,7 @@ module.exports = function(app) {
         simpleSend: function(){
             var mailOptions = {
                 from: config.mailer.sender,
-                to: 'dev.linhlv@gmail.com',
+                to: 'linh.le@smoovapp.com',
                 subject: 'subject',
                 text: 'simple mail',
                 html: '<html><body><h1>Hello</h1></body></html>'
@@ -32,14 +32,14 @@ module.exports = function(app) {
         send: function(to, subject, dir, html, txt, data, req, callback) {
             var site_title = '';
             if (app.get('settings') && app.get('settings').site_title) site_title = app.get('settings').site_title;
-            var data_html = renderer.render_file(dir, html, data),
-                data_txt = renderer.render_file(dir, txt, data),
+            var data_html = renderer.render_file(dir, html, data, req),
+                data_txt = renderer.render_file(dir, txt, data, req),
                 mail_template = renderer.render_file('../views', 'mail', {
                     title: subject,
                     message: data_html,
                     site_title: site_title,
                     site_url: config.protocol + '://' + req.get('host')
-                });
+                }, req);
             if (data_txt) data_txt = data_txt.replace(/<br>/gmi, '\n');
             var mailOptions = {
                 from: config.mailer.sender,

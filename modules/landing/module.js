@@ -203,6 +203,110 @@ module.exports = function(app) {
         return app.get('renderer').render(req, undefined, data, res);
     });  
 
+     router.get('/landing/confirm', function(req, res, next) {        
+        // Fields validation
+        var query_data = req.query,
+        data = {
+            title: baseTitle + ' - Request Full Catalogue',
+            page_title:'module_name',
+            keywords: '',
+            description: '',
+            extra_css: '<link rel="stylesheet" href="/modules/support/css/frontend.css" type="text/css">'
+        };
+        
+        if (!query_data || !query_data.id || !query_data.code) {
+            data.status = 0;
+            data.error = 'Data not found!';  
+
+            data.body = renderer.render_file(path.join(__dirname, 'views'), 'confirm_email', {
+                lang: i18nm,
+                data: data,
+                status_list: JSON.stringify(i18nm.__('status_list')),
+                prio_list: JSON.stringify(i18nm.__('prio_list')),
+                current_locale: req.session.current_locale
+            }, req); 
+            
+            return app.get('renderer').render(req, undefined, data, res);
+        }
+        
+        var find_query = {
+            id : query_data.id,
+            confirmed: false,
+            confirmCode: query_data.code
+        };  
+            
+            
+
+        app.get('mongodb').collection('requests').find(find_query, {
+            limit: 1
+        }).toArray(function(err, items) {            
+            if (typeof items != 'undefined' && !err) {
+                if (items.length == 1) {
+                    var update = items[0];
+
+                    update.confirmed = true;                                    
+
+
+                    console.log(find_query, err);
+                    
+                    app.get('mongodb').collection('requests').update({
+                        _id: new ObjectId(posting_data._id)
+                    }, update, function() {
+                         
+
+                        var password_md5 = crypto.createHash('md5').update(config.salt + '.' + update.password).digest('hex');
+                        app.get('mongodb').collection('users').insert({
+                            username: update.email,
+                            username_auth: update.email,
+                            email: update.email,
+                            realname: update.name,
+                            status: 2,
+                            regdate: Date.now(),
+                            password: password_md5
+                        }, function(_err) {
+                            if(_err){ return; }     
+
+                            data.confirmed = true;     
+
+                            data.body = renderer.render_file(path.join(__dirname, 'views'), 'confirm_email', {
+                                lang: i18nm,
+                                data: data,
+                                status_list: JSON.stringify(i18nm.__('status_list')),
+                                prio_list: JSON.stringify(i18nm.__('prio_list')),
+                                current_locale: req.session.current_locale
+                            }, req);   
+                            
+                            return app.get('renderer').render(req, undefined, data, res);                
+                        });
+                    });
+                }
+            } else {                
+                data.error = i18nm.__("id_not_found");
+                
+                data.body = renderer.render_file(path.join(__dirname, 'views'), 'confirm_email', {
+                    lang: i18nm,
+                    data: data,
+                    status_list: JSON.stringify(i18nm.__('status_list')),
+                    prio_list: JSON.stringify(i18nm.__('prio_list')),
+                    current_locale: req.session.current_locale
+                }, req); 
+                
+                return app.get('renderer').render(req, undefined, data, res);
+            }
+        });  
+
+        data.body = renderer.render_file(path.join(__dirname, 'views'), 'confirm_email', {
+            lang: i18nm,
+            data: data,
+            status_list: JSON.stringify(i18nm.__('status_list')),
+            prio_list: JSON.stringify(i18nm.__('prio_list')),
+            current_locale: req.session.current_locale
+        }, req); 
+        
+        return app.get('renderer').render(req, undefined, data, res);
+    });  
+    
+
     router.post('/request', function(req, res, next) {   
         // Fields validation
         var posting_data = req.body,
@@ -269,10 +373,13 @@ module.exports = function(app) {
                         rep.error = 'Your were already provided access information to view full catalogue or you my forgot your password, use forgot password feature!';
                         return res.send(JSON.stringify(rep));
                     }else{
+
+                        var md5 = crypto.createHash('md5');                           
+                        var act_code = md5.update(config.salt + '.' + Date.now()).digest('hex');                        
                         posting_data._id = new ObjectId();
                         posting_data.createdOn = new Date();     
                         posting_data.confirmed = false;
-                        posting_data.confirmCode = false;
+                        posting_data.confirmCode = act_code;
 
                         app.get('mongodb').collection('requests').insert(posting_data, function(create_requests_err){
                             if (create_requests_err) {
@@ -283,9 +390,7 @@ module.exports = function(app) {
                                 rep.error = 'There was an error while processing, please try again!';             
                                 return res.send(JSON.stringify(rep));
                             }else{
-                                // Send confirm mail     
-                                var md5 = crypto.createHash('md5');                           
-                                var act_code = md5.update(config.salt + '.' + Date.now()).digest('hex');
+                                // Send confirm mail                                     
                                 var confirm_url = config.protocol + '://' + req.get('host') + '/landing/confirm?id=' + posting_data._id + '&code=' + act_code;
                                 mailer.send(posting_data.email, 'Request full catalogue: ' + app.get('settings').site_title, path.join(__dirname, 'views'), 'mail_request_html', 'mail_request_txt', {
                                     lang: i18nm,

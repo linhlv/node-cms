@@ -16,7 +16,7 @@
 <div class="row" data-ng-controller="request.ctrl as vm">
     <div class="col-md-8">
         <p>To view full catalogue, please send the request to us, after reviewing your submitted information, we will send back to you access information.</p>        
-        <div class="alert" role="alert" data-ng-if="vm.alert.show" data-ng-bind="vm.alert.message" data-ng-class="vm.alert.class"></div>
+        <div class="alert" role="alert" data-ng-if="vm.alert.show" data-ng-class="vm.alert.class" data-ng-bind="vm.alert.message"></div>
         <form name="f" novalidate data-ng-submit="vm.send()">
             <div class="control-group form-group">
                 <div class="controls" data-ng-class="{'has-warning': (f.name.$touched || vm.submitting) && f.name.$error.required}">                    

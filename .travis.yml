@@ -3,12 +3,12 @@ node_js:
   - "5.9.1"
 before_install:
   #
-  #- sudo apt-get -qq update
-  #- sudo apt-get install ruby-dev
+  - sudo apt-get -qq update
+  - sudo apt-get install ruby-dev
 
 install:
   #
-  #- npm install
+  - npm install
 
 before_deploy:
 - openssl aes-256-cbc -K $encrypted_2c1c8c0dd14b_key -iv $encrypted_2c1c8c0dd14b_iv -in deploy-key.enc -out /tmp/deploy_rsa -d

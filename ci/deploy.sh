@@ -2,7 +2,7 @@
 set -x
 if [ $TRAVIS_BRANCH == 'at' ] ; then
     # Initialize a new git repo in _site, and push it to our server.
-    cd _site
+    #cd _site
     git init
         
     git remote add deploy "deploy@139.59.36.122:/var/www/at.labs.appiume.com"

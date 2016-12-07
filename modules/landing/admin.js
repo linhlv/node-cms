@@ -61,9 +61,7 @@ module.exports = function(app) {
                     var update = items[0];
 
                     update.approved = true;  
-                    update.password = app.get('utils').generatePassword(6);         
-
-                    console.log('t2');                           
+                    update.password = app.get('utils').generatePassword(6);                           
 
                     app.get('mongodb').collection('requests').update({
                         _id: new ObjectId(posting_data._id)

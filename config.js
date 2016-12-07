@@ -57,8 +57,8 @@ var config = {
 		"password": ""
 	},
 	"mailer": {
-		"sender": "TaracotJS <noreply@taracot.org>",
-		"feedback": "TaracotJS <info@taracot.org>",
+		"sender": "MK Handicrafts <noreply@mkhandicrafts.com>",
+		"feedback": "MK Handicrafts <info@mkhandicrafts.com>",
 		"transport": "smtp",
 		"sendmail": {
 			"path": "/usr/sbin/sendmail"

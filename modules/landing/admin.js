@@ -10,7 +10,8 @@ module.exports = function(app) {
         }),
         crypto = require('crypto'),
         config = require('../../config'),
-        parser = app.get('parser'),        
+        parser = app.get('parser'),
+        mailer = app.get('mailer'),        
         async = require('async');
         
     router.spa = true;
@@ -49,6 +50,8 @@ module.exports = function(app) {
         }
 
         find_query._id =  new ObjectId(posting_data._id);
+        find_query.confirmed = true;
+        find_query.approved = false;
 
         app.get('mongodb').collection('requests').find(find_query, {
             limit: 1
@@ -58,7 +61,9 @@ module.exports = function(app) {
                     var update = items[0];
 
                     update.approved = true;  
-                    update.password = app.get('utils').generatePassword(6);                                     
+                    update.password = app.get('utils').generatePassword(6);         
+
+                    console.log('t2');                           
 
                     app.get('mongodb').collection('requests').update({
                         _id: new ObjectId(posting_data._id)
@@ -75,9 +80,20 @@ module.exports = function(app) {
                         }, function(_err) {
                             if(_err){ return; }     
 
-                            rep.status = 1;
-                            rep.updated = update;
-                            return res.send(JSON.stringify(rep));                      
+                            var login_url = config.protocol + '://' + req.get('host') + '/auth/';
+                            mailer.send(update.email, 'Request full catalogue: MK Handicraft', path.join(__dirname, 'views'), 'mail_client_request_access_info_html', 'mail_client_request_access_info_text', {
+                                lang: i18nm,
+                                site_title: app.get('settings').site_title,
+                                password: update.password,
+                                login_url: login_url
+                            }, req, function(error) {
+                                if(!error){
+                                    // Success                
+                                    rep.status = 1;
+                                    rep.updated = update;
+                                    return res.send(JSON.stringify(rep));
+                                }                                                                    
+                            });                                                      
                         });
                     });
                 }

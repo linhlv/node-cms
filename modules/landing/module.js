@@ -307,10 +307,7 @@ module.exports = function(app) {
 
     router.post('/request', function(req, res, next) {   
         // Fields validation
-        var posting_data = req.body,
-        rep = {
-
-        };
+        var posting_data = req.body, rep = {};
         
         if (!posting_data) {
             rep.status = 0;
@@ -377,6 +374,7 @@ module.exports = function(app) {
                         posting_data._id = new ObjectId();
                         posting_data.createdOn = new Date();     
                         posting_data.confirmed = false;
+                        posting_data.approved = false;
                         posting_data.confirmCode = act_code;
 
                         app.get('mongodb').collection('requests').insert(posting_data, function(create_requests_err){
@@ -390,7 +388,7 @@ module.exports = function(app) {
                             }else{
                                 // Send confirm mail                                     
                                 var confirm_url = config.protocol + '://' + req.get('host') + '/landing/confirm?id=' + posting_data._id + '&code=' + act_code;
-                                mailer.send(posting_data.email, 'Request full catalogue: ' + app.get('settings').site_title, path.join(__dirname, 'views'), 'mail_request_html', 'mail_request_txt', {
+                                mailer.send(posting_data.email, 'Request full catalogue: MK Handicraft', path.join(__dirname, 'views'), 'mail_request_html', 'mail_request_txt', {
                                     lang: i18nm,
                                     site_title: app.get('settings').site_title,
                                     confirm_url: confirm_url

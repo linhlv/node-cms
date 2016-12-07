@@ -45,7 +45,9 @@ define(function () {
                     var approve_options = { method: 'POST', url: '/cp/landing/approve_request', data: item, headers: { 'Content-Type': 'application/json' } };
                     $http(approve_options).then(function (data, status, headers, cfg) {
                         if(data.data){
-                            swal("Approved!", "Partner full catalogue view request is approved.", "success");
+                            swal("Approved!", "Partner full catalogue view request is approved.", "success", function(){
+                                item.approve = true;
+                            });
                         }
                     },function (error, status) { vm.submitting = false; });
                        

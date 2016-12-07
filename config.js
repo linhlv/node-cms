@@ -1,5 +1,5 @@
 var config = {
-	"port": "5000",
+	"port": "5009",
 	"gid": "",
 	"uid": "",
 	"protocol": "http",
@@ -57,8 +57,8 @@ var config = {
 		"password": ""
 	},
 	"mailer": {
-		"sender": "TaracotJS <noreply@taracot.org>",
-		"feedback": "TaracotJS <info@taracot.org>",
+		"sender": "MK Handicrafts <noreply@taracot.org>",
+		"feedback": "MK Handicrafts <info@taracot.org>",
 		"transport": "sendmail",
 		"sendmail": {
 			"path": "/usr/sbin/sendmail"
@@ -72,8 +72,8 @@ var config = {
 		}
 	},
 	"mongo": {
-		// "url":"mongodb://forty:572Nhu9yd5gXkVyqkg6y8eDHJNhwu6BCBUe@ds050559.mlab.com:50559/cms?auto_reconnect=true,w=1",
-		"url": "mongodb://localhost/cms",
+ "url":"mongodb://forty:572Nhu9yd5gXkVyqkg6y8eDHJNhwu6BCBUe@ds050559.mlab.com:50559/cms?auto_reconnect=true,w=1",
+//		"url": "mongodb://localhost/cms",
 		"options": {
 			"server": {
 				"auto_reconnect": false,

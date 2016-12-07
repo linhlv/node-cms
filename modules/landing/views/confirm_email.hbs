@@ -14,8 +14,8 @@
 <!-- In order to set the email address and subject line for the contact form go to the bin/contact_me.php file. -->
 <div class="row" data-ng-controller="request.ctrl as vm">
     <div class="col-md-8">
-        {{#if confirmed}}
-        <p class="text-danger">Thank you for your confirming email - we will check your request and feedback to you soon! If you have any question please <a href="/contact">contact</a> our agent for support!</p>        
+        {{#if data.confirmed}}
+        <p class="text-danger">Your email has been confirmed successfully! Thank you for your email confirming - we will check your request and feedback to you soon! If you have any question please <a href="/contact">contact</a> our agent for support!</p>        
         {{else}}    
         <p class="text-danger">Email confirm failed, please <a href="/contact">contact</a> our agent for support!</p>
         {{/if}}

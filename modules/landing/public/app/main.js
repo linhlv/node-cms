@@ -40,7 +40,7 @@
 
                     vm.alert.show = true;
                     vm.alert.class = 'alert-success';
-                    vm.alert.message = 'Your request has been sent to us, our agent will review and feedback to you soon!';
+                    vm.alert.message = 'Your request has been sent to us, you may need to confirm by following the instruction on email, after your confirmation, our agent will review and feedback to you soon!';
                     
                     vm.data.name = '';
                     vm.data.company = '';

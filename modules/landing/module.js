@@ -230,12 +230,9 @@ module.exports = function(app) {
         }
         
         var find_query = {
-            id : query_data.id,
-            confirmed: false,
+            _id : new ObjectId(query_data.id),            
             confirmCode: query_data.code
-        };  
-            
-            
+        };          
 
         app.get('mongodb').collection('requests').find(find_query, {
             limit: 1
@@ -243,42 +240,53 @@ module.exports = function(app) {
             if (typeof items != 'undefined' && !err) {
                 if (items.length == 1) {
                     var update = items[0];
+                    if(update.confirmed){
+                        //confirmed
+                        data.confirmed = true;     
 
-                    update.confirmed = true;                                    
+                        data.body = renderer.render_file(path.join(__dirname, 'views'), 'confirm_email', {
+                            lang: i18nm,
+                            data: data,
+                            status_list: JSON.stringify(i18nm.__('status_list')),
+                            prio_list: JSON.stringify(i18nm.__('prio_list')),
+                            current_locale: req.session.current_locale
+                        }, req);   
+                        
+                        return app.get('renderer').render(req, undefined, data, res);   
+                    }
 
+                    //confirming
+                    update.confirmed = true;
 
-                    console.log(find_query, err);
-                    
                     app.get('mongodb').collection('requests').update({
-                        _id: new ObjectId(posting_data._id)
-                    }, update, function() {
-                         
+                        _id: new ObjectId(query_data.id)
+                    }, update, function(_err) {                        
+                        if(_err){ return; }
+                        
+                        data.confirmed = true;     
 
-                        var password_md5 = crypto.createHash('md5').update(config.salt + '.' + update.password).digest('hex');
-                        app.get('mongodb').collection('users').insert({
-                            username: update.email,
-                            username_auth: update.email,
-                            email: update.email,
-                            realname: update.name,
-                            status: 2,
-                            regdate: Date.now(),
-                            password: password_md5
-                        }, function(_err) {
-                            if(_err){ return; }     
-
-                            data.confirmed = true;     
-
-                            data.body = renderer.render_file(path.join(__dirname, 'views'), 'confirm_email', {
-                                lang: i18nm,
-                                data: data,
-                                status_list: JSON.stringify(i18nm.__('status_list')),
-                                prio_list: JSON.stringify(i18nm.__('prio_list')),
-                                current_locale: req.session.current_locale
-                            }, req);   
-                            
-                            return app.get('renderer').render(req, undefined, data, res);                
-                        });
+                        data.body = renderer.render_file(path.join(__dirname, 'views'), 'confirm_email', {
+                            lang: i18nm,
+                            data: data,
+                            status_list: JSON.stringify(i18nm.__('status_list')),
+                            prio_list: JSON.stringify(i18nm.__('prio_list')),
+                            current_locale: req.session.current_locale
+                        }, req);
+                        
+                        return app.get('renderer').render(req, undefined, data, res);          
                     });
+                }else{
+                    data.confirmed = false;     
+
+                    data.body = renderer.render_file(path.join(__dirname, 'views'), 'confirm_email', {
+                        lang: i18nm,
+                        data: data,
+                        status_list: JSON.stringify(i18nm.__('status_list')),
+                        prio_list: JSON.stringify(i18nm.__('prio_list')),
+                        current_locale: req.session.current_locale
+                    }, req);   
+                    
+                    return app.get('renderer').render(req, undefined, data, res);
                 }
             } else {                
                 data.error = i18nm.__("id_not_found");
@@ -294,16 +302,6 @@ module.exports = function(app) {
                 return app.get('renderer').render(req, undefined, data, res);
             }
         });  
-
-        data.body = renderer.render_file(path.join(__dirname, 'views'), 'confirm_email', {
-            lang: i18nm,
-            data: data,
-            status_list: JSON.stringify(i18nm.__('status_list')),
-            prio_list: JSON.stringify(i18nm.__('prio_list')),
-            current_locale: req.session.current_locale
-        }, req); 
-        
-        return app.get('renderer').render(req, undefined, data, res);
     });  
     
 
@@ -401,8 +399,7 @@ module.exports = function(app) {
                                         // Success
                                         rep.status = 1;
                                         return res.send(JSON.stringify(rep));
-                                    }
-                                    console.log(error);                                                                       
+                                    }                                                                    
                                 });                                
                             }
                         }); 

@@ -1,1 +1,0 @@
-sudo cp tmp/bson/ext/index.js node_modules/bson/ext/index.js

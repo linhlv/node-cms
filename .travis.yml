@@ -16,5 +16,8 @@ before_deploy:
 - chmod 600 /tmp/deploy_rsac
 - ssh-add /tmp/deploy_rsa
 
-before_deploy:
+deploy:
   - bash ci/deploy.sh
+
+after_deploy:
+  #

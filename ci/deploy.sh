@@ -1,4 +1,5 @@
 #!/bin/bash
+echo "Deploying"
 set -x
 if [ $TRAVIS_BRANCH == 'at' ] ; then
     # Initialize a new git repo in _site, and push it to our server.

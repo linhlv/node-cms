@@ -11,9 +11,8 @@ if [ $TRAVIS_BRANCH == 'at' ] ; then
     git config user.email "dev.linhlv@gmail.com"
     
     git add .
-    git commit -m "Deploy"
-    #git push --force deploy master
-    git push --set-upstream deploy master
+    git commit -m "Deploy"    
+    git push deploy master
 else
     echo "Not deploying, since this branch isn't master."
 fi

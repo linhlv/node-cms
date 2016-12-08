@@ -1,24 +1,18 @@
 language: node_js
 node_js:
-  - "5.9.1"
-
+- 5.9.1
 addons:
   ssh_known_hosts: 139.59.36.122
-
 before_install:
-  #
-  - sudo apt-get -qq update
-  - sudo apt-get install ruby-dev
-
+- sudo apt-get -qq update
+- sudo apt-get install ruby-dev
 install:
-  #
-  - npm install
-
+- npm install
 before_script:
-- openssl aes-256-cbc -K $encrypted_2c1c8c0dd14b_key -iv $encrypted_2c1c8c0dd14b_iv -in deploy-key.enc -out deploy-key -d
+- openssl aes-256-cbc -K $encrypted_2c1c8c0dd14b_key -iv $encrypted_2c1c8c0dd14b_iv
+  -in deploy-key.enc -out deploy-key -d
 - eval "$(ssh-agent -s)"
 - chmod 600 deploy-key
 - ssh-add deploy-key
-
 after_success:
-  - bash ci/deploy.sh
+- bash ci/deploy.sh

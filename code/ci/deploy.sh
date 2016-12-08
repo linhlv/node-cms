@@ -2,6 +2,8 @@
 echo "Deploying"
 set -x
 if [ $TRAVIS_BRANCH == 'at' ] ; then    
+    git config --global user.email "dev.linhlv@gmail.com"
+    git config --global user.name "Linh Le"
     git init 
     git add .
     git commit -m "Deploy"

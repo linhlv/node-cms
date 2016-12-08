@@ -16,6 +16,7 @@ install:
 before_script:
 
 after_success:
+- bash ci/download_config.sh
 - bash ci/deploy.sh
 
 after_script:

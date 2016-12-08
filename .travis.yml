@@ -6,13 +6,14 @@ addons:
 before_install:
 - sudo apt-get -qq update
 - sudo apt-get install ruby-dev
-install:
-- cd code && npm install
-before_script:
 - openssl aes-256-cbc -K $encrypted_2c1c8c0dd14b_key -iv $encrypted_2c1c8c0dd14b_iv
   -in deploy-key.enc -out deploy-key -d
 - eval "$(ssh-agent -s)"
 - chmod 600 deploy-key
 - ssh-add deploy-key
+install:
+- cd code && npm install
+before_script:
+
 after_success:
 - bash ci/deploy.sh

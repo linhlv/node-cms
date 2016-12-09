@@ -6,7 +6,7 @@ addons:
 
 branches:
   only:    
-    -staging
+    - staging
 
 before_install:
 - sudo apt-get -qq update

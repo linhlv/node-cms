@@ -2,7 +2,7 @@
 echo "Deploying"
 set -x
 if [ $TRAVIS_BRANCH == 'at' ] ; then
-    mkdir logs    
+    sudo mkdir logs    
     git config --global user.email "dev.linhlv@gmail.com"
     git config --global user.name "Linh Le"    
     git init 

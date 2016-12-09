@@ -2,7 +2,7 @@
 echo "Deploying"
 set -x
 if [ $TRAVIS_BRANCH == 'staging' ] ; then
-    sudo mkdir logs    
+    sudo mkdir /var/www/at.labs.appiume.com/logs    
     git config --global user.email "dev.linhlv@gmail.com"
     git config --global user.name "Linh Le"    
     git init 

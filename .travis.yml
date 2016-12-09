@@ -3,6 +3,11 @@ node_js:
 - 5.9.1
 addons:
   ssh_known_hosts: 139.59.36.122
+
+branches:
+  only:    
+    -staging
+
 before_install:
 - sudo apt-get -qq update
 - sudo apt-get install ruby-dev

@@ -48,12 +48,15 @@ module.exports = function(app) {
             next();
         }
     });
-    router.get('/', function(req, res) {        
+    router.get('/', function(req, res) {      
+        console.log('test');  
         i18nm.setLocale(req.session.current_locale);
+        /*
         if (typeof req.session != 'undefined' && typeof req.session.auth != 'undefined' && req.session.auth !== false) {
             res.redirect(303, "/?rnd=" + Math.random().toString().replace('.', ''));
             return;
         }
+        */
         var c = parseInt(Math.random() * 9000 + 1000);
         var _cap = 'b64';
         if (app.get('config').captcha == 'captcha_gm') {

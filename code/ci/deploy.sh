@@ -1,7 +1,7 @@
 #!/bin/bash
 echo "Deploying"
 set -x
-if [ $TRAVIS_BRANCH == 'at' ] ; then
+if [ $TRAVIS_BRANCH == 'staging' ] ; then
     sudo mkdir logs    
     git config --global user.email "dev.linhlv@gmail.com"
     git config --global user.name "Linh Le"    
@@ -11,5 +11,5 @@ if [ $TRAVIS_BRANCH == 'at' ] ; then
     git remote add staging "ssh://deploy@139.59.36.122:/var/www/at.labs.appiume.com/site.git"
     git push -f staging master
 else
-    echo "Not deploying, since this branch isn't master."
+    echo "Not deploying, since this branch isn't staging."
 fi

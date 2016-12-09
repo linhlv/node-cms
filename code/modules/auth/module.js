@@ -778,13 +778,11 @@ module.exports = function(app) {
         res.setHeader('Content-Type', 'application/json');
         i18nm.setLocale(req.session.current_locale);
 
-        console.log(req.body);
-
         var username = req.body.username;
         var password = req.body.password;
         
         var email_pattern = /[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}/igm;
-        console.log(username);
+        
         if (!email_pattern.test(username)) {
             res.send(JSON.stringify({
                 result: 0,

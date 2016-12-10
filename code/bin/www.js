@@ -42,5 +42,5 @@ if (config.redis.active) {
 var server = http.listen(port, function() {
     if (config.gid) process.setgid(config.gid);
     if (config.uid) process.setuid(config.uid);
-    console.log('[%s] server listening on port x: ' + port, process.pid);
+    console.log('[%s] server listening on port: ' + port, process.pid);
 });

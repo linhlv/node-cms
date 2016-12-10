@@ -41,12 +41,15 @@ module.exports = function(app) {
 
             var helpers = app.get('helpers');
 
+            console.log(helpers);
+
             if(helpers){                
                 _.forEach(helpers, function(mh, key){
                     var m_helpers = app.get('helpers')[key](app, req);                    
                     _.forEach(m_helpers, function(h, i){
                         h(function(html){
                             hbs.handlebars.registerHelper(key + '_' + i, html);
+                            console.log(key + '_' + i);
                         });                        
                     });                        
                 });

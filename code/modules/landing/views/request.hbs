@@ -17,7 +17,7 @@
     <div class="col-md-8">
         <p>To view full catalogue, please send the request to us, after reviewing your submitted information, we will send back to you access information.</p>        
         <div class="alert" role="alert" data-ng-if="vm.alert.show" data-ng-class="vm.alert.class" data-ng-bind="vm.alert.message"></div>
-        <form name="f" novalidate data-ng-submit="vm.send()">
+        <form name="f" novalidate data-ng-submit="vm.send()" data-ng-show="!vm.sent">
             <div class="control-group form-group">
                 <div class="controls" data-ng-class="{'has-warning': (f.name.$touched || vm.submitting) && f.name.$error.required}">                    
                     <input type="text" class="form-control" id="name" name="name" placeholder="Full name *" data-ng-model="vm.data.name" required data-validation-required-message="Please enter your name.">
@@ -53,7 +53,7 @@
 
             <div id="success"></div>
             <!-- For success/fail messages -->
-            <button type="submit" class="btn btn-primary" data-ng-disabled="vm.submitting">Send Request</button>
+            <button type="submit" class="btn btn-primary" data-ng-disabled="vm.submitting"><i data-ng-show="vm.submitting" class="fa fa-spinner"></i> Request</button>
         </form>
     </div>
 

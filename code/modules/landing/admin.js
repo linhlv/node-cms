@@ -22,13 +22,17 @@ module.exports = function(app) {
     };
 
     router.get('/requests', function(req, res, next) {
-        var find_query = {}, sort = {}, rep = {};
+        var find_query = {confirmed: true}, sort = {}, rep = {};
         app.get('mongodb').collection('requests').find(find_query)        
             .sort(sort).toArray(function(err, items) {
                 if(items && items.length ){
                     // Return results
                     rep.status = 1;
                     rep.items = items;                    
+                    return res.send(JSON.stringify(rep));
+                }else{
+                    rep.status = 0;
+                    rep.message = 'Not found!';                    
                     return res.send(JSON.stringify(rep));
                 }
             });   
@@ -72,7 +76,7 @@ module.exports = function(app) {
                             username_auth: update.email,
                             email: update.email,
                             realname: update.name,
-                            status: 2,
+                            status: 1,
                             regdate: Date.now(),
                             password: password_md5
                         }, function(_err) {

@@ -18,6 +18,7 @@ module.exports = function(app) {
             req.session.auth_redirect_host = req.get('host');
             req.session.auth_redirect = '/cp';
             res.redirect(303, "/auth/cp?rnd=" + Math.random().toString().replace('.', ''));
+            console.log('rte');
             return;
         }
         i18nm.setLocale(req.session.current_locale);

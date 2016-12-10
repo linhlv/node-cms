@@ -69,8 +69,8 @@ var config = {
 			"port": 465,
 			"secure": true,
 			"auth": {
-				"user": "dev.linhlv@gmail.com",
-				"pass": "ThanhNha"
+				"user": "mail.appiume@gmail.com",
+				"pass": "P@ssw0rd!"
 			}
 		}
 	},

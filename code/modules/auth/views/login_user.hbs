@@ -17,6 +17,7 @@
 <div class="row" data-ng-controller="login.user.ctrl as vm">
     <div class="col-md-4 col-md-offset-4">
         <h4 class="page-header">Login</h3>
+        <div class="alert alert-warning" role="alert" data-ng-if="!vm.status">Login fail! Please check your email or password!</div>
         <form role="form" name="f" data-ng-submit="vm.login()" novalidate>
             <div class="form-group">
                 <label for="lblEmail">Email</label>

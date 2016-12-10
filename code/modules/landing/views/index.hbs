@@ -97,17 +97,20 @@
     </div>
 </div>
 <!-- /.row -->
-
-<hr>
-
-<!-- Call to Action Section -->
-<div class="well">
-    <div class="row">
-        <div class="col-md-8">
-            <p>To view full catalogue, please send the request to us, after reviewing your submitted information, we will send back to you access information.</p>
-        </div>
-        <div class="col-md-4">
-            <a class="btn btn-lg btn-default btn-block mk-button" href="/request">Request Full Catalogue</a>
+{{#if data.auth}}        
+{{else}}
+    <hr>    
+    <!-- Call to Action Section -->
+    <div class="well">
+        <div class="row">
+            <div class="col-md-8">
+                <p>To view full catalogue, please send the request to us, after reviewing your submitted information, we will send back to you access information.</p>
+            </div>
+            <div class="col-md-4">
+                <a class="btn btn-lg btn-default btn-block mk-button" href="/request">Request Full Catalogue</a>
+            </div>
         </div>
     </div>
-</div>
+{{/if}}
+
+

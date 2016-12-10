@@ -1,3 +1,3 @@
 (function(){
-    window.rootModule = window.rootModule || angular.module('root', []);
+    window.rootModule = window.rootModule || angular.module('root', ['shared']);
 })();

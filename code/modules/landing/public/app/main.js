@@ -3,16 +3,15 @@
 
     window.rootModule.controller('request.ctrl', ['$scope', '$http', function($scope, $http){
         var vm = this;
-        vm.data = {}, vm.submitting = false, vm.alert = {show: false, message: ''};
-
-        console.log($scope.f);
+        vm.data = {}, vm.submitting = false, vm.alert = {show: false, message: ''}, vm.sent = false;        
 
         vm.send = function(){
             vm.submitting = true;
             
-            var options = { method: 'POST', url: '/request', data: vm.data, headers: { 'Content-Type': 'application/json' } };            
-            
-            if($scope.f.$valid){  
+            if($scope.f.$valid){ 
+                
+                var options = { method: 'POST', url: '/request', data: vm.data, headers: { 'Content-Type': 'application/json' } };
+
                 $http(options).then(function (data, status, headers, cfg) {
                     if(!data.data.status){
                         //error
@@ -49,6 +48,8 @@
                     vm.data.message = '';
                     
                     vm.submitting = false;
+
+                    vm.sent = true;
 
                     $scope.f.$setPristine();
                     $scope.f.$setUntouched();

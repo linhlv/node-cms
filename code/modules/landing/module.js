@@ -20,6 +20,7 @@ module.exports = function(app) {
                 page_title:'module_name',
                 keywords: '',
                 description: '',
+                auth: req.session ? req.session.auth : null,
                 extra_css: '<link rel="stylesheet" href="/modules/support/css/frontend.css" type="text/css">'
             },carousel = renderer.render_file(path.join(__dirname, 'views'), 'carousel', {
                 lang: i18nm,
@@ -66,6 +67,7 @@ module.exports = function(app) {
         var data = {
                 title: baseTitle + ' - Products',
                 page_title:'module_name',
+                auth: req.session ? req.session.auth : null,
                 keywords: '',
                 description: '',
                 extra_css: '<link rel="stylesheet" href="/modules/support/css/frontend.css" type="text/css">'
@@ -86,7 +88,7 @@ module.exports = function(app) {
         var data = {
                 title: baseTitle + ' - Product Details',
                 page_title:'module_name',
-                keywords: '',
+                keywords: '',              
                 description: '',
                 extra_css: '<link rel="stylesheet" href="/modules/support/css/frontend.css" type="text/css">'
             },            
@@ -368,7 +370,6 @@ module.exports = function(app) {
                         rep.error = 'Your were already provided access information to view full catalogue or you my forgot your password, use forgot password feature!';
                         return res.send(JSON.stringify(rep));
                     }else{
-
                         var md5 = crypto.createHash('md5');                           
                         var act_code = md5.update(config.salt + '.' + Date.now()).digest('hex');                        
                         posting_data._id = new ObjectId();
@@ -396,6 +397,10 @@ module.exports = function(app) {
                                     if(!error){
                                         // Success
                                         rep.status = 1;
+                                        return res.send(JSON.stringify(rep));
+                                    }else{
+                                        rep.status = 0;
+                                        rep.error = 'Email configuration has error!';         
                                         return res.send(JSON.stringify(rep));
                                     }                                                                    
                                 });                                

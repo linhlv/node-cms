@@ -8,43 +8,49 @@
         <title>{{lang 'auth'}}</title>
 
         <!-- Vendor CSS -->
-        <link href="{{assets}}/vendors/bower_components/animate.css/animate.min.css" rel="stylesheet">
+        
+        <link href="{{assets}}/vendors/bower_components/animate.css/animate.min.css" rel="stylesheet">        
         <link href="{{assets}}/vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css" rel="stylesheet">
+        <link href="{{assets}}/vendors/bower_components/bootstrap-sweetalert/lib/sweet-alert.css" rel="stylesheet">
 
         <!-- CSS -->
         <link href="{{assets}}/css/app.min.1.css" rel="stylesheet">
         <link href="{{assets}}/css/app.min.2.css" rel="stylesheet">
+        <link href="{{assets}}/css/demo.css" rel="stylesheet">
+        <link href="{{assets}}/css/main.css" rel="stylesheet">
     </head>
 
     <body class="login-content" data-ng-controller="loginCtrl as vm">
-
-        <!-- Login -->
-        <div class="lc-block toggled" id="l-login" >
-            <div class="input-group m-b-20">
-                <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
-                <div class="fg-line">
-                    <input type="text" id="auth_username" class="form-control" placeholder="{{lang 'username'}}" data-ng-model="vm.username">
+        <section id="main">
+            <!-- Login -->
+            <div class="lc-block toggled" id="l-login" >
+                <div class="input-group m-b-20">
+                    <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+                    <div class="fg-line">
+                        <input type="text" id="auth_username" class="form-control" placeholder="{{lang 'username'}}" data-ng-model="vm.username">
+                    </div>
                 </div>
-            </div>
 
-            <div class="input-group m-b-20">
-                <span class="input-group-addon"><i class="zmdi zmdi-male"></i></span>
-                <div class="fg-line">
-                    <input type="password" id="auth_password" class="form-control" placeholder="{{lang 'password'}}"  data-ng-model="vm.password">
+                <div class="input-group m-b-20">
+                    <span class="input-group-addon"><i class="zmdi zmdi-male"></i></span>
+                    <div class="fg-line">
+                        <input type="password" id="auth_password" class="form-control" placeholder="{{lang 'password'}}"  data-ng-model="vm.password">
+                    </div>
                 </div>
+
+                <div class="clearfix"></div>
+
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" value="">
+                        <i class="input-helper"></i>
+                        Keep me signed in
+                    </label>
+                </div>
+                <a href="" class="btn btn-login btn-danger btn-float" data-ng-click="vm.login()"><i class="zmdi zmdi-arrow-forward"></i></a>         
             </div>
 
-            <div class="clearfix"></div>
-
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" value="">
-                    <i class="input-helper"></i>
-                    Keep me signed in
-                </label>
-            </div>
-            <a href="" class="btn btn-login btn-danger btn-float" data-ng-click="vm.login()"><i class="zmdi zmdi-arrow-forward"></i></a>         
-        </div>
+         </section>
         <!-- Older IE warning message -->
         <!--[if lt IE 9]>
             <div class="ie-warning">
@@ -88,19 +94,17 @@
             </div>
         <![endif]-->
 
+         <!-- Core -->
+        <script src="{{assets}}/vendors/bower_components/jquery/dist/jquery.min.js"></script>
+
         <script type="text/javascript">
             window.configs = {baseUrl : '{{assets}}/'};
         </script>        
 
-        <!-- Core -->
-        <script src="{{assets}}/vendors/bower_components/jquery/dist/jquery.min.js"></script>
-
         <!-- Angular -->
         <script src="{{assets}}/vendors/bower_components/angular/angular.min.js"></script>
-        <script src="{{assets}}/vendors/bower_components/angular-resource/angular-resource.min.js"></script>
         <script src="{{assets}}/vendors/bower_components/angular-animate/angular-animate.min.js"></script>
         <script src="{{assets}}/vendors/bower_components/angular-resource/angular-resource.min.js"></script>
-
         
         <!-- Angular Modules -->
         <script src="{{assets}}/vendors/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
@@ -108,11 +112,34 @@
         <script src="{{assets}}/vendors/bower_components/oclazyload/dist/ocLazyLoad.min.js"></script>
         <script src="{{assets}}/vendors/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
 
+        <script src="{{assets}}/vendors/3rds/ngStorage.js"></script>
+
         <!-- Common Vendors -->
-        <script src="{{assets}}/vendors/bower_components/jquery.nicescroll/jquery.nicescroll.min.js"></script>
+        <script src="{{assets}}/vendors/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+        
+        <script src="{{assets}}/vendors/bower_components/bootstrap-sweetalert/lib/sweet-alert.min.js"></script>
+        
         <script src="{{assets}}/vendors/bower_components/Waves/dist/waves.min.js"></script>
-        <script src="{{assets}}/vendors/bower_components/angular-nouislider/src/nouislider.min.js"></script>
+        <script src="{{assets}}/vendors/bootstrap-growl/bootstrap-growl.min.js"></script>
         <script src="{{assets}}/vendors/bower_components/ng-table/dist/ng-table.min.js"></script>
+        <script src="{{assets}}/vendors/bower_components/chosen/chosen.jquery.js"></script>
+        <script src="{{assets}}/vendors/bower_components/angular-chosen-localytics/chosen.js"></script>
+        <script src="{{assets}}/vendors/bower_components/autosize/dist/autosize.min.js"></script>
+        <!-- Placeholder for IE9 -->
+        <!--[if IE 9 ]>
+            <script src="{{assets}}/vendors/bower_components/jquery-placeholder/jquery.placeholder.min.js"></script>
+        <![endif]-->
+
+        <!-- Using below vendors in order to avoid misloading on resolve -->
+        <script src="{{assets}}/vendors/bower_components/flot/jquery.flot.js"></script>
+        <script src="{{assets}}/vendors/bower_components/flot.curvedlines/curvedLines.js"></script>
+        <script src="{{assets}}/vendors/bower_components/flot/jquery.flot.resize.js"></script>
+        <script src="{{assets}}/vendors/bower_components/moment/min/moment.min.js"></script>
+        <script src="{{assets}}/vendors/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
+        <script src="{{assets}}/vendors/bower_components/flot-orderBars/js/jquery.flot.orderBars.js"></script>
+        <script src="{{assets}}/vendors/bower_components/flot/jquery.flot.pie.js"></script>
+        <script src="{{assets}}/vendors/bower_components/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
+        <script src="{{assets}}/vendors/bower_components/angular-nouislider/src/nouislider.min.js"></script>
 
         <!-- Placeholder for IE9 -->
         <!--[if IE 9 ]>
@@ -133,7 +160,7 @@
         <script src="{{mp}}/js/app.js"></script>
         <script src="{{mp}}/js/services/auth.svc.js"></script>
         <script src="{{mp}}/js/controllers/login_cp.ctrl.js"></script>
-        
+       
     </body>
 </html>
 

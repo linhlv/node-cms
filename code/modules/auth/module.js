@@ -49,7 +49,6 @@ module.exports = function(app) {
         }
     });
     router.get('/', function(req, res) {      
-        console.log('test');  
         i18nm.setLocale(req.session.current_locale);
         /*
         if (typeof req.session != 'undefined' && typeof req.session.auth != 'undefined' && req.session.auth !== false) {
@@ -82,8 +81,12 @@ module.exports = function(app) {
         } else {
             req.session.auth_redirect_host = req.get('host');
         }
+        
+        req.session.auth_redirect = '/';
+        /* 
         if (!req.session.auth_redirect)
             req.session.auth_redirect = '/auth/profile?rnd=' + Math.random().toString().replace('.', '');
+            */
         
         var body = renderer.render_file(path.join(__dirname, 'views'), 'login_user', {            
             captcha: _cap,
@@ -104,10 +107,6 @@ module.exports = function(app) {
 
     router.get('/cp', function(req, res) {        
         i18nm.setLocale(req.session.current_locale);
-        if (typeof req.session != 'undefined' && typeof req.session.auth != 'undefined' && req.session.auth !== false) {
-            res.redirect(303, "/?rnd=" + Math.random().toString().replace('.', ''));
-            return;
-        }
         var c = parseInt(Math.random() * 9000 + 1000);
         var _cap = 'b64';
         if (app.get('config').captcha == 'captcha_gm') {
@@ -118,7 +117,9 @@ module.exports = function(app) {
         var redirect_host = '';
         if (req.session.auth_redirect_host) redirect_host = config.protocol + '://' + req.session.auth_redirect_host;
 
-         var data = {
+        req.session.auth_redirect = '/cp';
+
+        var data = {
             lang: i18nm,
             m : 'auth', 
             keywords: '',
@@ -810,9 +811,21 @@ module.exports = function(app) {
         }).toArray(function(err, items) {
             if (typeof items != 'undefined' && !err) {
                 if (items.length > 0 && items[0].status > 0) {
-                    req.session.captcha_req = false;
-                    req.session.auth = items[0];
-                    req.session.auth.timestamp = Date.now();
+                    if(req.session.auth_redirect == '/cp'){ //on control panel
+                        if(items[0].status != 2){ //not admin
+                            res.send(JSON.stringify({
+                                result: 0,
+                                field: "auth_access_denied",
+                                error: 'Access denied!'
+                            }));
+
+                            return;
+                        }
+                    }
+
+                    req.session.auth = items[0];                    
+                    req.session.captcha_req = false;                    
+                    req.session.auth.timestamp = Date.now();                    
                     delete req.session.auth.password;
                     res.send(JSON.stringify({
                         result: 1
@@ -820,7 +833,8 @@ module.exports = function(app) {
                     return;
                 }
             }
-            req.session.captcha_req = true;
+
+            //req.session.captcha_req = true;
             res.send(JSON.stringify({
                 result: 0,
                 field: "auth_password",

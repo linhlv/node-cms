@@ -4,7 +4,7 @@ module.exports = function(app, req) {
     helpers.auth_menu = function(callback){
         var html = '';                   
 
-        if(!req.session){
+        if(!req.session || !req.session.auth){
             html += '<ul class="nav navbar-nav navbar-right nav-margin">';                             
             html += '   <li>';
             html += '       <a href="/auth/">Login</a>';

@@ -252,6 +252,7 @@ footer {
   margin-left: 16px;
   margin-right: 16px;
   padding: 20px 0px;
+  max-width: 768px;
 }
 .dropdown-menu-large > li > ul {
   padding: 0;

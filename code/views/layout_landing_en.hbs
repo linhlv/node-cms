@@ -12,6 +12,8 @@
     <!-- Bootstrap Core CSS -->
     <link href="/landing/css/bootstrap.min.css" rel="stylesheet">
 
+    <link href="/landing/css/yamm.css" rel="stylesheet">
+
     
     <!-- Custom CSS -->
     <link href="/landing/css/main.css" rel="stylesheet">
@@ -31,7 +33,7 @@
 
 </head>
 
-<body class="mk" data-ng-app="root">    
+<body class="mk" data-ng-app="root" data-ng-controller="main.ctrl as main">    
     <!-- Navigation -->
     <nav class="navbar navbar-fixed-top mk-nav" role="navigation">
         <div class="container">
@@ -46,71 +48,23 @@
                 <a class="navbar-brand" href="/">
                     <img class="logo" src="/landing/images/logo.png" alt=""/>
                 </a>
-            </div>
+            </div>    
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-left nav-margin">
+                <ul class="nav navbar-nav navbar-left nav-margin yamm" role="navigation">
                      <li>
                         <a href="/">Home</a>
                     </li>
                     <li>
                         <a href="/about">About Us</a>
-                    </li>
+                    </li>         
                     <li class="dropdown dropdown-large">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Products <b class="caret"></b></a>                        
-                        <ul class="dropdown-menu dropdown-menu-large row">
-                            <li class="col-sm-3">
+                        <ul class="dropdown-menu dropdown-menu-large">
+                            <li class="col-sm-3" data-ng-repeat="c in main.mega_menu">
                                 <ul>
-                                    <li class="dropdown-header">Water Hyacinth</li>
-                                    <li><a href="/products">All</a></li>
-                                    <li class="disabled"><a href="/products">Bamboo</a></li>
-                                    <li><a href="/products">Sea Grass</a></li>
-                                    <li class="divider"></li>
-                                    <li class="dropdown-header">PP</li>
-                                    <li><a href="/products">Example</a></li>
-                                    <li><a href="/products">Aligninment options</a></li>
-                                    <li><a href="/products">Headers</a></li>
-                                    <li><a href="/products">Disabled menu items</a></li>
-                                </ul>
-                            </li>
-                            <li class="col-sm-3">
-                                <ul>
-                                    <li class="dropdown-header">Pressed seagrass</li>
-                                    <li><a href="/products">Basic example</a></li>
-                                    <li><a href="/products">Button toolbar</a></li>
-                                    <li><a href="/products">Sizing</a></li>
-                                    <li><a href="/products">Nesting</a></li>
-                                    <li><a href="/products">Vertical variation</a></li>
-                                    <li class="divider"></li>
-                                    <li class="dropdown-header">Bamboo</li>
-                                    <li><a href="/products">Single button dropdowns</a></li>
-                                </ul>
-                            </li>
-                            <li class="col-sm-3">
-                                <ul>
-                                    <li class="dropdown-header">Rattan</li>
-                                    <li><a href="/products">Basic example</a></li>
-                                    <li><a href="/products">Sizing</a></li>
-                                    <li><a href="/products">Checkboxes and radio addons</a></li>
-                                    <li class="divider"></li>
-                                    <li class="dropdown-header">Coiled Seagrass</li>
-                                    <li><a href="/products">Tabs</a></li>
-                                    <li><a href="/products">Pills</a></li>
-                                    <li><a href="/products">Justified</a></li>
-                                </ul>
-                            </li>
-                            <li class="col-sm-3">
-                                <ul>
-                                    <li class="dropdown-header">Splitted seagrass</li>
-                                    <li><a href="/products">Default navbar</a></li>
-                                    <li><a href="/products">Buttons</a></li>
-                                    <li><a href="/products">Text</a></li>
-                                    <li><a href="/products">Non-nav links</a></li>
-                                    <li><a href="/products">Component alignment</a></li>
-                                    <li><a href="/products">Fixed to top</a></li>
-                                    <li><a href="/products">Fixed to bottom</a></li>
-                                    <li><a href="/products">Static top</a></li>
-                                    <li><a href="/products">Inverted navbar</a></li>
+                                    <li class="dropdown-header" data-ng-bind="c.name"></li>
+                                    <li data-ng-repeat="m in c.materials"><a data-product-path data-c="c.id" data-m="m.id" data-ng-bind="m.name"></a></li>
                                 </ul>
                             </li>
                         </ul>                     

@@ -77,4 +77,45 @@
             
         };
     }]);
+
+    window.rootModule.directive('productPath', function(){
+         return {
+            scope: {
+                c: '=',
+                m: '='
+            },
+            link: function(scope, elem, attrs) {                
+                var url = '/products/' + scope.c + '/' + scope.m ;
+                elem.attr('href', url); 
+            }
+        }
+    });
+
+    window.rootModule.controller('main.ctrl', ['$scope', '$http', function($scope, $http){
+        var vm = this;
+        vm.data = {}, vm.submitting = false;
+
+        vm.retrieve = function(){
+             var options = { method: 'GET', url: 'http://staging.mk.labs.appiume.com/category/getmenu', data: vm.data, headers: { 'Content-Type': 'application/json' } };
+
+                $http(options).then(function (data, status, headers, cfg) {
+                    if(!data){ //error                        
+                        return;                    
+                    }
+                    
+                    vm.mega_menu = data.data;
+
+                    console.log(data);
+
+                },function (error, status) { vm.submitting = false; });  
+            
+        };
+
+        vm.getProductPath = function(c, m){
+            console.log('c')
+            return '/product/' + c.id + '/' + m.id;
+        }
+
+        vm.retrieve();
+    }]);
 })();

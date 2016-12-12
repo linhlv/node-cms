@@ -8,11 +8,13 @@ module.exports = function(app, req) {
             html += '<ul class="nav navbar-nav navbar-right nav-margin">';                             
             html += '   <li>';
             html += '       <a href="/auth/">Login</a>';
-            html += '   </li>';            
+            html += '   </li>';           
+            /* 
             html += '   <li>';
             html += '       <a href="/request">Request Full Catalogue</a>';
             html += '   </li>';
             html += '</ul>';            
+            */
         }else{
             html += '<ul class="nav navbar-nav navbar-right nav-margin">';                             
             html += '   <li>';

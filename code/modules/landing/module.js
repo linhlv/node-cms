@@ -63,7 +63,7 @@ module.exports = function(app) {
         return app.get('renderer').render(req, undefined, data, res);
     });
 
-    router.get('/products', function(req, res, next) {        
+    router.get('/products/:cat/:mat', function(req, res, next) {        
         var data = {
                 title: baseTitle + ' - Products',
                 page_title:'module_name',

@@ -63,6 +63,20 @@ module.exports = function(app) {
         return app.get('renderer').render(req, undefined, data, res);
     });
 
+    
+
+    router.get('/rest/categories', function(req, res, next) {
+        var restClient = app.get('client'), rep = {};
+
+        // direct way
+        restClient.get("http://staging.mk.labs.appiume.com/category/getmenu", function (data, response) {
+            rep.status = 1;
+            rep.data = data;
+            return res.send(JSON.stringify(rep));
+        });
+        
+    });
+
     router.get('/products/:cat/:mat', function(req, res, next) {        
         var data = {
                 title: baseTitle + ' - Products',

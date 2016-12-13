@@ -13,104 +13,30 @@
 </div>
 <!-- /.row -->
 
+
+
 <!-- Products Row -->
 <div class="row">
-    <div class="col-md-4 img-portfolio">
-        <a href="/product-item">
-            <img class="img-responsive img-hover" src="http://placehold.it/700x700" alt="">
-        </a>
-        <h3>
-            <a href="/product-item">Product Name</a>
-        </h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-    </div>
-    <div class="col-md-4 img-portfolio">
-        <a href="/product-item">
-            <img class="img-responsive img-hover" src="http://placehold.it/700x700" alt="">
-        </a>
-        <h3>
-            <a href="/product-item">Product Name</a>
-        </h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-    </div>
-    <div class="col-md-4 img-portfolio">
-        <a href="/product-item">
-            <img class="img-responsive img-hover" src="http://placehold.it/700x700" alt="">
-        </a>
-        <h3>
-            <a href="/product-item">Product Name</a>
-        </h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-    </div>
+     {{#each data.products}}
+        <div class="col-md-4 img-portfolio">
+            <a href="/product-item">
+                <img class="img-responsive img-hover" src="{{this.imageUrl}}" alt="">                
+            </a>
+            <h3>
+                <a href="/product-item">{{this.code}}</a>
+            </h3>
+            <p>{{this.size}} - {{this.packaging}}</p>
+        </div>
+    {{/each}}
 </div>
 <!-- /.row -->
 
-<!-- Products Row -->
-<div class="row">
-    <div class="col-md-4 img-portfolio">
-        <a href="/product-item">
-            <img class="img-responsive img-hover" src="http://placehold.it/700x700" alt="">
-        </a>
-        <h3>
-            <a href="/product-item">Product Name</a>
-        </h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-    </div>
-    <div class="col-md-4 img-portfolio">
-        <a href="/product-item">
-            <img class="img-responsive img-hover" src="http://placehold.it/700x700" alt="">
-        </a>
-        <h3>
-            <a href="/product-item">Product Name</a>
-        </h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-    </div>
-    <div class="col-md-4 img-portfolio">
-        <a href="/product-item">
-            <img class="img-responsive img-hover" src="http://placehold.it/700x700" alt="">
-        </a>
-        <h3>
-            <a href="/product-item">Product Name</a>
-        </h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-    </div>
-</div>
-
-<!-- Products Row -->
-<div class="row">
-    <div class="col-md-4 img-portfolio">
-        <a href="/product-item">
-            <img class="img-responsive img-hover" src="http://placehold.it/700x700" alt="">
-        </a>
-        <h3>
-            <a href="/product-item">Product Name</a>
-        </h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-    </div>
-    <div class="col-md-4 img-portfolio">
-        <a href="/product-item">
-            <img class="img-responsive img-hover" src="http://placehold.it/700x700" alt="">
-        </a>
-        <h3>
-            <a href="/product-item">Product Name</a>
-        </h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-    </div>
-    <div class="col-md-4 img-portfolio">
-        <a href="/product-item">
-            <img class="img-responsive img-hover" src="http://placehold.it/700x700" alt="">
-        </a>
-        <h3>
-            <a href="/product-item">Product Name</a>
-        </h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-    </div>
-</div>
-<!-- /.row -->
-
+<!--
 <hr>
+-->
 
 <!-- Pagination -->
+<!--
 <div class="row text-center">
     <div class="col-lg-12">
         <ul class="pagination">
@@ -138,7 +64,9 @@
         </ul>
     </div>
 </div>
+-->
 <!-- /.row -->
+
 
 
 {{#if data.auth}}        

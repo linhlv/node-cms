@@ -12,7 +12,11 @@ module.exports = function(app) {
             directory: path.join(__dirname, 'lang'),
             extension: '.js',
             devMode: app.get('config').locales.dev_mode
-        }), baseTitle = 'MK Handicrafts';          
+        }), baseTitle = 'MK Handicrafts',
+        restClient = app.get('client');          
+    
+    var rootRestUrl = 'http://crm.mkhandicrafts.com';
+    //var rootRestUrl = 'http://192.168.1.6';
     
     router.get('/', function(req, res, next) {
         var data = {
@@ -61,41 +65,63 @@ module.exports = function(app) {
         data.body = body;
         
         return app.get('renderer').render(req, undefined, data, res);
-    });
-
-    
+    });    
 
     router.get('/rest/categories', function(req, res, next) {
-        var restClient = app.get('client'), rep = {};
+        var rep = {};
 
         // direct way
-        restClient.get("http://staging.mk.labs.appiume.com/category/getmenu", function (data, response) {
+        restClient.get(rootRestUrl + '/category/getmenu', function (data, response) {
             rep.status = 1;
             rep.data = data;
             return res.send(JSON.stringify(rep));
-        });
-        
+        });        
     });
 
     router.get('/products/:cat/:mat', function(req, res, next) {        
         var data = {
                 title: baseTitle + ' - Products',
                 page_title:'module_name',
+                baseUrl: rootRestUrl,
                 auth: req.session ? req.session.auth : null,
                 keywords: '',
                 description: '',
                 extra_css: '<link rel="stylesheet" href="/modules/support/css/frontend.css" type="text/css">'
-            },            
-            body = renderer.render_file(path.join(__dirname, 'views'), 'products', {
-                lang: i18nm,
-                data: data,
-                status_list: JSON.stringify(i18nm.__('status_list')),
-                prio_list: JSON.stringify(i18nm.__('prio_list')),
-                current_locale: req.session.current_locale
-            }, req);        
-        data.body = body;
+            };  
         
-        return app.get('renderer').render(req, undefined, data, res);
+        
+        if(req && req.params.cat && req.params.mat){
+            var q = '?category=' + req.params.cat + '&material=' + req.params.mat + '&page=1&itemsPerPage=30';
+
+            restClient.get(rootRestUrl + '/product/search' + q, function (d, response) {
+                console.log(d);
+
+                if(d && d.data){
+                    data.products = [];
+
+                    for(var i=0;i< d.data.length;i++){
+                        var obj = d.data[i];
+                        obj.imageUrl = rootRestUrl +  '/Images?filename=' + obj.productImages[0].imageFileUrl + '&w=700&h=700';
+                        data.products.push(obj);
+                    }
+
+                    var body = renderer.render_file(path.join(__dirname, 'views'), 'products', {
+                        lang: i18nm,
+                        data: data,
+                        status_list: JSON.stringify(i18nm.__('status_list')),
+                        prio_list: JSON.stringify(i18nm.__('prio_list')),
+                        current_locale: req.session.current_locale
+                    }, req);
+
+            
+                    data.body = body;
+                    
+                    return app.get('renderer').render(req, undefined, data, res);
+                }              
+            });
+        }else{
+
+        }        
     });
 
     router.get('/product-item', function(req, res, next) {        

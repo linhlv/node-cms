@@ -58,8 +58,17 @@
                     <li>
                         <a href="/about">About Us</a>
                     </li>       
-                      
-                    {{{landing_product_menu}}}
+                     <li class="dropdown dropdown-large">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Products <b class="caret"></b></a>                        
+                        <ul class="dropdown-menu dropdown-menu-large">
+                            <li class="col-sm-3" data-ng-repeat="c in main.mega_menu">
+                                <ul>
+                                    <li class="dropdown-header" data-ng-bind="c.name"></li>
+                                    <li data-ng-repeat="m in c.materials"><a data-product-path data-c="c.id" data-m="m.id" data-ng-bind="m.name"></a></li>
+                                </ul>
+                            </li>
+                        </ul>                     
+                    </li>
                     
                     <li>
                         <a href="/faq">FAQs</a>

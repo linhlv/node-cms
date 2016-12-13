@@ -1,6 +1,8 @@
 (function(){
     window.rootModule = window.rootModule || angular.module('root', []);
 
+    var rootUrl = 'http://crm.mkhandicrafts.com';
+
     window.rootModule.controller('request.ctrl', ['$scope', '$http', function($scope, $http){
         var vm = this;
         vm.data = {}, vm.submitting = false, vm.alert = {show: false, message: ''}, vm.sent = false;        
@@ -96,7 +98,7 @@
         vm.data = {}, vm.submitting = false;
 
         vm.retrieve = function(){
-             var options = { method: 'GET', url: 'http://staging.mk.labs.appiume.com/category/getmenu', data: vm.data, headers: { 'Content-Type': 'application/json' } };
+             var options = { method: 'GET', url: rootUrl + '/category/getmenu', data: vm.data, headers: { 'Content-Type': 'application/json' } };
 
                 $http(options).then(function (data, status, headers, cfg) {
                     if(!data){ //error                        

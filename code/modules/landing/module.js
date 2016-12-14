@@ -17,6 +17,14 @@ module.exports = function(app) {
     
     var rootRestUrl = 'http://crm.mkhandicrafts.com';
     //var rootRestUrl = 'http://192.168.1.6';
+
+    var renderLanding = function(req, layout, data, res){
+        restClient.get(rootRestUrl + '/category/getmenu', function (_data, response) {
+            //var data = data || {};           
+            data.menu =  _data;  
+            return app.get('renderer').render(req, layout, data, res);
+        });   
+    };
     
     router.get('/', function(req, res, next) {
         var data = {
@@ -44,7 +52,7 @@ module.exports = function(app) {
         data.carousel = carousel;
         data.body = body;
         
-        return app.get('renderer').render(req, undefined, data, res);
+        return renderLanding(req, undefined, data, res);
     });
 
     router.get('/about', function(req, res, next) {        
@@ -64,7 +72,7 @@ module.exports = function(app) {
             }, req);        
         data.body = body;
         
-        return app.get('renderer').render(req, undefined, data, res);
+        return renderLanding(req, undefined, data, res);
     });    
 
     router.get('/rest/categories', function(req, res, next) {
@@ -92,31 +100,35 @@ module.exports = function(app) {
         
         if(req && req.params.cat && req.params.mat){
             var q = '?category=' + req.params.cat + '&material=' + req.params.mat + '&page=1&itemsPerPage=30';
+             restClient.get(rootRestUrl + '/category/getcategory?id=' + req.params.cat , function (c, cresponse) {
+                  data.categoryName = c.Name;                
 
-            restClient.get(rootRestUrl + '/product/search' + q, function (d, response) {
-                if(d && d.data){
-                    data.products = [];
-
-                    for(var i=0;i< d.data.length;i++){
-                        var obj = d.data[i];
-                        obj.imageUrl = rootRestUrl +  '/Images?filename=' + obj.productImages[0].imageFileUrl + '&w=360&h=360';
-                        data.products.push(obj);
-                    }
-
-                    var body = renderer.render_file(path.join(__dirname, 'views'), 'products', {
-                        lang: i18nm,
-                        data: data,
-                        status_list: JSON.stringify(i18nm.__('status_list')),
-                        prio_list: JSON.stringify(i18nm.__('prio_list')),
-                        current_locale: req.session.current_locale
-                    }, req);
-
-            
-                    data.body = body;
+                  restClient.get(rootRestUrl + '/product/search' + q, function (d, response) {
+                        if(d && d.data){
                     
-                    return app.get('renderer').render(req, undefined, data, res);
-                }              
-            });
+                            data.products = [];
+
+                            for(var i=0;i< d.data.length;i++){
+                                var obj = d.data[i];
+                                obj.imageUrl = rootRestUrl +  '/Images?filename=' + obj.productImages[0].imageFileUrl + '&w=360&h=360';
+                                data.products.push(obj);
+                            }
+
+                            var body = renderer.render_file(path.join(__dirname, 'views'), 'products', {
+                                lang: i18nm,
+                                data: data,
+                                status_list: JSON.stringify(i18nm.__('status_list')),
+                                prio_list: JSON.stringify(i18nm.__('prio_list')),
+                                current_locale: req.session.current_locale
+                            }, req);
+
+                    
+                            data.body = body;
+                            
+                            return renderLanding(req, undefined, data, res);
+                        }              
+                    });
+             });           
         }else{
 
         }        
@@ -139,7 +151,7 @@ module.exports = function(app) {
             }, req);        
         data.body = body;
         
-        return app.get('renderer').render(req, undefined, data, res);
+        return renderLanding(req, undefined, data, res);
     });
 
     router.get('/collection', function(req, res, next) {        
@@ -159,7 +171,7 @@ module.exports = function(app) {
             }, req);        
         data.body = body;
         
-        return app.get('renderer').render(req, undefined, data, res);
+        return renderLanding(req, undefined, data, res);
     });
 
     router.get('/faq', function(req, res, next) {        
@@ -179,7 +191,7 @@ module.exports = function(app) {
             }, req);        
         data.body = body;
         
-        return app.get('renderer').render(req, undefined, data, res);
+        return renderLanding(req, undefined, data, res);
     });
 
     router.get('/contact', function(req, res, next) {        
@@ -199,7 +211,7 @@ module.exports = function(app) {
             }, req);        
         data.body = body;
         
-        return app.get('renderer').render(req, undefined, data, res);
+        return renderLanding(req, undefined, data, res);
     });
 
 
@@ -220,7 +232,7 @@ module.exports = function(app) {
             }, req);        
         data.body = body;
         
-        return app.get('renderer').render(req, undefined, data, res);
+        return renderLanding(req, undefined, data, res);
     });
     
     router.get('/request', function(req, res, next) {        
@@ -240,7 +252,7 @@ module.exports = function(app) {
             }, req);        
         data.body = body;
         
-        return app.get('renderer').render(req, undefined, data, res);
+        return renderLanding(req, undefined, data, res);
     });  
 
      router.get('/landing/confirm', function(req, res, next) {        
@@ -292,7 +304,7 @@ module.exports = function(app) {
                             current_locale: req.session.current_locale
                         }, req);   
                         
-                        return app.get('renderer').render(req, undefined, data, res);   
+                        return renderLanding(req, undefined, data, res);   
                     }
 
                     //confirming
@@ -313,7 +325,7 @@ module.exports = function(app) {
                             current_locale: req.session.current_locale
                         }, req);
                         
-                        return app.get('renderer').render(req, undefined, data, res);          
+                        return renderLanding(req, undefined, data, res);          
                     });
                 }else{
                     data.confirmed = false;     
@@ -326,7 +338,7 @@ module.exports = function(app) {
                         current_locale: req.session.current_locale
                     }, req);   
                     
-                    return app.get('renderer').render(req, undefined, data, res);
+                    return renderLanding(req, undefined, data, res);
                 }
             } else {                
                 data.error = i18nm.__("id_not_found");
@@ -339,7 +351,7 @@ module.exports = function(app) {
                     current_locale: req.session.current_locale
                 }, req); 
                 
-                return app.get('renderer').render(req, undefined, data, res);
+                return renderLanding(req, undefined, data, res);
             }
         });  
     });  

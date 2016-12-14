@@ -117,7 +117,8 @@
             console.log('c')
             return '/product/' + c.id + '/' + m.id;
         }
-
+        /*
         vm.retrieve();
+        */
     }]);
 })();

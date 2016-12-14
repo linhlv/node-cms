@@ -94,14 +94,12 @@ module.exports = function(app) {
             var q = '?category=' + req.params.cat + '&material=' + req.params.mat + '&page=1&itemsPerPage=30';
 
             restClient.get(rootRestUrl + '/product/search' + q, function (d, response) {
-                console.log(d);
-
                 if(d && d.data){
                     data.products = [];
 
                     for(var i=0;i< d.data.length;i++){
                         var obj = d.data[i];
-                        obj.imageUrl = rootRestUrl +  '/Images?filename=' + obj.productImages[0].imageFileUrl + '&w=700&h=700';
+                        obj.imageUrl = rootRestUrl +  '/Images?filename=' + obj.productImages[0].imageFileUrl + '&w=360&h=360';
                         data.products.push(obj);
                     }
 

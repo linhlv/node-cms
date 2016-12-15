@@ -124,7 +124,7 @@ module.exports = function(app) {
     });
 
 
-    router.get('/products/:cat/:mat', function(req, res, next) {        
+    router.get('/products/:cat/:mat/:page', function(req, res, next) {        
         var data = {
                 title: baseTitle + ' - Products',
                 page_title:'module_name',
@@ -133,40 +133,90 @@ module.exports = function(app) {
                 keywords: '',
                 description: '',
                 extra_css: '<link rel="stylesheet" href="/modules/support/css/frontend.css" type="text/css">'
-            };  
+            };
+
+        if (typeof req.session.auth == 'undefined' || req.session.auth === false || req.session.auth.status < 1) {
+            if(req && req.params && req.params.page && req.params.page > 1){
+                var body = renderer.render_file(path.join(__dirname, 'views'), 'products', {
+                    lang: i18nm,
+                    data: data,
+                    status_list: JSON.stringify(i18nm.__('status_list')),
+                    prio_list: JSON.stringify(i18nm.__('prio_list')),
+                    current_locale: req.session.current_locale
+                }, req);
+
+        
+                data.body = body;
+                
+                return renderLanding(req, undefined, data, res);
+            }            
+        }  
         
         
         if(req && req.params.cat && req.params.mat){
-            var q = '?category=' + req.params.cat + '&material=' + req.params.mat + '&page=1&itemsPerPage=30';
-             restClient.get(rootRestUrl + '/category/getcategory?id=' + req.params.cat , function (c, cresponse) {
-                  data.categoryName = c.Name;                
+            var page = req.params.page ? parseInt(req.params.page) : 1,
+            itemsPerPage = 10,
+            q = '?category=' + req.params.cat + '&material=' + req.params.mat + '&page=' + page + '&itemsPerPage=' + itemsPerPage;    
+            restClient.get(rootRestUrl + '/category/getcategory?id=' + req.params.cat , function (c, cresponse) {
+                data.categoryName = c.Name;                                
+                restClient.get(rootRestUrl + '/product/search' + q, function (d, response) {
+                    if(d && d.data){
+                        data.paging = {
+                            currentPage : page,
+                            totalProductsCount : d.totalCount,
+                            pageNumbers : []
+                        };
 
-                  restClient.get(rootRestUrl + '/product/search' + q, function (d, response) {
-                        if(d && d.data){
-                    
-                            data.products = [];
+                        data.paging.pages = Math.ceil(d.totalCount / itemsPerPage);
 
-                            for(var i=0;i< d.data.length;i++){
-                                var obj = d.data[i];
-                                obj.imageUrl = rootRestUrl +  '/Images?filename=' + obj.productImages[0].imageFileUrl + '&w=360&h=360';
-                                data.products.push(obj);
+                        if(data.paging.pages > 1){
+                            data.paging.show = true;
+
+                            for(var i=0;i < data.paging.pages;i++){
+                                data.paging.pageNumbers.push({
+                                    p: i+1,
+                                    current: (i+1) == page,
+                                    link: '/products/' + req.params.cat + '/' + req.params.mat + '/' + (i+1)
+                                });
                             }
+                        }                       
 
-                            var body = renderer.render_file(path.join(__dirname, 'views'), 'products', {
-                                lang: i18nm,
-                                data: data,
-                                status_list: JSON.stringify(i18nm.__('status_list')),
-                                prio_list: JSON.stringify(i18nm.__('prio_list')),
-                                current_locale: req.session.current_locale
-                            }, req);
+                        data.products = [];
 
-                    
-                            data.body = body;
-                            
-                            return renderLanding(req, undefined, data, res);
-                        }              
-                    });
-             });           
+                        for(var i=0;i< d.data.length;i++){
+                            var obj = d.data[i];
+                            obj.imageUrl = rootRestUrl +  '/Images?filename=' + obj.productImages[0].imageFileUrl + '&w=360&h=360';
+                            data.products.push(obj);
+                        }
+
+                        var body = renderer.render_file(path.join(__dirname, 'views'), 'products', {
+                            lang: i18nm,
+                            data: data,
+                            status_list: JSON.stringify(i18nm.__('status_list')),
+                            prio_list: JSON.stringify(i18nm.__('prio_list')),
+                            current_locale: req.session.current_locale
+                        }, req);
+
+                
+                        data.body = body;
+                        
+                        return renderLanding(req, undefined, data, res);
+                    }else{
+                        var body = renderer.render_file(path.join(__dirname, 'views'), 'products', {
+                            lang: i18nm,
+                            data: data,
+                            status_list: JSON.stringify(i18nm.__('status_list')),
+                            prio_list: JSON.stringify(i18nm.__('prio_list')),
+                            current_locale: req.session.current_locale
+                        }, req);
+
+                
+                        data.body = body;
+                        
+                        return renderLanding(req, undefined, data, res);
+                    }             
+                });
+            });           
         }else{
 
         }        
@@ -287,9 +337,10 @@ module.exports = function(app) {
                 status_list: JSON.stringify(i18nm.__('status_list')),
                 prio_list: JSON.stringify(i18nm.__('prio_list')),
                 current_locale: req.session.current_locale
-            }, req);        
+            }, req); 
+
         data.body = body;
-        
+
         return renderLanding(req, undefined, data, res);
     });  
 

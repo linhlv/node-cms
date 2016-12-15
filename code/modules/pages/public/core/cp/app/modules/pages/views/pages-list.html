@@ -1,0 +1,126 @@
+<div class="card">
+     <div class="card-body card-padding">
+        <p>Please choose a language and click <code>LOAD MENU</code> button to load data.</p>
+        <div class="row">
+            <div class="col-sm-3 m-b-15">
+                <select chosen data-placeholder="Select a language..." class="w-100">
+                    <option value="English">English</option>
+                    <option value="Rusian">Rusian</option>
+                </select>
+            </div>
+            <div class="col-sm-3 m-b-15">
+                <a data-ui-sref="breadcrumb-demo" class="btn btn-primary">Load menu</a>
+            </div>            
+        </div>
+    </div>
+</div>
+
+<div class="card">
+     <div class="card-header ch-alt">
+        <h2>Data <small>You can navigate to parent by clicking on breadcrumb...</small></h2>
+        <ul class="actions">
+            <li>
+                <a data-ui-sref="pages.add.1">
+                    <i class="zmdi zmdi-plus"></i>
+                </a>
+            </li>   
+        </ul>
+    </div>
+    <div class="card-body">
+        <ol class="breadcrumb">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Library</a></li>
+            <li class="active">Data</li>
+        </ol>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Text</th>
+                        <th>Link</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Alexandra</td>
+                        <td>Christopher</td>
+                        <td>
+                            <button class="btn btn-default btn-sm"><i class="zmdi zmdi-edit"></i></button>
+                            <button class="btn btn-default btn-sm"><i class="zmdi zmdi-delete"></i></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Madeleine</td>
+                        <td>Hollaway</td>
+                        <td>
+                            <button class="btn btn-default btn-sm"><i class="zmdi zmdi-edit"></i></button>
+                            <button class="btn btn-default btn-sm"><i class="zmdi zmdi-delete"></i></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Sebastian</td>
+                        <td>Johnston</td>
+                        <td>
+                            <button class="btn btn-default btn-sm"><i class="zmdi zmdi-edit"></i></button>
+                            <button class="btn btn-default btn-sm"><i class="zmdi zmdi-delete"></i></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Mitchell</td>
+                        <td>Christin</td>
+                        <td>
+                            <button class="btn btn-default btn-sm"><i class="zmdi zmdi-edit"></i></button>
+                            <button class="btn btn-default btn-sm"><i class="zmdi zmdi-delete"></i></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Elizabeth</td>
+                        <td>Belkitt</td>
+                        <td>
+                            <button class="btn btn-default btn-sm"><i class="zmdi zmdi-edit"></i></button>
+                            <button class="btn btn-default btn-sm"><i class="zmdi zmdi-delete"></i></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>Benjamin</td>
+                        <td>Parnell</td>
+                        <td>
+                            <button class="btn btn-default btn-sm"><i class="zmdi zmdi-edit"></i></button>
+                            <button class="btn btn-default btn-sm"><i class="zmdi zmdi-delete"></i></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>Katherine</td>
+                        <td>Buckland</td>
+                        <td>
+                            <button class="btn btn-default btn-sm"><i class="zmdi zmdi-edit"></i></button>
+                            <button class="btn btn-default btn-sm"><i class="zmdi zmdi-delete"></i></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>Nicholas</td>
+                        <td>Walmart</td>
+                        <td>
+                            <button class="btn btn-default btn-sm "><i class="zmdi zmdi-edit"></i></button>
+                            <button class="btn btn-default btn-sm"><i class="zmdi zmdi-delete"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>    
+    <div class="lv-pagination">
+        <uib-pagination template-url="template/pagination/pagination.html" total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"></uib-pagination>
+    </div>
+</div>
+

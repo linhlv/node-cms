@@ -117,25 +117,27 @@ module.exports = function(app) {
         };       
 
         app.get('mongodb').collection('types').find(query).count(function(err, items_count) {
-             if (!err && items_count > 0) {
+             if (!err && items_count > 0) {                 
                  if(items_count == 1){   
                     types_data._id = new ObjectId(types_data._id);                 
                     app.get('mongodb').collection('types').update({
                         _id: new ObjectId(types_data._id)
-                    }, types_data, {w:1}, function(err, r) {
-                        console.log(err,r);
+                    }, types_data, {w:1}, function(err, r) {                        
                         if(!err){
                             rep.status = 1;
                             return res.send(JSON.stringify(rep));
                         }                        
                     });
                  }                                               
-             }else{                
+             }else{ 
                 types_data._id = new ObjectId()                                
                 app.get('mongodb').collection('types').insert(types_data, function(err){
                     if (err) {
                         rep.status = 0;
                         rep.error = i18nm.__("invalid_query");                        
+                        return res.send(JSON.stringify(rep));
+                    }else{
+                        rep.status = 1;                                                
                         return res.send(JSON.stringify(rep));
                     }
                 });                

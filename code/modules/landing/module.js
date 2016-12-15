@@ -179,6 +179,9 @@ module.exports = function(app) {
                                     link: '/products/' + req.params.cat + '/' + req.params.mat + '/' + (i+1)
                                 });
                             }
+
+                            data.paging.next = (page < data.paging.pages) ? (page + 1) : '#';
+                            data.paging.previous = (page > 1) ? (page - 1) : '#';
                         }                       
 
                         data.products = [];

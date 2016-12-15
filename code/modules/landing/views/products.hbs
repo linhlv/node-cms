@@ -19,11 +19,11 @@
 <div class="row">
      {{#each data.products}}
         <div class="col-md-4 img-portfolio">
-            <a href="/product-item">
+            <a href="/product-item/{{this.id}}">
                 <img class="img-responsive img-hover" src="{{this.imageUrl}}" alt="">                
             </a>
             <h3>
-                <a href="/product-item">{{this.code}}</a>
+                <a href="/product-item/{{this.id}}">{{this.code}}</a>
             </h3>
             <p>{{this.size}} - {{this.packaging}}</p>
         </div>

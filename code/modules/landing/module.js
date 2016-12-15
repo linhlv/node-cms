@@ -86,6 +86,44 @@ module.exports = function(app) {
         });        
     });
 
+
+    router.get('/product-item/:id', function(req, res, next) {        
+        var data = {
+            title: baseTitle + ' - Products',
+            page_title:'module_name',
+            baseUrl: rootRestUrl,
+            auth: req.session ? req.session.auth : null,
+            keywords: '',
+            description: '',
+            extra_css: '<link rel="stylesheet" href="/modules/support/css/frontend.css" type="text/css">'
+        };          
+        
+        if(req && req.params.id){            
+             restClient.get(rootRestUrl + '/product/getproduct/' +  req.params.id , function (d, cresponse) {
+                    var data = {
+                        title: baseTitle + ' - Product Details',
+                        page_title:'module_name',
+                        keywords: '',              
+                        description: '',
+                        details: d,
+                        extra_css: '<link rel="stylesheet" href="/modules/support/css/frontend.css" type="text/css">'
+                    },            
+                    body = renderer.render_file(path.join(__dirname, 'views'), 'product-item', {
+                        lang: i18nm,
+                        data: data,
+                        status_list: JSON.stringify(i18nm.__('status_list')),
+                        prio_list: JSON.stringify(i18nm.__('prio_list')),
+                        current_locale: req.session.current_locale
+                    }, req);  
+
+                    data.body = body;
+                    
+                    return renderLanding(req, undefined, data, res);
+             });           
+        }else{ }        
+    });
+
+
     router.get('/products/:cat/:mat', function(req, res, next) {        
         var data = {
                 title: baseTitle + ' - Products',

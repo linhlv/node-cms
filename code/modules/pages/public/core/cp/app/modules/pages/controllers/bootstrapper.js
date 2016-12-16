@@ -8,5 +8,5 @@ define(['modules/pages/controllers/pages.ctrl',
             .controller('pages.ctrl', ['$scope', pages])
             .controller('pages.list.ctrl', ['$scope', pages_list_ctrl])
             .controller('page.add.1.ctrl', ['$scope', '$state', '$sessionStorage', 'pages.svc', page_add_1_ctrl])
-            .controller('page.add.2.ctrl', ['$scope', '$state', '$sessionStorage', 'pages.svc', page_add_2_ctrl]);
+            .controller('page.add.2.ctrl', ['$scope', '$state', '$sessionStorage', '$stateParams', 'pages.svc', page_add_2_ctrl]);
 });

@@ -15,7 +15,17 @@
         <li class="active">Data</li>
     </ol>  
     <div>
-        <small>Page type is <code>structure</code> with following information.</small>
+        <small>Page type is <code data-ng-bind="vm.pageType.displayName"></code> with following information.</small>
     </div>    
     <div>&nbsp;</div>
+    <div>
+        <div class="row" data-ng-repeat="f in vm.pageType.fields">
+            <div class="col-sm-4 m-b-20">                
+               <editing-field data-field="f"></editing-field>                
+            <div>       
+        </div>
+    </div>
+    <div>
+
+    </div>
 </div>    

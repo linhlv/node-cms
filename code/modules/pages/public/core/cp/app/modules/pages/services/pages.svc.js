@@ -21,7 +21,7 @@ define([], function () {
         /// </summary>
         this.getTypesAll = function () {
             return $http.get('/cp/types/data/load').then(httpHandler.handleSuccess, httpHandler.handleError);
-        };
+        };       
 
         /// <summary>
         /// save type

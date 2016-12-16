@@ -1,4 +1,5 @@
 define([   
-    'modules/pages/services/bootstraper',
-    'modules/pages/controllers/bootstraper'
+    'modules/pages/services/bootstrapper',
+    'modules/pages/controllers/bootstrapper',
+    'modules/pages/directives/bootstrapper'
 ]);

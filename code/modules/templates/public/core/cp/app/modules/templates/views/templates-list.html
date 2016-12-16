@@ -5,7 +5,7 @@
             <i class="lvh-search-close" data-ng-click="mactrl.listviewSearchStat = false">&times;</i>
         </div>
 
-        <h2>Page types <small>Each page is of a specific type – a page type. Each page consists of: fields, layout.</small></h2>
+        <h2>Page templates <small>Each page is presented by a page template. Each page consists of: layout and data formatting.</small></h2>
         <ul class="actions">
             <li>
                 <a href="" data-ng-click="mactrl.listviewSearchStat = true">
@@ -13,7 +13,7 @@
                 </a>
             </li>
             <li>
-                <a data-ui-sref="types.add.1">
+                <a data-ui-sref="templates.add">
                     <i class="zmdi zmdi-plus"></i>
                 </a>
             </li>   
@@ -46,7 +46,6 @@
                         <th>Actions</th>
                         <th>Display name</th>
                         <th>Code name</th>
-                        <th>Data type</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -63,8 +62,7 @@
                             </div>
                         </td>
                         <td data-ng-bind="item.displayName"></td>
-                        <td data-ng-bind="item.types ? item.namespace + '.' + item.name +' (' + item.typeName + ')' : item.namespace + '.' + item.name"></td>
-                        <td data-ng-bind="item.types ? 'Page':'Container'"></td>
+                        <td data-ng-bind="item.types ? item.namespace + '.' + item.name +' (' + item.typeName + ')' : item.namespace + '.' + item.name"></td>                        
                     </tr>
                 </tbody>
             </table>

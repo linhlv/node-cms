@@ -1,0 +1,69 @@
+<div class="card">
+     <div class="card-header ch-alt">
+        <h2>New page type <code data-ng-bind="vm.data.types ? '(2/4)':'(2/3)'"></code>
+            <small>
+                Please choose which kind of page type you wish to create. If you select a page type with custom fields, you also need to supply names for the new database table and its primary key.
+            </small>
+        </h2>        
+        <ul class="actions">
+            <li>
+                <a href="" data-ng-click="vm.back()">
+                    <i class="zmdi zmdi-arrow-back"></i>
+                </a>
+            </li>
+            <li>
+                <a href="" data-ng-click="vm.next()">
+                    <i class="zmdi zmdi-arrow-forward"></i>
+                </a>
+            </li>
+        </ul>  
+    </div>
+    <div class="card-body card-padding">
+        <form role="form">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group fg-line">
+                        <label for="typeDisplayName">Page type has custom fields</label>
+                    </div>
+                </div>
+            </div>          
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group fg-line">
+                        <div class="toggle-switch">
+                            <input id="tw-switch" type="checkbox" hidden="hidden" data-ng-model="vm.data.types">
+                            <label for="tw-switch" class="ts-helper"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div data-ng-hide="vm.data.types">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <blockquote class="m-b-25">
+                            <p>The page type is only a container without custom fields.</p>
+                        </blockquote>
+                    </div>                
+                </div>
+            </div>
+            <div data-ng-show="vm.data.types">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <blockquote class="m-b-25">
+                            <p>The page type has custom fields.</p>
+                        </blockquote>
+                    </div>                
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group fg-line">
+                            <label for="typeName">Type name</label>
+                            <input type="text" class="form-control input-sm" id="typeName" data-ng-model="vm.data.typeName" placeholder="Page type name">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>     
+    </div>    
+</div>
+

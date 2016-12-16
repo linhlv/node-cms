@@ -1,0 +1,68 @@
+{
+  "name": "templates",
+  "enabled": true,
+  "routing_prefix":"templates",
+  "templateUrl":"templates.html",
+  "routes":[    
+    {
+      "name":"list",
+      "url":"/list",
+      "templateUrl":"templates-list.html",
+      "controller":"templates-list.ctrl as vm"
+    },
+    {
+      "name":"add",
+      "url":"/add",
+      "templateUrl":"templates-add.html"
+    },
+    {
+      "name":"add.1",
+      "url":"/1",
+      "templateUrl":"templates-add.1.html",
+      "controller":"templates-add.1.ctrl as vm"
+    },
+    {
+      "name":"add.2",
+      "url":"/2",
+      "templateUrl":"templates-add.2.html",
+      "controller":"templates-add.2.ctrl as vm"
+    },
+    {
+      "name":"add.3",
+      "url":"/3",
+      "templateUrl":"templates-add.3.html",
+      "controller":"templates-add.3.ctrl as vm"
+    },
+    {
+      "name":"add.4",
+      "url":"/4",
+      "templateUrl":"templates-add.4.html",
+      "controller":"templates-add.4.ctrl as vm"
+    },
+    {
+      "name":"edit",
+      "url":"/e/:id",
+      "templateUrl":"templates-edit.html",
+      "controller":"templates-edit.ctrl as vm"
+    },
+    {
+      "name":"edit.general",
+      "url":"/general",
+      "templateUrl":"templates-edit-general.html",
+      "controller":"templates-edit-general.ctrl as vm"
+    },
+    {
+      "name":"edit.fields",
+      "url":"/fields",
+      "templateUrl":"templates-edit-fields.html",
+      "controller":"templates-edit-fields.ctrl as vm"
+    }
+  ],
+  "menu":[
+    {
+      "title":"Templates",
+      "state":"templates.list",
+      "iconClass": "zmdi zmdi-file zmdi-hc-fw"
+    } 
+  ]
+}

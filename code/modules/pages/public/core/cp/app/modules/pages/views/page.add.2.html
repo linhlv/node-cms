@@ -18,14 +18,14 @@
         <small>Page type is <code data-ng-bind="vm.pageType.displayName"></code> with following information.</small>
     </div>    
     <div>&nbsp;</div>
-    <div>
+    <form role="form" data-ng-submit="vm.save()">
         <div class="row" data-ng-repeat="f in vm.pageType.fields">
             <div class="col-sm-4 m-b-20">                
-               <editing-field data-field="f"></editing-field>                
-            <div>       
+                <editing-field data-field="f"></editing-field>                
+            </div>       
         </div>
-    </div>
-    <div>
-
-    </div>
+        <div>
+            <button type="submit" class="btn bgm-green"><i class="zmdi zmdi-check-circle"></i> Save</button>
+        </div>
+    </form>    
 </div>    

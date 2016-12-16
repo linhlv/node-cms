@@ -12,6 +12,10 @@ define(function () {
                 }            
             });       
         }
+
+        vm.save = function(){
+            console.log(vm.pageType.fields);
+        }
     }
 
     return c;

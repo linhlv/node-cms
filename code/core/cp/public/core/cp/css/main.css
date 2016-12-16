@@ -61,3 +61,7 @@
     margin-left: auto;
     margin-right: auto;
 }
+
+.dropdown-basic-demo ul.dropdown-menu li > a {
+    cursor: pointer;
+}

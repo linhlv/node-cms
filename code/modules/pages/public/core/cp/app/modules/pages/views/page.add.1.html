@@ -1,21 +1,20 @@
 <div class="card-header ch-alt">
-    <h2>New page <small>Please select new page type...</small></h2>
-    <ul class="actions">        
-        <li>
-            <a href="" data-ng-click="vm.next()">
-                <i class="zmdi zmdi-arrow-forward"></i>
-            </a>
-        </li>
-    </ul>    
+    <h2>New page <small>Please select new page type...</small></h2>   
 </div>
-<div class="card-body card-padding">     
+
+<div class="card-body card-padding">
+    <ol class="breadcrumb">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Library</a></li>
+        <li class="active">Data</li>
+    </ol>     
     <div>
         <small>Page type is predefined page <code>structure</code> for storing <code>page</code> information.</small>
-    </div>
+    </div>    
     <div>&nbsp;</div>
     <div class="dropdown-basic-demo clearfix">
         <ul class="dropdown-menu dm-icon" role="menu">
-            <li data-ng-repeat="item in vm.items"><a href=""><i class="zmdi zmdi-file zmdi-hc-fw"></i> {{item.name}}</a></li>
+            <li data-ng-repeat="item in vm.items"><a data-ng-click="vm.next(item)"><i class="zmdi zmdi-file zmdi-hc-fw"></i> {{item.name}}</a></li>
         </ul>
     </div>
 </div>    

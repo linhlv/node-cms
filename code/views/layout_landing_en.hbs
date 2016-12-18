@@ -58,23 +58,16 @@
                     <li>
                         <a href="/about">About Us</a>
                     </li>       
-                    <li class="dropdown dropdown-large">
-                     
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Products <b class="caret"></b></a>                        
-                        <ul class="dropdown-menu dropdown-menu-large">                               
-                            {{#each menu as |v k|}}
-                                <li class="col-sm-3">
-                                    <ul>
-                                        <li class="dropdown-header">{{this.name}}</li>
-                                        {{#each this.materials as |cv ck|}}
-                                            <li><a href="/products/{{v.id}}/{{cv.id}}/1">{{cv.name}}</a></li>
-                                        {{/each}}                                        
-                                    </ul>
-                                </li>
-                            {{/each}}                           
-                        </ul>                     
-                    </li>
-                    
+
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Products
+                        <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                             {{#each menu}}
+                                <li><a href="/products/{{this.id}}/1">{{this.name}}</a></li>
+                             {{/each}}
+                        </ul>
+                    </li>                    
                     <li>
                         <a href="/faq">FAQs</a>
                     </li>                    

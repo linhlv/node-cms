@@ -19,7 +19,8 @@ module.exports = function(app) {
     //var rootRestUrl = 'http://192.168.1.6';
 
     var renderLanding = function(req, layout, data, res){
-        restClient.get(rootRestUrl + '/category/getmenu', function (_data, response) {
+        restClient.get(rootRestUrl + '/material/getmenu', function (_data, response) {
+            console.log(_data);
             //var data = data || {};           
             data.menu =  _data;  
             return app.get('renderer').render(req, layout, data, res);
@@ -79,7 +80,7 @@ module.exports = function(app) {
         var rep = {};
 
         // direct way
-        restClient.get(rootRestUrl + '/category/getmenu', function (data, response) {
+        restClient.get(rootRestUrl + '/materials/getmenu', function (data, response) {
             rep.status = 1;
             rep.data = data;
             return res.send(JSON.stringify(rep));
@@ -124,7 +125,7 @@ module.exports = function(app) {
     });
 
 
-    router.get('/products/:cat/:mat/:page', function(req, res, next) {        
+    router.get('/products/:mat/:page', function(req, res, next) {        
         var data = {
                 title: baseTitle + ' - Products',
                 page_title:'module_name',
@@ -153,13 +154,13 @@ module.exports = function(app) {
         }  
         
         
-        if(req && req.params.cat && req.params.mat){
+        if(req && req.params.mat){
             var page = req.params.page ? parseInt(req.params.page) : 1,
             itemsPerPage = 10,
-            q = '?category=' + req.params.cat + '&material=' + req.params.mat + '&page=' + page + '&itemsPerPage=' + itemsPerPage;    
-            restClient.get(rootRestUrl + '/category/getcategory?id=' + req.params.cat , function (c, cresponse) {
-                data.categoryName = c.Name;                                
-                restClient.get(rootRestUrl + '/product/search' + q, function (d, response) {
+            q = '?material=' + req.params.mat + '&page=' + page + '&itemsPerPage=' + itemsPerPage;    
+            restClient.get(rootRestUrl + '/material/get?id=' + req.params.mat , function (m, mresponse) {
+                data.materialName = m.Name;                                
+                restClient.get(rootRestUrl + '/product/search' + q, function (d, response) {                    
                     if(d && d.data){
                         data.paging = {
                             currentPage : page,
@@ -176,7 +177,7 @@ module.exports = function(app) {
                                 data.paging.pageNumbers.push({
                                     p: i+1,
                                     current: (i+1) == page,
-                                    link: '/products/' + req.params.cat + '/' + req.params.mat + '/' + (i+1)
+                                    link: '/products/' + req.params.mat + '/' + (i+1)
                                 });
                             }
 

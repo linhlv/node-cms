@@ -20,8 +20,8 @@ module.exports = function(app) {
 
     var renderLanding = function(req, layout, data, res){
         restClient.get(rootRestUrl + '/material/getmenu', function (_data, response) {
-            data.menu =  _data;  
-            return app.get('renderer').render(req, layout, data, res);
+             data.menu =  _data;  
+             return app.get('renderer').render(req, layout, data, res);          
         });   
     };
     
@@ -156,68 +156,102 @@ module.exports = function(app) {
             var page = req.params.page ? parseInt(req.params.page) : 1,
             itemsPerPage = 10,
             q = '?material=' + req.params.mat + '&page=' + page + '&itemsPerPage=' + itemsPerPage;    
+
+            data.selectedCategory = 0;
+
+            if(req.query){
+                if(req.query.category){
+                    q+= '&category=' + req.query.category;
+                    data.selectedCategory = req.query.category;
+                }
+
+                if(req.query.keyword){
+                    q+= '&keyword=' + req.query.keyword;
+                }
+            }             
+
             restClient.get(rootRestUrl + '/material/get?id=' + req.params.mat , function (m, mresponse) {
-                data.materialName = m.Name;                                
-                restClient.get(rootRestUrl + '/product/search' + q, function (d, response) {                    
-                    if(d && d.data){
-                        data.paging = {
-                            currentPage : page,
-                            totalProductsCount : d.totalCount,
-                            pageNumbers : []
-                        };
+                data.materialId = req.params.mat;
+                data.materialName = m.Name;        
 
-                        data.paging.pages = Math.ceil(d.totalCount / itemsPerPage);
+                restClient.get(rootRestUrl + '/category/GetByMaterial?id=' + req.params.mat, function (_cdata, cresponse) {
+                    if(_cdata) {                        
+                        data.categories = _cdata;
+                        data.categories.unshift({
+                            id: 0,
+                            name: '-- All category --'
+                        });
 
-                        if(data.paging.pages > 1){
-                            data.paging.show = true;
+                        if(req.query && req.query.category){
+                            for(var i=0; i< data.categories.length;i++){
+                                if(data.categories[i].id==parseInt(req.query.category)){
+                                    data.categories[i].selected = true;
+                                }
+                            }
+                        }                        
+                    }
+                    
+                    restClient.get(rootRestUrl + '/product/search' + q, function (d, response) {                    
+                        if(d && d.data){
+                            data.paging = {
+                                currentPage : page,
+                                totalProductsCount : d.totalCount,
+                                pageNumbers : []
+                            };
 
-                            for(var i=0;i < data.paging.pages;i++){
-                                data.paging.pageNumbers.push({
-                                    p: i+1,
-                                    current: (i+1) == page,
-                                    link: '/products/' + req.params.mat + '/' + (i+1)
-                                });
+                            data.paging.pages = Math.ceil(d.totalCount / itemsPerPage);
+
+                            if(data.paging.pages > 1){
+                                data.paging.show = true;
+
+                                for(var i=0;i < data.paging.pages;i++){
+                                    data.paging.pageNumbers.push({
+                                        p: i+1,
+                                        current: (i+1) == page,
+                                        link: '/products/' + req.params.mat + '/' + (i+1)
+                                    });
+                                }
+
+                                data.paging.next = (page < data.paging.pages) ? (page + 1) : '#';
+                                data.paging.previous = (page > 1) ? (page - 1) : '#';
+                            }                       
+
+                            data.products = [];
+
+                            for(var i=0;i< d.data.length;i++){
+                                var obj = d.data[i];
+                                obj.imageUrl = rootRestUrl +  '/Images?filename=' + obj.productImages[0].imageFileUrl + '&w=360&h=360';
+                                data.products.push(obj);
                             }
 
-                            data.paging.next = (page < data.paging.pages) ? (page + 1) : '#';
-                            data.paging.previous = (page > 1) ? (page - 1) : '#';
-                        }                       
+                            var body = renderer.render_file(path.join(__dirname, 'views'), 'products', {
+                                lang: i18nm,
+                                data: data,
+                                status_list: JSON.stringify(i18nm.__('status_list')),
+                                prio_list: JSON.stringify(i18nm.__('prio_list')),
+                                current_locale: req.session.current_locale
+                            }, req);
 
-                        data.products = [];
+                    
+                            data.body = body;
+                            
+                            return renderLanding(req, undefined, data, res);
+                        }else{
+                            var body = renderer.render_file(path.join(__dirname, 'views'), 'products', {
+                                lang: i18nm,
+                                data: data,
+                                status_list: JSON.stringify(i18nm.__('status_list')),
+                                prio_list: JSON.stringify(i18nm.__('prio_list')),
+                                current_locale: req.session.current_locale
+                            }, req);
 
-                        for(var i=0;i< d.data.length;i++){
-                            var obj = d.data[i];
-                            obj.imageUrl = rootRestUrl +  '/Images?filename=' + obj.productImages[0].imageFileUrl + '&w=360&h=360';
-                            data.products.push(obj);
-                        }
-
-                        var body = renderer.render_file(path.join(__dirname, 'views'), 'products', {
-                            lang: i18nm,
-                            data: data,
-                            status_list: JSON.stringify(i18nm.__('status_list')),
-                            prio_list: JSON.stringify(i18nm.__('prio_list')),
-                            current_locale: req.session.current_locale
-                        }, req);
-
-                
-                        data.body = body;
-                        
-                        return renderLanding(req, undefined, data, res);
-                    }else{
-                        var body = renderer.render_file(path.join(__dirname, 'views'), 'products', {
-                            lang: i18nm,
-                            data: data,
-                            status_list: JSON.stringify(i18nm.__('status_list')),
-                            prio_list: JSON.stringify(i18nm.__('prio_list')),
-                            current_locale: req.session.current_locale
-                        }, req);
-
-                
-                        data.body = body;
-                        
-                        return renderLanding(req, undefined, data, res);
-                    }             
-                });
+                    
+                            data.body = body;
+                            
+                            return renderLanding(req, undefined, data, res);
+                        }             
+                    });
+                });                     
             });           
         }else{
 

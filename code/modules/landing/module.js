@@ -20,8 +20,6 @@ module.exports = function(app) {
 
     var renderLanding = function(req, layout, data, res){
         restClient.get(rootRestUrl + '/material/getmenu', function (_data, response) {
-            console.log(_data);
-            //var data = data || {};           
             data.menu =  _data;  
             return app.get('renderer').render(req, layout, data, res);
         });   

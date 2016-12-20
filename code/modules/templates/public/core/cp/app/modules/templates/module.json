@@ -1,0 +1,33 @@
+{
+  "name": "templates",
+  "enabled": true,
+  "routing_prefix":"templates",
+  "templateUrl":"templates.html",
+  "routes":[    
+    {
+      "name":"list",
+      "url":"/list",
+      "templateUrl":"templates-list.html",
+      "controller":"templates-list.ctrl as vm"
+    },
+    {
+      "name":"add",
+      "url":"/add",
+      "templateUrl":"templates-edit.html",
+      "controller":"templates-edit.ctrl as vm"
+    },
+    {
+      "name":"edit",
+      "url":"/e/:id",
+      "templateUrl":"templates-edit.html",
+      "controller":"templates-edit.ctrl as vm"
+    }
+  ],
+  "menu":[
+    {
+      "title":"Templates",
+      "state":"templates.list",
+      "iconClass": "zmdi zmdi-file zmdi-hc-fw"
+    } 
+  ]
+}

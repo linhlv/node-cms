@@ -12,12 +12,31 @@ module.exports = function(app) {
         async = require('async');
         
     // false to hide on menu
-    router.spa = false;
+    router.spa = true;
 
     router.get_module_name = function(req) {
         i18nm.setLocale(req.session.current_locale);
         return i18nm.__("module_name");
     };
+
+    router.get('/data/load',function(req, res){         
+        var query_string = req.query; 
+        var sort = {};
+        var rep = {};
+        var find_query = {
+           
+        };       
+
+        app.get('mongodb').collection('types').find(find_query)        
+            .sort(sort).toArray(function(err, items) {
+                if(items && items.length && items.length){
+                    // Return results
+                    rep.status = 1;
+                    rep.data = items;                    
+                    return res.send(JSON.stringify(rep));
+                }
+            });   
+    });
 
     return router;
 };

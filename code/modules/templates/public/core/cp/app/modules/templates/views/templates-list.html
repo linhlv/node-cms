@@ -1,0 +1,77 @@
+<div class="card">
+     <div class="card-header ch-alt">
+        <div class="lvh-search" data-ng-if="mactrl.listviewSearchStat" data-ng-click="mactrl.listviewSearchStat">
+            <input type="text" placeholder="Start typing..." class="lvhs-input">
+            <i class="lvh-search-close" data-ng-click="mactrl.listviewSearchStat = false">&times;</i>
+        </div>
+
+        <h2>Page templates <small>Each page is presented by a page template. Each page consists of: layout and data formatting.</small></h2>
+        <ul class="actions">
+            <li>
+                <a href="" data-ng-click="mactrl.listviewSearchStat = true">
+                    <i class="zmdi zmdi-search"></i>
+                </a>
+            </li>
+            <li>
+                <a data-ui-sref="templates.add">
+                    <i class="zmdi zmdi-plus"></i>
+                </a>
+            </li>   
+            <li class="dropdown" uib-dropdown>
+                <a href="" uib-dropdown-toggle aria-expanded="true">
+                    <i class="zmdi zmdi-sort"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right">
+                    <li>
+                        <a href="">Last Modified</a>
+                    </li>
+                    <li>
+                        <a href="">Last Edited</a>
+                    </li>
+                    <li>
+                        <a href="">Name</a>
+                    </li>
+                    <li>
+                        <a href="">Date</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="card-body">     
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Actions</th>
+                        <th>Display name</th>
+                        <th>Code name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                     <tr data-ng-repeat="item in vm.items">
+                        <td>  
+                            <button class="btn btn-default btn-sm" data-ng-click="vm.edit(item)"><i class="zmdi zmdi-edit"></i></button>
+                            <button class="btn btn-default btn-sm"><i class="zmdi zmdi-delete"></i></button>
+                            <div class="btn-group" uib-dropdown>
+                                <button type="button" class="btn btn-default btn-sm dropdown-toggle" uib-dropdown-toggle><i class="zmdi zmdi-more-vert"></i></button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#">Dropdown link</a></li>
+                                    <li><a href="#">Dropdown link</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                        <td data-ng-bind="item.displayName"></td>
+                        <td data-ng-bind="item.types ? item.namespace + '.' + item.name +' (' + item.typeName + ')' : item.namespace + '.' + item.name"></td>                        
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>    
+    <!--
+    <div class="lv-pagination">
+        <uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"></uib-pagination>
+    </div>
+    -->
+</div>
+

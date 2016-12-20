@@ -1,0 +1,31 @@
+<div class="card-header ch-alt">
+    <h2>New page <small>Please enter following information...</small></h2>
+    <ul class="actions">        
+        <li>
+            <a href="" data-ng-click="vm.next()">
+                <i class="zmdi zmdi-arrow-forward"></i>
+            </a>
+        </li>
+    </ul>    
+</div>
+<div class="card-body card-padding">   
+    <ol class="breadcrumb">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Library</a></li>
+        <li class="active">Data</li>
+    </ol>  
+    <div>
+        <small>Page type is <code data-ng-bind="vm.pageType.displayName"></code> with following information.</small>
+    </div>    
+    <div>&nbsp;</div>
+    <form role="form" data-ng-submit="vm.save()">
+        <div class="row" data-ng-repeat="f in vm.pageType.fields">
+            <div class="col-sm-4 m-b-20">                
+                <editing-field data-field="f"></editing-field>                
+            </div>       
+        </div>
+        <div>
+            <button type="submit" class="btn bgm-green"><i class="zmdi zmdi-check-circle"></i> Save</button>
+        </div>
+    </form>    
+</div>    

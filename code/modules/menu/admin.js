@@ -12,7 +12,7 @@ module.exports = function(app) {
         async = require('async');
     
     // false to hide on menu
-    router.spa = false;
+    router.spa = true;
 
     router.get_module_name = function(req) {
         i18nm.setLocale(req.session.current_locale);

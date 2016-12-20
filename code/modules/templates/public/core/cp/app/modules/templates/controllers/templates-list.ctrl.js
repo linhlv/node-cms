@@ -2,12 +2,12 @@
 // monitor common task change
 /// </summary>
 define(function () {
-    function c($scope, $state, $sessionStorage, typesSvc){
+    function c($scope, $state, $sessionStorage, templatesSvc){
         var vm = this;
 
-        vm.edit = function(item){$state.go('types.edit.general', {id: item._id});}
+        vm.edit = function(item){$state.go('templates.edit.general', {id: item._id});}
         
-        typesSvc.getAll().then(function(res){
+        templatesSvc.getAll().then(function(res){
             if(res && res.items){
                 vm.items = res.items;                    
             }            

@@ -370,8 +370,7 @@ app.use(function(err, req, res, next) {
     var site_title = 'Node CMS';
     if (app.get('settings') && app.get('settings').site_title) site_title = app.get('settings').site_title;
     var error_template = 'error';
-    if (fs.existsSync(path.join(__dirname, 'views', 'custom_error.html'))) error_template = 'custom_error';    
-    console.log(error_template);
+    if (fs.existsSync(path.join(__dirname, 'views', 'custom_error.html'))) error_template = 'custom_error';
 
     res.render(error_template, {
         assets : '/core/cp',

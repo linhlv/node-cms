@@ -24,25 +24,8 @@ define(function () {
         editor.getSession().setMode("ace/mode/javascript"); 
         */
 
-        vm.aceLoaded = function(_editor){            
-            console.log('ace loaded');
-            // Editor part
-            var _session = _editor.getSession();
-            var _renderer = _editor.renderer;
-
-            // Options
-            _editor.setReadOnly(true);
-            _session.setUndoManager(new ace.UndoManager());
-            _renderer.setShowGutter(false);
-
-            // Events
-            _editor.on("changeSession", function(){ 
-
-            });
-
-            _session.on("change", function(){
-                
-            });
+        vm.aceLoaded = function(){            
+            console.log('ace loaded');           
         };
 
         vm.aceChanged = function(){
@@ -54,12 +37,12 @@ define(function () {
         };
 
         vm.save = function(){
-            var template = {
-                displayName: vm.data.displayName,
-                template : vm.data.template
-            };
-
-            console.log(template)
+            templatesSvc.save(vm.data).then(function(res){
+                console.log(res);
+                if(res){                    
+                    $state.go('templates.list');
+                }
+            });      
         }
     }
 

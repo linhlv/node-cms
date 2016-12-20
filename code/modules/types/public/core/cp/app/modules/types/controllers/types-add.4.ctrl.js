@@ -38,8 +38,7 @@ define(function () {
             }                
         };
 
-        vm.finish = function(){
-            
+        vm.finish = function(){            
             var d = {
                 displayName: vm.data.step1.displayName,
                 name: vm.data.step1.name,

@@ -9,7 +9,7 @@ define([], function () {
     function s($http, httpHandler){
 
         /// <summary>
-        /// save type
+        /// save template
         /// </summary>
         this.get = function (id) {
             return $http.get('/cp/templates/data/get', { params: { id: id }}).then(httpHandler.handleSuccess, httpHandler.handleError);
@@ -17,17 +17,17 @@ define([], function () {
 
 
         /// <summary>
-        /// save type
+        /// save template
         /// </summary>
         this.getAll = function () {
             return $http.get('/cp/templates/data/load').then(httpHandler.handleSuccess, httpHandler.handleError);
         };
 
         /// <summary>
-        /// save type
+        /// save template
         /// </summary>
-        this.save = function (type) {
-            return $http.post('/cp/templates/data/save', type).then(httpHandler.handleSuccess, httpHandler.handleError);
+        this.save = function (template) {
+            return $http.post('/cp/templates/data/save', template).then(httpHandler.handleSuccess, httpHandler.handleError);
         };
     }
 

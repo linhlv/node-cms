@@ -5,11 +5,19 @@
     
     <div class="card-body card-padding">    
         <form role="form">
+             <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group fg-line">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control input-sm" id="name" data-ng-model="vm.data.name" placeholder="Page template name">
+                    </div>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-sm-4">
                     <div class="form-group fg-line">
-                        <label for="typeDisplayName">Display name</label>
-                        <input type="text" class="form-control input-sm" id="typeDisplayName" data-ng-model="vm.data.displayName" placeholder="Page template display name">
+                        <label for="displayName">Display name</label>
+                        <input type="text" class="form-control input-sm" id="displayName" data-ng-model="vm.data.displayName" placeholder="Page template display name">
                     </div>
                 </div>
             </div>
@@ -30,7 +38,7 @@
                                         firstLineNumber: 1,
                                         onLoad: vm.aceLoaded,
                                         onChange: vm.aceChanged,
-                                        onBlur : vm.aceBlured,
+                                        onBlur : vm.aceBlured
                             }" data-ng-model="vm.data.template"></div>
                     </div>
                 </div>

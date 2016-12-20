@@ -40,7 +40,7 @@ module.exports = function(app) {
             _id : new ObjectId(req.query.id)
         };       
 
-        app.get('mongodb').collection('types').find(find_query)        
+        app.get('mongodb').collection('templates').find(find_query)        
             .sort(sort).toArray(function(err, items) {
                 if(items && items.length && items.length==1){
                     // Return results
@@ -56,7 +56,7 @@ module.exports = function(app) {
         var sort = {};
         var rep = {};
         rep.items = [];
-        app.get('mongodb').collection('types').find(find_query).sort(sort).toArray(function(err, items) {
+        app.get('mongodb').collection('templates').find(find_query).sort(sort).toArray(function(err, items) {
             if (!err && items && items.length) {
                 for (var i = 0; i < items.length; i++) {                   
                     rep.items.push(items[i]);
@@ -85,44 +85,31 @@ module.exports = function(app) {
         }
 
         // Fields validation
-        var types_data = req.body;
+        var _data = req.body;
         
-        if (!types_data) {
+        if (!_data) {
             rep.status = 0;
             rep.error = i18nm.__("invalid_query");
             return res.send(JSON.stringify(rep));
         }
 
-        if (!types_data.name) {
-            rep.status = 0;
-            rep.error = i18nm.__("invalid_query");
-            return res.send(JSON.stringify(rep));
-        }
-
-        if (!types_data.namespace) {
-            rep.status = 0;
-            rep.error = i18nm.__("invalid_query");
-            return res.send(JSON.stringify(rep));
-        }
-
-         if (!types_data.displayName) {
+        if (!_data.displayName) {
             rep.status = 0;
             rep.error = i18nm.__("invalid_query");
             return res.send(JSON.stringify(rep));
         }
 
         var query = {
-            name: types_data.name,
-            namespace: types_data.namespace,
-        };       
+            name: _data.name
+        };               
 
-        app.get('mongodb').collection('types').find(query).count(function(err, items_count) {
+        app.get('mongodb').collection('templates').find(query).count(function(err, items_count) {
              if (!err && items_count > 0) {                 
                  if(items_count == 1){   
-                    types_data._id = new ObjectId(types_data._id);                 
-                    app.get('mongodb').collection('types').update({
-                        _id: new ObjectId(types_data._id)
-                    }, types_data, {w:1}, function(err, r) {                        
+                    _data._id = new ObjectId(_data._id);                 
+                    app.get('mongodb').collection('templates').update({
+                        _id: new ObjectId(_data._id)
+                    }, _data, {w:1}, function(err, r) {                        
                         if(!err){
                             rep.status = 1;
                             return res.send(JSON.stringify(rep));
@@ -130,8 +117,8 @@ module.exports = function(app) {
                     });
                  }                                               
              }else{ 
-                types_data._id = new ObjectId()                                
-                app.get('mongodb').collection('types').insert(types_data, function(err){
+                _data._id = new ObjectId()                                
+                app.get('mongodb').collection('templates').insert(_data, function(err){
                     if (err) {
                         rep.status = 0;
                         rep.error = i18nm.__("invalid_query");                        

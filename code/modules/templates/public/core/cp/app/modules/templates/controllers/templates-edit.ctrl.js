@@ -22,6 +22,18 @@ define(function () {
         editor.setTheme("ace/theme/monokai");
         editor.getSession().setMode("ace/mode/javascript"); 
         */
+
+        vm.aceLoaded = function(){
+            console.log('ace loaded');
+        };
+
+        vm.aceChanged = function(){
+            console.log('ace changed');
+        };
+
+        vm.aceBlured = function(){
+            console.log('ace aceBlured');
+        };
     }
 
     return c;

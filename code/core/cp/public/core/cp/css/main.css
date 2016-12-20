@@ -65,3 +65,6 @@
 .dropdown-basic-demo ul.dropdown-menu li > a {
     cursor: pointer;
 }
+
+
+.ace_editor { height: 200px; }

@@ -7,6 +7,7 @@ define(function () {
         vm.includes = function(s){ return $state.includes(s); };
         vm.tabSelect = function(s){ $state.go('templates.edit.' + s, id); };
         vm.title = (id ? 'Editing' : 'New') + ' page template';
+        vm.data = vm.data || {};
         
         if(id){
             // https://ace.c9.io/#nav=about
@@ -34,6 +35,15 @@ define(function () {
         vm.aceBlured = function(){
             console.log('ace aceBlured');
         };
+
+        vm.save = function(){
+            var template = {
+                displayName: vm.data.displayName,
+                template : vm.data.template
+            };
+
+            console.log(template)
+        }
     }
 
     return c;

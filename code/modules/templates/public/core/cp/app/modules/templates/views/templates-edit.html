@@ -18,7 +18,12 @@
                     <div class="form-group fg-line">                    
                         <label for="namespace">Template</label>
                         <div ui-ace="{
-                                        require: ['ace/ext/language_tools'],                                       
+                                        require: ['ace/ext/language_tools'],     
+                                        advanced: {
+                                            enableSnippets: true,
+                                            enableBasicAutocompletion: true,
+                                            enableLiveAutocompletion: true
+                                        },
                                         useWrapMode : false,
                                         showGutter: true,                                        
                                         mode: 'javascript',

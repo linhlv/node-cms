@@ -27,6 +27,12 @@
       "url":"/2/:typeId",
       "templateUrl":"page.add.2.html",
       "controller":"page.add.2.ctrl as vm"
+    },
+    {
+      "name":"add.3",
+      "url":"/3/:typeId/:templateId",
+      "templateUrl":"page.add.3.html",
+      "controller":"page.add.3.ctrl as vm"
     }
   ],
   "menu":[

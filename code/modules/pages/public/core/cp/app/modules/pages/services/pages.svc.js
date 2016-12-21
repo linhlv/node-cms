@@ -7,13 +7,20 @@ define([], function () {
     
     //Events Publish/Subscribe
     function s($http, httpHandler){
+        /// <summary>
+        /// save type
+        /// </summary>
+        this.getType = function (id) {
+            return $http.get('/cp/types/data/get', { params: { id: id }}).then(httpHandler.handleSuccess, httpHandler.handleError);
+        };
 
         /// <summary>
         /// save type
         /// </summary>
-        this.get = function (id) {
-            return $http.get('/cp/types/data/get', { params: { id: id }}).then(httpHandler.handleSuccess, httpHandler.handleError);
+        this.getTemplate = function (id) {
+            return $http.get('/cp/templates/data/get', { params: { id: id }}).then(httpHandler.handleSuccess, httpHandler.handleError);
         };
+
 
 
         /// <summary>
@@ -21,7 +28,14 @@ define([], function () {
         /// </summary>
         this.getTypesAll = function () {
             return $http.get('/cp/types/data/load').then(httpHandler.handleSuccess, httpHandler.handleError);
-        };       
+        };   
+
+        /// <summary>
+        /// save type
+        /// </summary>
+        this.getTemplatesAll = function () {
+            return $http.get('/cp/templates/data/load').then(httpHandler.handleSuccess, httpHandler.handleError);
+        };    
 
         /// <summary>
         /// save type

@@ -3,19 +3,19 @@
 /// </summary>
 define(function () {
     function c($scope, $state, $sessionStorage, $stateParams, pagesSvc){
-        var vm = this;        
+        var vm = this;
 
         if($stateParams.typeId){
-            pagesSvc.get($stateParams.typeId).then(function(res){
-                if(res && res.data){
-                    vm.pageType = res.data                                       
+            pagesSvc.getTemplatesAll().then(function(res){
+                if(res && res.items){
+                    vm.items = res.items;                    
                 }            
-            });       
+            });
         }
-
-        vm.save = function(){
-            console.log(vm.pageType.fields);
-        }
+        
+        vm.next = function(item){            
+            $state.go('pages.add.3', {typeId : $stateParams.typeId, templateId: item._id});
+        };
     }
 
     return c;

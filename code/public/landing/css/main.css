@@ -1,0 +1,313 @@
+/*!
+ * Start Bootstrap - Modern Business (http://startbootstrap.com/)
+ * Copyright 2013-2016 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
+ */
+
+/* Global Styles */
+
+html,
+body {
+    font-family: 'Lato', sans-serif;    
+    height: 100%;
+    padding-top: 45px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    /*background: url('../images/bg.jpg');*/
+}
+
+p{
+    line-height: 24px;
+    font-weight: 400;
+    font-style: normal;
+    color: #838383;
+    font-size: 14px;
+}
+
+h2{
+    font-size: 16px;
+}
+.page-header{
+    text-transform: uppercase;
+    font-family: Raleway, Arial, Helvetica, sans-serif;
+    font-weight: 600;
+    line-height: 1.35;
+    letter-spacing: 1.5px;
+}
+
+.heading-upper{
+    text-transform: uppercase;
+}
+
+.navbar-brand {
+    float: left;
+    height: 59px;
+    padding: 5px 5px;
+    
+    line-height: 20px;
+}
+.mk-nav{    
+    font-family: Montserrat, arial, serif;
+    text-transform: uppercase;
+    font-size: 13px;     
+    margin-bottom: 0px;
+    background: #fff;
+}
+
+.ontop {
+    background: rgba(255,255,255,0.95);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.11);
+    -webkit-transition: all .4s ease-out;
+    -moz-transition: all .4s ease-out;
+    -ms-transition: all .4s ease-out;
+    -o-transition: all .4s ease-out;       
+}
+
+.mk-nav .nav-margin {
+    margin-top: 5px;
+}
+
+.mk-nav .navbar-brand img.logo{
+    height: 80px;
+}
+
+.mk-nav .navbar-toggle .icon-bar {
+    background-color: #888;
+}
+
+.mk-nav .navbar-toggle{
+      background-color: #ddd;
+}
+
+.mk-nav ul.nav > li > a{
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1.12px;
+    color: #323334;
+    line-height: 50px;
+}
+
+.ontop ul.nav > li > a{
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1.12px;
+    color: #323334;
+    line-height: 30px;
+}
+
+.ontop .navbar-brand img.logo{
+    height: 50px;
+}
+
+.mk-nav ul li a:hover, .mk-nav ul .open>a, .mk-nav ul .open>a:focus, .mk-nav ul .open>a:hover{
+    color:  #fbaf5d;
+    background: none;
+}
+
+.mk-nav .dropdown-menu-large{
+    text-transform: capitalize;
+    font-family: Raleway, Arial, Helvetica, sans-serif;
+    border-top: 2px solid #a43d21;
+    box-shadow: 0 1px 2px 2px rgba(0,0,0,0.2);
+}
+
+.mk-nav ul.dropdown-menu-large li a:hover, .mk-nav ul.dropdown-menu-large li.active a {
+    color:  #fbaf5d;
+} 
+
+.mk input[type="text"], .mk input[type="tel"], .mk input[type="email"],.mk input[type="password"], .mk  textarea{
+    background: #f2f2f2;
+    border: 1px solid #e3e3e3;
+    border-radius: 0;
+    height: 46px;
+    padding-left: 15px;
+    width: 100%;
+}
+
+.mk  textarea{
+    height: 100px;
+    background: none;
+}
+
+.mk .well{
+    border-radius: 0;
+    border: none;
+    margin: 0 0 40px;
+    padding: 20px;
+    background: #f7f7f7;
+}
+
+.mk .btn{
+    border-radius: 0;
+    border:transparent;
+    background:#333;
+    padding: 10px 15px;
+    font-weight: 100;
+    text-transform: uppercase;
+    color: #fff !important;
+    display: inline-block;
+    vertical-align: middle;
+    transition: all 0.4s ease;
+}
+
+.mk .btn:hover{
+    background: #fbaf5d;
+}
+
+.mk .panel {
+    border: none;
+}
+
+.mk .breadcrumb{
+    text-transform: uppercase;
+}
+
+.mk .validation-error{
+    color:red;
+    font-size: 13px;
+    line-height: 180%;
+}
+
+
+
+.img-portfolio {
+    margin-bottom: 30px;
+}
+
+.img-hover:hover {
+    opacity: 0.8;
+}
+
+/* Home Page Carousel */
+
+header.carousel {
+    height: 50%;
+}
+
+header.carousel .item,
+header.carousel .item.active,
+header.carousel .carousel-inner {
+    height: 100%;
+}
+
+header.carousel .fill {
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+}
+
+/* 404 Page Styles */
+
+.error-404 {
+    font-size: 100px;
+}
+
+/* Pricing Page Styles */
+
+.price {
+    display: block;
+    font-size: 50px;
+    line-height: 50px;
+}
+
+.price sup {
+    top: -20px;
+    left: 2px;
+    font-size: 20px;
+}
+
+.period {
+    display: block;
+    font-style: italic;
+}
+
+/* Footer Styles */
+
+footer {
+    margin: 50px 0;
+}
+
+/* Responsive Styles */
+
+@media(max-width:991px) {
+    .customer-img,
+    .img-related {
+        margin-bottom: 30px;
+    }
+}
+
+@media(max-width:767px) {
+    .img-portfolio {
+        margin-bottom: 15px;
+    }
+
+    header.carousel .carousel {
+        height: 70%;
+    }
+}
+
+
+.dropdown-large {
+  position: static !important;
+}
+.dropdown-menu-large {
+  margin-left: 16px;
+  margin-right: 16px;
+  padding: 20px 0px;
+  max-width: 768px;
+}
+.dropdown-menu-large > li > ul {
+  padding: 0;
+  margin: 0;
+}
+.dropdown-menu-large > li > ul > li {
+  list-style: none;
+}
+.dropdown-menu-large > li > ul > li > a {
+  display: block;
+  padding: 3px 20px;
+  clear: both;
+  font-weight: normal;
+  line-height: 1.428571429;
+  color: #a9a9a9;
+  white-space: normal;
+  font-size: 12px;
+}
+.dropdown-menu-large > li ul > li > a:hover,
+.dropdown-menu-large > li ul > li > a:focus {
+  text-decoration: none;
+  color: #262626;
+  background-color: #f5f5f5;
+}
+.dropdown-menu-large .disabled > a,
+.dropdown-menu-large .disabled > a:hover,
+.dropdown-menu-large .disabled > a:focus {
+  color: #999999;  
+}
+.dropdown-menu-large .disabled > a:hover,
+.dropdown-menu-large .disabled > a:focus {
+  text-decoration: none;
+  background-color: transparent;
+  background-image: none;
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+  cursor: not-allowed;
+}
+.dropdown-menu-large .dropdown-header {
+  color: #3c3c3c;
+  font-size: 12px;
+  font-weight: 600;
+}
+@media (max-width: 768px) {
+  .dropdown-menu-large {
+    margin-left: 0 ;
+    margin-right: 0 ;
+  }
+  .dropdown-menu-large > li {
+    margin-bottom: 30px;
+  }
+  .dropdown-menu-large > li:last-child {
+    margin-bottom: 0;
+  }
+  .dropdown-menu-large .dropdown-header {
+    padding: 3px 15px !important;
+  }
+}

@@ -1,0 +1,29 @@
+<div class="card">
+    <div class="card-header ch-alt">
+        <h2 class="lvh-label hidden-xs"><span data-ng-bind="vm.title"></span> <small>Please provide partner information.</small></h2>        
+    </div>
+    
+    <div class="card-body card-padding">    
+        <form role="form">
+             <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group fg-line">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control input-sm" id="name" data-ng-model="vm.data.name" placeholder="Page template name">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group fg-line">
+                        <label for="displayName">Display name</label>
+                        <input type="text" class="form-control input-sm" id="displayName" data-ng-model="vm.data.displayName" placeholder="Page template display name">
+                    </div>
+                </div>
+            </div>
+        </form>   
+    </div> 
+    <div class="card-body card-padding">     
+        <button class="btn bgm-green" data-ng-click="vm.save()"><i class="zmdi zmdi-check-circle"></i> Save</button>
+    </div>
+</div>

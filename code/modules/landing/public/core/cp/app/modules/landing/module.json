@@ -11,6 +11,18 @@
         "templateUrl":"partners.html",
         "controller":"partners.ctrl as vm"
       },
+       {
+        "name":"partners.list",
+        "url":"/list",
+        "templateUrl":"partners.list.html",
+        "controller":"partners.list.ctrl as vm"
+      },
+      {
+        "name":"partners.edit",
+        "url":"/:id/edit",
+        "templateUrl":"partners.edit.html",
+        "controller":"partners.edit.ctrl as vm"
+      },
       {
         "name":"contacts",
         "url":"/contacts",
@@ -26,7 +38,7 @@
       "menu":[
         {
           "title":"Partners",
-          "state":"landing.partners",
+          "state":"landing.partners.list",
           "iconClass": "zmdi zmdi-accounts-list zmdi-hc-fw"
         },
         {

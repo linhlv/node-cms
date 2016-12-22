@@ -1,0 +1,43 @@
+<div class="listview lv-bordered lv-lg">
+        <div class="lv-header-alt clearfix">
+            <h2 class="lvh-label hidden-xs">Partners <small></small></h2>
+            
+            <ul class="lv-actions actions">                                            
+                <li>
+                    <a data-ui-sref="landing.partners.edit({id:'new'})">
+                        <i class="zmdi zmdi-plus"></i>
+                    </a>
+                </li>   
+            </ul>
+        </div>
+
+        <div class="lv-body mk-custom">
+            <div class="lv-item media" data-ng-repeat="item in vm.items">                
+                <div class="media-body">
+                    <div class="lv-title">{{item.name + ' from ' + item.company}}</div>
+                    <ul class="lv-attrs">
+                        <li>Date Created: {{item.createdOn | date: 'dd-MM-yyyy HH:mm:ss'}}</li>                        
+                        <li>Phone:&nbsp;<a class="listview-a" data-ng-href="tel:{{item.phone}}" data-ng-bind="item.phone"></a></li>
+                        <li>Email:&nbsp;<a class="listview-a" data-ng-href="mailto:{{item.email}}" data-ng-bind="item.email"></a></li>
+                        <li data-ng-if="item.approved">Password: <span data-ng-bind="item.password"></span></li>                        
+                    </ul>
+                    <div class="lv-actions actions">
+                        <a href="" data-ng-click="vm.approve(item)" data-ng-if="!item.approved">
+                            <i class="zmdi zmdi-check"></i>
+                        </a>   
+                        <!--  
+                        <a href="" data-ng-click="vm.generateNewPassword(item)">
+                            <i class="zmdi zmdi-key"></i>
+                        </a>   
+                        <a href="" data-ng-click="vm.delete(item)">
+                            <i class="zmdi zmdi-delete"></i>
+                        </a>
+                        -->   
+                        <a href="" data-ng-click="vm.show(item)">
+                            <i class="zmdi zmdi-info"></i>
+                        </a>                  
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </div>  

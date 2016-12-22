@@ -19,10 +19,9 @@ module.exports = function(app) {
     //var rootRestUrl = 'http://192.168.1.6';
 
     var renderLanding = function(req, layout, data, res){
-        restClient.get(rootRestUrl + '/category/getmenu', function (_data, response) {
-            //var data = data || {};           
-            data.menu =  _data;  
-            return app.get('renderer').render(req, layout, data, res);
+        restClient.get(rootRestUrl + '/material/getmenu', function (_data, response) {
+             data.menu =  _data;  
+             return app.get('renderer').render(req, layout, data, res);          
         });   
     };
     
@@ -79,7 +78,7 @@ module.exports = function(app) {
         var rep = {};
 
         // direct way
-        restClient.get(rootRestUrl + '/category/getmenu', function (data, response) {
+        restClient.get(rootRestUrl + '/materials/getmenu', function (data, response) {
             rep.status = 1;
             rep.data = data;
             return res.send(JSON.stringify(rep));
@@ -124,7 +123,7 @@ module.exports = function(app) {
     });
 
 
-    router.get('/products/:cat/:mat', function(req, res, next) {        
+    router.get('/products/:mat/:page', function(req, res, next) {        
         var data = {
                 title: baseTitle + ' - Products',
                 page_title:'module_name',
@@ -133,17 +132,90 @@ module.exports = function(app) {
                 keywords: '',
                 description: '',
                 extra_css: '<link rel="stylesheet" href="/modules/support/css/frontend.css" type="text/css">'
-            };  
-        
-        
-        if(req && req.params.cat && req.params.mat){
-            var q = '?category=' + req.params.cat + '&material=' + req.params.mat + '&page=1&itemsPerPage=30';
-             restClient.get(rootRestUrl + '/category/getcategory?id=' + req.params.cat , function (c, cresponse) {
-                  data.categoryName = c.Name;                
+            };
 
-                  restClient.get(rootRestUrl + '/product/search' + q, function (d, response) {
-                        if(d && d.data){
+        if (typeof req.session.auth == 'undefined' || req.session.auth === false || req.session.auth.status < 1) {
+            if(req && req.params && req.params.page && req.params.page > 1){
+                var body = renderer.render_file(path.join(__dirname, 'views'), 'products', {
+                    lang: i18nm,
+                    data: data,
+                    status_list: JSON.stringify(i18nm.__('status_list')),
+                    prio_list: JSON.stringify(i18nm.__('prio_list')),
+                    current_locale: req.session.current_locale
+                }, req);
+
+        
+                data.body = body;
+                
+                return renderLanding(req, undefined, data, res);
+            }            
+        }  
+        
+        
+        if(req && req.params.mat){
+            var page = req.params.page ? parseInt(req.params.page) : 1,
+            itemsPerPage = 10,
+            q = '?material=' + req.params.mat + '&page=' + page + '&itemsPerPage=' + itemsPerPage;    
+
+            data.selectedCategory = 0;
+
+            if(req.query){
+                if(req.query.category){
+                    q+= '&category=' + req.query.category;
+                    data.selectedCategory = req.query.category;
+                }
+
+                if(req.query.keyword){
+                    q+= '&keyword=' + req.query.keyword;
+                }
+            }             
+
+            restClient.get(rootRestUrl + '/material/get?id=' + req.params.mat , function (m, mresponse) {
+                data.materialId = req.params.mat;
+                data.materialName = m.Name;        
+
+                restClient.get(rootRestUrl + '/category/GetByMaterial?id=' + req.params.mat, function (_cdata, cresponse) {
+                    if(_cdata) {                        
+                        data.categories = _cdata;
+                        data.categories.unshift({
+                            id: 0,
+                            name: '-- All category --'
+                        });
+
+                        if(req.query && req.query.category){
+                            for(var i=0; i< data.categories.length;i++){
+                                if(data.categories[i].id==parseInt(req.query.category)){
+                                    data.categories[i].selected = true;
+                                }
+                            }
+                        }                        
+                    }
                     
+                    restClient.get(rootRestUrl + '/product/search' + q, function (d, response) {                    
+                        if(d && d.data){
+                            data.paging = {
+                                currentPage : page,
+                                totalProductsCount : d.totalCount,
+                                pageNumbers : []
+                            };
+
+                            data.paging.pages = Math.ceil(d.totalCount / itemsPerPage);
+
+                            if(data.paging.pages > 1){
+                                data.paging.show = true;
+
+                                for(var i=0;i < data.paging.pages;i++){
+                                    data.paging.pageNumbers.push({
+                                        p: i+1,
+                                        current: (i+1) == page,
+                                        link: '/products/' + req.params.mat + '/' + (i+1)
+                                    });
+                                }
+
+                                data.paging.next = (page < data.paging.pages) ? (page + 1) : '#';
+                                data.paging.previous = (page > 1) ? (page - 1) : '#';
+                            }                       
+
                             data.products = [];
 
                             for(var i=0;i< d.data.length;i++){
@@ -164,9 +236,23 @@ module.exports = function(app) {
                             data.body = body;
                             
                             return renderLanding(req, undefined, data, res);
-                        }              
+                        }else{
+                            var body = renderer.render_file(path.join(__dirname, 'views'), 'products', {
+                                lang: i18nm,
+                                data: data,
+                                status_list: JSON.stringify(i18nm.__('status_list')),
+                                prio_list: JSON.stringify(i18nm.__('prio_list')),
+                                current_locale: req.session.current_locale
+                            }, req);
+
+                    
+                            data.body = body;
+                            
+                            return renderLanding(req, undefined, data, res);
+                        }             
                     });
-             });           
+                });                     
+            });           
         }else{
 
         }        
@@ -287,9 +373,10 @@ module.exports = function(app) {
                 status_list: JSON.stringify(i18nm.__('status_list')),
                 prio_list: JSON.stringify(i18nm.__('prio_list')),
                 current_locale: req.session.current_locale
-            }, req);        
+            }, req); 
+
         data.body = body;
-        
+
         return renderLanding(req, undefined, data, res);
     });  
 

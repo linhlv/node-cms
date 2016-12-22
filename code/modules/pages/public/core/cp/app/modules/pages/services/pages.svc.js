@@ -10,22 +10,6 @@ define([], function () {
         /// <summary>
         /// save type
         /// </summary>
-        this.getType = function (id) {
-            return $http.get('/cp/types/data/get', { params: { id: id }}).then(httpHandler.handleSuccess, httpHandler.handleError);
-        };
-
-        /// <summary>
-        /// save type
-        /// </summary>
-        this.getTemplate = function (id) {
-            return $http.get('/cp/templates/data/get', { params: { id: id }}).then(httpHandler.handleSuccess, httpHandler.handleError);
-        };
-
-
-
-        /// <summary>
-        /// save type
-        /// </summary>
         this.getTypesAll = function () {
             return $http.get('/cp/types/data/load').then(httpHandler.handleSuccess, httpHandler.handleError);
         };   

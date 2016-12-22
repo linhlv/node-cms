@@ -2,13 +2,20 @@
 // monitor common task change
 /// </summary>
 define(function () {
-    function c($scope, $state, $sessionStorage, $stateParams, $q, pagesSvc){
+    function c($scope, $state, $sessionStorage, $stateParams, $q, typesSvc, templatesSvc, pagesSvc){
         var vm = this;        
 
         if($stateParams.typeId && $stateParams.templateId ){
-            $q.all(pagesSvc.getType($stateParams.typeId), pagesSvc.getTemplate($stateParams.templateId))
-                .then(function(data){
-                    console.log(data);
+            var callback = function(value){
+                return value;
+            };
+
+            var promiseGetType = typesSvc.get($stateParams.typeId).then(callback);
+            var promiseGetTemplate = templatesSvc.get($stateParams.templateId).then(callback);
+
+            $q.all([promiseGetType, promiseGetTemplate]).then(
+            function(values){
+                console.log(values);
             });
 
             /*

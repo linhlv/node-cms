@@ -14,22 +14,19 @@ define(function () {
             var promiseGetTemplate = templatesSvc.get($stateParams.templateId).then(callback);
 
             $q.all([promiseGetType, promiseGetTemplate]).then(
-            function(values){
-                console.log(values);
-            });
-
-            /*
-            pagesSvc.getType($stateParams.typeId).then(function(res){
-                if(res && res.data){
-                    vm.pageType = res.data                                       
-                }            
-            });       
-            */
+                function(values){
+                    if(values && values.length === 2){
+                        vm.data = {};
+                        vm.data.type = values[0].data;
+                        vm.data.template = values[1].data;
+                    }
+                }
+            );
         }
 
         vm.save = function(){
-            console.log(vm.pageType.fields);
-        }
+
+        };
     }
 
     return c;

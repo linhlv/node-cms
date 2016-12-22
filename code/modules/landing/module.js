@@ -122,6 +122,27 @@ module.exports = function(app) {
         }else{ }        
     });
 
+    router.post('/products/:mat/:page', function(req, res, next) {  
+        if(req && req.params.mat && req.params.page){
+            var q = '';            
+            if(req.body){
+                if(req.body.category && parseInt(req.body.category)!==0){
+                    q+= '&category=' + req.body.category;
+                }
+
+                if(req.params.keyword){
+                    q+= '&keyword=' + req.body.keyword;
+                }
+            } 
+
+            if(q.length){
+                q = q.substring(1, q.length);
+                q = '?' + q;
+            }
+
+            res.redirect('/products/' + req.params.mat + '/1' + q);            
+        }
+    });
 
     router.get('/products/:mat/:page', function(req, res, next) {        
         var data = {
@@ -204,11 +225,28 @@ module.exports = function(app) {
                             if(data.paging.pages > 1){
                                 data.paging.show = true;
 
+                                var attachingQ = '';
+
+                                if(req.query){
+                                    if(req.query.category){
+                                        attachingQ+= '&category=' + req.query.category;
+                                    }
+
+                                    if(req.query.keyword){
+                                        attachingQ+= '&keyword=' + req.query.keyword;
+                                    }
+                                }       
+
+                                if(attachingQ.length){
+                                    attachingQ = attachingQ.substring(1, attachingQ.length);
+                                    attachingQ = '?' + attachingQ;
+                                }
+
                                 for(var i=0;i < data.paging.pages;i++){
                                     data.paging.pageNumbers.push({
                                         p: i+1,
                                         current: (i+1) == page,
-                                        link: '/products/' + req.params.mat + '/' + (i+1)
+                                        link: '/products/' + req.params.mat + '/' + (i+1) + '' + attachingQ
                                     });
                                 }
 

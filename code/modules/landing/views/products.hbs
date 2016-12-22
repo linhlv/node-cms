@@ -15,7 +15,7 @@
 
 <div class="row">
     <div class="col-lg-12">
-        <form class="form-inline" action="/products/{{data.materialId}}/{{data.paging.currentPage}}">
+        <form class="form-inline" action="/products/{{data.materialId}}/{{data.paging.currentPage}}" method="POST">
             <div class="form-group">
                 <select class="form-control" id="category" name="category">
                     {{#each data.categories}}

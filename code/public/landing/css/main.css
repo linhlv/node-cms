@@ -178,6 +178,7 @@ h2{
 
 /* Home Page Carousel */
 
+/*
 header.carousel {
     height: 50%;
 }
@@ -194,6 +195,7 @@ header.carousel .fill {
     background-position: center;
     background-size: cover;
 }
+*/
 
 /* 404 Page Styles */
 
@@ -239,10 +241,12 @@ footer {
     .img-portfolio {
         margin-bottom: 15px;
     }
-
+    
+    /*
     header.carousel .carousel {
         height: 70%;
     }
+    */
 }
 
 

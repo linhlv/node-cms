@@ -4,20 +4,40 @@
     </div>
     
     <div class="card-body card-padding">    
-        <form role="form">
-             <div class="row">
+        <form name="f" role="form" novalidate>
+            <div class="row">
                 <div class="col-sm-4">
-                    <div class="form-group fg-line">
-                        <label for="name">Name</label>
-                        <input type="text" class="form-control input-sm" id="name" data-ng-model="vm.data.name" placeholder="Page template name">
+                    <div class="form-group fg-line" data-ng-class="{'has-error': (f.name.$touched || f.$submitted) && f.name.$error.required, 'has-success': (f.name.$touched || f.$submitted) && !f.name.$error.required }">
+                        <label for="name">Fullname</label>
+                        <input type="text" class="form-control input-sm" name="name" data-ng-model="vm.data.name" placeholder="Your partner fullname" required>
+                        <small class="help-block" data-ng-if="(f.name.$touched || f.$submitted) && f.name.$error.required">Fullname is required.</small>                                        
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group fg-line" data-ng-class="{'has-error': (f.email.$touched || f.$submitted) && (f.email.$error.required||f.email.$error.email), 'has-success': (f.email.$touched || f.$submitted) && !f.email.$error.required  && !f.email.$error.email}">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control input-sm" name="email" data-ng-model="vm.data.email" placeholder="Your partner email" required>
+                        <small class="help-block" data-ng-if="(f.email.$touched || f.$submitted) && f.email.$error.required">Email is required.</small>                                        
+                        <small class="help-block" data-ng-if="(f.email.$touched || f.$submitted) && f.email.$error.email">Email is not valid.</small>                                        
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group fg-line" data-ng-class="{'has-error': (f.company.$touched || f.$submitted) && f.company.$error.required, 'has-success': (f.company.$touched || f.$submitted) && !f.company.$error.required }">
+                        <label for="name">Company</label>
+                        <input type="text" class="form-control input-sm" name="company" data-ng-model="vm.data.company" placeholder="Your partner company name" required>
+                        <small class="help-block" data-ng-if="(f.company.$touched || f.$submitted) && f.company.$error.required">Your partner company name is required.</small>                                        
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-4">
                     <div class="form-group fg-line">
-                        <label for="displayName">Display name</label>
-                        <input type="text" class="form-control input-sm" id="displayName" data-ng-model="vm.data.displayName" placeholder="Page template display name">
+                        <label for="name">Description</label>
+                        <textarea class="form-control" name="description" data-autosize-on="true" data-ng-model="vm.data.description" ></textarea>                             
                     </div>
                 </div>
             </div>

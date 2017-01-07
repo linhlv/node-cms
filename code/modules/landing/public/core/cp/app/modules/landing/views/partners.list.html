@@ -14,7 +14,7 @@
         <div class="lv-body mk-custom">
             <div class="lv-item media" data-ng-repeat="item in vm.items">                
                 <div class="media-body">
-                    <div class="lv-title">{{item.name + ' from ' + item.company}}</div>
+                    <div class="lv-title">{{item.company + ' - ' + item.name }}</div>
                     <ul class="lv-attrs">
                         <li>Date Created: {{item.createdOn | date: 'dd-MM-yyyy HH:mm:ss'}}</li>                        
                         <li>Phone:&nbsp;<a class="listview-a" data-ng-href="tel:{{item.phone}}" data-ng-bind="item.phone"></a></li>

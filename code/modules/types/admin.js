@@ -12,7 +12,7 @@ module.exports = function(app) {
         async = require('async');
     
     
-    router.spa = true;
+    router.spa = false;
 
     router.get_module_name = function(req) {
         i18nm.setLocale(req.session.current_locale);

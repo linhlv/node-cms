@@ -34,7 +34,7 @@
     {
       "title":"Landing",
       "state":"landing",
-      "iconClass": "zmdi zmdi-menu zmdi-hc-fw zmdi",
+      "iconClass": "zmdi zmdi-view-compact",
       "menu":[
         {
           "title":"Partners",

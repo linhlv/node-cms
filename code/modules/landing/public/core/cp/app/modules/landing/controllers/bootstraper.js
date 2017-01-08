@@ -9,6 +9,6 @@ define([
             .controller('landing.ctrl', ['$scope', landing])
             .controller('partners.ctrl', ['$scope', '$http', requests])
             .controller('partners.list.ctrl', ['$scope', '$http', partnersList])
-            .controller('partners.edit.ctrl', ['$scope', '$state', '$stateParams', partnersEdit])
+            .controller('partners.edit.ctrl', ['$scope', '$state', '$stateParams', '$http', partnersEdit])
             .controller('contacts.ctrl', ['$scope', contacts]);
 });

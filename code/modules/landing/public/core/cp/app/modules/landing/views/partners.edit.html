@@ -3,8 +3,8 @@
         <h2 class="lvh-label hidden-xs"><span data-ng-bind="vm.title"></span> <small>Please provide partner information.</small></h2>        
     </div>
     
-    <div class="card-body card-padding">    
-        <form name="f" role="form" novalidate>
+    <form name="f" role="form" novalidate data-ng-submit="vm.save()">
+        <div class="card-body card-padding"> 
             <div class="row">
                 <div class="col-sm-4">
                     <div class="form-group fg-line" data-ng-class="{'has-error': (f.name.$touched || f.$submitted) && f.name.$error.required, 'has-success': (f.name.$touched || f.$submitted) && !f.name.$error.required }">
@@ -40,10 +40,10 @@
                         <textarea class="form-control" name="description" data-autosize-on="true" data-ng-model="vm.data.description" ></textarea>                             
                     </div>
                 </div>
-            </div>
-        </form>   
-    </div> 
-    <div class="card-body card-padding">     
-        <button class="btn bgm-green" data-ng-click="vm.save()"><i class="zmdi zmdi-check-circle"></i> Save</button>
-    </div>
+            </div>        
+        </div> 
+        <div class="card-body card-padding">     
+            <button class="btn bgm-green" type="submit" ><i class="zmdi zmdi-check-circle"></i> Save</button>
+        </div>
+    </form>   
 </div>

@@ -38,6 +38,78 @@ module.exports = function(app) {
             });   
     });
 
+    router.post('/create_user', function(req, res, next) {
+        var find_query = {}, sort = {}, rep = {};
+        var posting_data = req.body;
+        if(!posting_data){
+            rep.status = 0;
+            rep.error = 'Data not found!';
+            return res.send(JSON.stringify(rep));
+        }
+
+        if (!posting_data.email) {
+            rep.status = 0;
+            rep.error = 'Data fields are missing!';
+            return res.send(JSON.stringify(rep));
+        }
+
+        find_query.email =  posting_data.email;
+         app.get('mongodb').collection('users').find(find_query, {
+            limit: 1
+        }).toArray(function(err, items) {
+           
+
+            if (typeof items != 'undefined' && !err && items.length > 0) {
+                 console.log(items);
+                 return res.send({ existing:  true });
+            }else{
+                var r = {
+                    approved : true,
+                    name: posting_data.name,
+                    company: posting_data.company,
+                    phone: posting_data.phone,
+                    email: posting_data.email
+                };
+
+                r.password = app.get('utils').generatePassword(6);    
+                
+                app.get('mongodb').collection('requests').insert(r, function(_err) {
+                     if(!_err){
+                        var password_md5 = crypto.createHash('md5').update(config.salt + '.' + r.password).digest('hex');
+                        app.get('mongodb').collection('users').insert({
+                            username: r.email,
+                            username_auth: r.email,
+                            email: r.email,
+                            realname: r.name,
+                            status: 1,
+                            regdate: Date.now(),
+                            password: password_md5
+                        }, function(_err_u) {
+                            if(_err_u){ return; }     
+
+                            var login_url = config.protocol + '://' + req.get('host') + '/auth/';
+                            mailer.send(r.email, 'Your account on MK Handicraft has been created', path.join(__dirname, 'views'), 'mail_client_created_access_info_html', 'mail_client_created_access_info_text', {
+                                lang: i18nm,
+                                site_title: app.get('settings').site_title,
+                                password: r.password,
+                                login_url: login_url
+                            }, req, function(error) {
+                                if(!error){
+                                    // Success                
+                                    rep.status = 1;
+                                    rep.r = r;
+                                    return res.send(JSON.stringify(rep));
+                                }                                                                    
+                            });                                                      
+                        });
+                     }
+                });
+
+                
+            }
+        });
+    });
+
     router.post('/approve_request', function(req, res, next) {
         var find_query = {}, sort = {}, rep = {};
         var posting_data = req.body;

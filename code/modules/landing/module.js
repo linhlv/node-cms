@@ -175,7 +175,7 @@ module.exports = function(app) {
         
         if(req && req.params.mat){
             var page = req.params.page ? parseInt(req.params.page) : 1,
-            itemsPerPage = 10,
+            itemsPerPage = 45,
             q = '?material=' + req.params.mat + '&page=' + page + '&itemsPerPage=' + itemsPerPage;    
 
             data.selectedCategory = 0;
